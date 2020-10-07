@@ -20,6 +20,12 @@ public class BattleSystem : MonoBehaviour
     public Text choice1;
     public Text choice2;
 
+    public int numofx;
+    public bool endgame;
+
+    public Image[] xs;
+    public Sprite xexist;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +44,19 @@ public class BattleSystem : MonoBehaviour
 
         enemyText.text = "vs. " + opponent.name;
 
+        endgame = false;
+        for (int i = 0; i < xs.Length; i++)
+        {
+            if (i < numofx)
+            {
+                xs[i].enabled = true;
+            }
+            else
+            {
+                xs[i].enabled = false;
+            }
+        }
+
         //TODO: sync with beatmanager
         yield return new WaitForSeconds(2f);
 
@@ -51,15 +70,30 @@ public class BattleSystem : MonoBehaviour
         {
             enemyText.text = "vs. " + opponent.name + "- nice!!!";
             player.answered = true;
+            if (numofx >0)
+            {
+                numofx = numofx- 1;
+                xs[numofx].enabled = false;
+            }
         }
         if (selection == 2)
         {
             enemyText.text = "vs. " + opponent.name + "- booooooo";
+            if (numofx < 3)
+            {
+                xs[numofx].enabled = true;
+                numofx = numofx+ 1;
+
+            }
         }
 
         yield return new WaitForSeconds(2f);
 
         //TODO: win/lose is probably checked here
+        if(numofx ==3)
+        {
+            endgame = true;
+        }
         StartCoroutine(OpponentTurn());
     }
 
