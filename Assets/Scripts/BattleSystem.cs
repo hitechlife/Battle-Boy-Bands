@@ -24,7 +24,6 @@ public class BattleSystem : MonoBehaviour
     public bool endgame;
 
     public Image[] xs;
-    public Sprite xexist;
 
     // Start is called before the first frame update
     void Start()
