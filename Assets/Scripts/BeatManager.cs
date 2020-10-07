@@ -18,18 +18,25 @@ public class BeatManager : MonoBehaviour
     // Constants
     private float SECONDS_CONST = 60;
     private int SUBDIVISION_CONST = 4;
+    private double START_TICK;
+    private double SAMPLE_RATE;
 
     // Singleton reference
     public static BeatManager S;
 
     private void Awake()
     {
+        START_TICK = AudioSettings.dspTime;
+        SAMPLE_RATE = AudioSettings.outputSampleRate;
         S = this;
     }
 
     // Update is called once per frame
     void Update()
     {
+        double samplesPerTick = SAMPLE_RATE * 60.0F / beatsPerMinute * 4.0F / 4;
+        // print(samplesPerTick);
+
         if (measureTimer <= 0)
         {
             if (playSound)
@@ -40,7 +47,6 @@ public class BeatManager : MonoBehaviour
         }
 
         measureTimer -= (beatsPerMinute / SECONDS_CONST) * Time.deltaTime;
-        print(measureTimer);
     }
 
     public void ModifySoundValue(int bpmModifier)
