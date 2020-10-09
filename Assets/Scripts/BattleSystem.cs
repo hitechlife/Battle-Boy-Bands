@@ -65,31 +65,41 @@ public class BattleSystem : MonoBehaviour
         battleSpeaker.text = "Announcer";
         battleText.text = "You vs. " + opponent.name;
 
-        //TODO: sync with beatmanager
-        yield return new WaitForSeconds(2f);
+        // Initial loop
+        while (BeatManager.S.isFirstLoop)
+        {
+            yield return null;
+        }
 
         StartCoroutine(BattleRoutine());
     }
 
     IEnumerator BattleRoutine() {
-
         //TODO: snc with beatmanager
         // Game always ends on your turn
         for (int i = 0; i < maxTurns; i++) {
             // Starts with enemy insult
             yield return StartCoroutine(OpponentTurn(enemyText));
-            yield return new WaitForSeconds(1f);
+            // yield return new WaitForSeconds(1f);
+            while (BeatManager.S.isEnemyLoop)
+            {
+                yield return null;
+            }
 
             // Player should be choosing answer during this time....
             yield return StartCoroutine(PlayerTurn());
-            yield return new WaitForSeconds(2f); //TODO: not hardcoded
+            // yield return new WaitForSeconds(2f); //TODO: not hardcoded
+            while (BeatManager.S.isPlayerLoop)
+            {
+                yield return null;
+            }
 
             // defaults to the wrong answer if nothing chosen yet
             //TODO: let's not have 2 be the wrong answer everytime...
             if (!playerAnswered) ChooseInsult(2);
 
             // Display chosen insult
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(BeatManager.S.NUM_BREAK_BARS);
             // enemy text should be set by TryInsult at this point
 
             // Break out of loop if 3 x's
@@ -209,7 +219,7 @@ public class BattleSystem : MonoBehaviour
         coolTimer.SetActive(active);
 
         //TODO: don't hardcode this value!!
-        if (active) StartCoroutine(ChoicesTimer(2f));
+        if (active) StartCoroutine(ChoicesTimer(BeatManager.S.NUM_BREAK_BARS));
     }
 
     IEnumerator ChoicesTimer(float timeToWait) {
