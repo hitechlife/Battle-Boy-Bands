@@ -31,6 +31,10 @@ public class BattleSystem : MonoBehaviour
     private bool playerAnswered;
     private string enemyText = "sad rap line";
 
+    // X system
+    public int numOfX;
+    public Image[] xs;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +53,13 @@ public class BattleSystem : MonoBehaviour
         opponent = opponentPrefab.GetComponent<Opponent>();
 
         SetChoices(false);
+        for (int i = 0; i < xs.Length; i++) {
+            // if (i < numOfX) {
+            //     xs[i].enabled = true;
+            // } else {
+                xs[i].enabled = false;
+            // }
+        }
 
         battleSpeaker.text = "Announcer";
         battleText.text = "You vs. " + opponent.name;
@@ -67,16 +78,20 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < maxTurns; i++) {
             // Player should be choosing answer during this time....
             yield return StartCoroutine(PlayerTurn());
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2f); //TODO: not hardcoded
 
             // defaults to the wrong answer if nothing chosen yet
             //TODO: let's not have 2 be the wrong answer everytime...
             if (!playerAnswered) ChooseInsult(2);
 
+            // Display chosen insult
             yield return new WaitForSeconds(2f);
             // enemy text should be set by TryInsult at this point
 
-            //TODO: check win/lose here + break out of loop if 3 x's
+            // Break out of loop if 3 x's, no opponent response
+            if (numOfX >= 3) {
+                break;
+            }
             yield return StartCoroutine(OpponentTurn(enemyText));
             //TODO: sync these "seconds" w beatmanager
             yield return new WaitForSeconds(1f);
@@ -88,26 +103,36 @@ public class BattleSystem : MonoBehaviour
     void EndBattle() {
         gameOver = true;
         battleSpeaker.text = "Announcer";
-        battleText.text = "And the winner is... " + player.name + "!!";
+        string winner = numOfX >= 3 ? opponent.name : player.name;
+        battleText.text = "And the winner is... " + winner + "!!";
         SetChoices(false);
     }
 
     IEnumerator TryInsult(int selection)
     {
         //TODO: stop using Getcomponent so much
+        //TODO: don't hardcode good/ok/bad per choice or enemy text
         battleSpeaker.text = player.name;
         switch (selection) {
-            case 0:
+            case 0: //good
                 battleText.text = choice0.GetComponentInChildren<Text>().text;
                 enemyText = "nice!!!";
+                if (numOfX > 0) {
+                    numOfX--;
+                    xs[numOfX].enabled = false;
+                }
                 break;
-            case 1:
+            case 1: //ok
                 battleText.text = choice1.GetComponentInChildren<Text>().text;
                 enemyText = "meh...";
                 break;
-            case 2:
+            case 2: //bad
                 battleText.text = choice2.GetComponentInChildren<Text>().text;
                 enemyText = "boooooo";
+                if (numOfX < xs.Length) {
+                    xs[numOfX].enabled = true;
+                    numOfX++;
+                }
                 break;
             default: //invalid choice
                 //TODO: default to "bad" choice

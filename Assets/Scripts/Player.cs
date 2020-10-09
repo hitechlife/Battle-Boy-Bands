@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int numX;
+    // public int numX;
     // public bool answered;
     public string name;
 }
