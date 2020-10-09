@@ -40,7 +40,7 @@ public class BeatManager : MonoBehaviour
         }
 
         measureTimer -= (beatsPerMinute / SECONDS_CONST) * Time.deltaTime;
-        print(measureTimer);
+        // print(measureTimer);
     }
 
     public void ModifySoundValue(int bpmModifier)
