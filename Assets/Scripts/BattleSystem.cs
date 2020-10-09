@@ -72,11 +72,14 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator BattleRoutine() {
-        // Starts with enemy insult
-        yield return StartCoroutine(OpponentTurn(enemyText));
-        yield return new WaitForSeconds(1f);
 
+        //TODO: snc with beatmanager
+        // Game always ends on your turn
         for (int i = 0; i < maxTurns; i++) {
+            // Starts with enemy insult
+            yield return StartCoroutine(OpponentTurn(enemyText));
+            yield return new WaitForSeconds(1f);
+
             // Player should be choosing answer during this time....
             yield return StartCoroutine(PlayerTurn());
             yield return new WaitForSeconds(2f); //TODO: not hardcoded
@@ -89,13 +92,10 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(2f);
             // enemy text should be set by TryInsult at this point
 
-            // Break out of loop if 3 x's, no opponent response
+            // Break out of loop if 3 x's
             if (numOfX >= 3) {
                 break;
             }
-            yield return StartCoroutine(OpponentTurn(enemyText));
-            //TODO: sync these "seconds" w beatmanager
-            yield return new WaitForSeconds(1f);
         }
 
         EndBattle();
