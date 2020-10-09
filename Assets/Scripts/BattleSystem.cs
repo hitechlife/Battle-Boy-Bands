@@ -70,6 +70,7 @@ public class BattleSystem : MonoBehaviour
         {
             yield return null;
         }
+        print("DONE");
 
         StartCoroutine(BattleRoutine());
     }
@@ -99,7 +100,10 @@ public class BattleSystem : MonoBehaviour
             if (!playerAnswered) ChooseInsult(2);
 
             // Display chosen insult
-            yield return new WaitForSeconds(BeatManager.S.NUM_BREAK_BARS);
+            while (BeatManager.S.isPlayerResponseLoop)
+            {
+                yield return null;
+            }
             // enemy text should be set by TryInsult at this point
 
             // Break out of loop if 3 x's
@@ -219,7 +223,7 @@ public class BattleSystem : MonoBehaviour
         coolTimer.SetActive(active);
 
         //TODO: don't hardcode this value!!
-        if (active) StartCoroutine(ChoicesTimer(BeatManager.S.NUM_BREAK_BARS));
+        if (active) StartCoroutine(ChoicesTimer(BeatManager.S.SUBDIVISION_CONST));
     }
 
     IEnumerator ChoicesTimer(float timeToWait) {
@@ -228,10 +232,13 @@ public class BattleSystem : MonoBehaviour
         slider.value = 1;
         float deltaTime = timeToWait;
 
+        // Temporary scaling fix until we can integrate the BeatManager more
+        float scalingFactor = 0.8f;
+
         // Decrease slider value over timeToWait seconds
         while (deltaTime > 0) {
             if(coolTimer.activeSelf == false) break;
-            slider.value -= Time.deltaTime/timeToWait;
+            slider.value -= scalingFactor * Time.deltaTime/timeToWait;
             yield return null;
         }
     }

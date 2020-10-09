@@ -12,18 +12,26 @@ public class BeatManager : MonoBehaviour
     [SerializeField]
     private bool playSound = true;
 
-    // Private variables - beat timer
-    private float measureTimer;
-
     // Constants
     private readonly int SECONDS_CONST = 60;
-    private readonly int SUBDIVISION_CONST = 4;
-    public readonly int NUM_BREAK_BARS = 8;
+    public readonly int SUBDIVISION_CONST = 4;
+    public readonly int NUM_BREAK_BARS = 2;
 
     public float counter = 0;
     public bool isFirstLoop = true;
     public bool isEnemyLoop = false;
     public bool isPlayerLoop = false;
+    public bool isPlayerResponseLoop = false;
+
+    // Timing vars
+    public float gain = 0.0F;
+    double nextTick = 0.0F;
+    private float amp = 0.0F;
+    private float phase = 0.0F;
+    double sampleRate = 0.0F;
+    int accent;
+    bool running = true;
+    bool okToToggle;
 
     // Singleton reference
     public static BeatManager S;
@@ -33,29 +41,69 @@ public class BeatManager : MonoBehaviour
         S = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (measureTimer <= 0)
+        accent = SUBDIVISION_CONST;
+        counter = NUM_BREAK_BARS;
+        double startTick = AudioSettings.dspTime;
+        sampleRate = AudioSettings.outputSampleRate;
+        nextTick = startTick * sampleRate;
+        running = true;
+
+
+    }
+
+    // This is from the Unity documentation, thanks Unity!
+    private void OnAudioFilterRead(float[] data, int channels)
+    {
+        if (!running)
+            return;
+
+        double samplesPerTick = sampleRate * SECONDS_CONST / beatsPerMinute;
+        double sample = AudioSettings.dspTime * sampleRate;
+
+        int dataLen = data.Length / channels;
+
+        int n = 0;
+        while (n < dataLen)
         {
-            if (playSound)
+            float x = gain * amp * Mathf.Sin(phase);
+            int i = 0;
+            while (i < channels)
             {
-                SoundManager.S.PlaySound(beatSound);
+                data[n * channels + i] += x;
+                i++;
             }
-
-            measureTimer = 1.0f;
-            counter++;
-            counter %= NUM_BREAK_BARS;
-            // print(counter);
-
-            if (counter == 0)
+            while (sample + n >= nextTick)
             {
-                ToggleCounters();
+                nextTick += samplesPerTick;
+                
+                amp = 1.0F;
+                if (++accent > SUBDIVISION_CONST)
+                {
+                    accent = 1;
+                    amp *= 2.0F;
+
+                    counter++;
+                }
+
+                if (counter > NUM_BREAK_BARS)
+                {
+                    if (okToToggle)
+                    {
+                        ToggleCounters();
+                    }
+                    counter = 1;
+                    okToToggle = true;
+                }
+
+                // Debug.Log("Tick: " + accent + "/" + SUBDIVISION_CONST);
+                // Debug.Log("Bar: " + counter + "/" + NUM_BREAK_BARS);
             }
+            phase += amp * 0.3F;
+            amp *= 0.993F;
+            n++;
         }
-
-        measureTimer -= (beatsPerMinute / SECONDS_CONST) * Time.deltaTime;
-        // print(measureTimer);
     }
 
     void ToggleCounters()
@@ -73,6 +121,11 @@ public class BeatManager : MonoBehaviour
         else if (isPlayerLoop)
         {
             isPlayerLoop = false;
+            isPlayerResponseLoop = true;
+        }
+        else if (isPlayerResponseLoop)
+        {
+            isPlayerResponseLoop = false;
             isEnemyLoop = true;
         }
     }
