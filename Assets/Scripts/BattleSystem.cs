@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleState { START, PLAYERTURN, OPPONENTTURN, WIN, LOSE }
+public enum BattleState { START, PLAYERTURN, PLAYERCHOICE, OPPONENTTURN, WIN, LOSE }
 
 public class BattleSystem : MonoBehaviour
 {
@@ -31,6 +31,7 @@ public class BattleSystem : MonoBehaviour
     private bool gameOver;
     private bool playerAnswered;
     private string enemyText = "sad rap line";
+    private string playerText = "...";
 
     // X system
     public int numOfX;
@@ -76,30 +77,34 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator BattleRoutine() {
-        //TODO: snc with beatmanager
+        Debug.Log("starting battle routine");
         // Game always ends on your turn
         for (int i = 0; i < maxTurns; i++) {
+            Debug.Log("On turn " + (i+1));
             // Starts with enemy insult
-            yield return StartCoroutine(OpponentTurn(enemyText));
-            // yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(OpponentTurn());
+            // yield return new WaitForSeconds(2f);
             while (BeatManager.S.isEnemyLoop)
             {
                 yield return null;
             }
 
             // Player should be choosing answer during this time....
-            yield return StartCoroutine(PlayerTurn());
-            // yield return new WaitForSeconds(2f); //TODO: not hardcoded
+            // Note that cooldown timer coroutine is also started at this point
+            yield return StartCoroutine(StartChoiceSelection());
+            // yield return new WaitForSeconds(2f);
             while (BeatManager.S.isPlayerLoop)
             {
                 yield return null;
             }
+            
 
             // defaults to the wrong answer if nothing chosen yet
-            //TODO: let's not have 2 be the wrong answer everytime...
-            if (!playerAnswered) ChooseInsult(2);
+            // does this in Cooldown routine
 
             // Display chosen insult
+            yield return StartCoroutine(PlayerTurn());
+            // yield return new WaitForSeconds(4f);
             while (BeatManager.S.isPlayerResponseLoop)
             {
                 yield return null;
@@ -116,6 +121,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     void EndBattle() {
+        Debug.Log("Ending game");
         gameOver = true;
         battleSpeaker.text = "Announcer";
         string winner = numOfX >= 3 ? opponent.name : player.name;
@@ -127,27 +133,34 @@ public class BattleSystem : MonoBehaviour
     {
         //TODO: stop using Getcomponent so much
         //TODO: don't hardcode good/ok/bad per choice or enemy text
-        battleSpeaker.text = player.name;
+
         switch (selection) {
             case 0: //good
-                battleText.text = choice0.GetComponentInChildren<Text>().text;
+                playerText = choice0.GetComponentInChildren<Text>().text;
                 enemyText = "nice!!!";
                 if (numOfX > 0) {
                     numOfX--;
                     xs[numOfX].enabled = false;
                 }
+                choice1.GetComponentInChildren<Button>().interactable = false;
+                choice2.GetComponentInChildren<Button>().interactable = false;
                 break;
             case 1: //ok
-                battleText.text = choice1.GetComponentInChildren<Text>().text;
+                playerText = choice1.GetComponentInChildren<Text>().text;
                 enemyText = "meh...";
+                choice0.GetComponentInChildren<Button>().interactable = false;
+                choice2.GetComponentInChildren<Button>().interactable = false;
                 break;
             case 2: //bad
-                battleText.text = choice2.GetComponentInChildren<Text>().text;
+                playerText = choice2.GetComponentInChildren<Text>().text;
+                //TODO: add "bad" sound for bad choice
                 enemyText = "boooooo";
                 if (numOfX < xs.Length) {
                     xs[numOfX].enabled = true;
                     numOfX++;
                 }
+                choice1.GetComponentInChildren<Button>().interactable = false;
+                choice0.GetComponentInChildren<Button>().interactable = false;
                 break;
             default: //invalid choice
                 //TODO: default to "bad" choice
@@ -167,12 +180,10 @@ public class BattleSystem : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator PlayerTurn()
+    IEnumerator StartChoiceSelection()
     {
         // Let enemy text display while we pick a choice
-        state = BattleState.PLAYERTURN;
-        // enemyText.text = "vs. " + opponent.name + "- your turn";
-        // currSpeaker.text = "You";
+        state = BattleState.PLAYERCHOICE;
         SetChoices(true);
 
         //TODO: obviously... change... these are placeholders
@@ -180,36 +191,40 @@ public class BattleSystem : MonoBehaviour
         choice1.GetComponentInChildren<Text>().text = "this is ok";
         choice2.GetComponentInChildren<Text>().text = "this is incorrect";
 
-        //TODO: fill cooldown meter
-
         // yield return new WaitForSeconds(2f);
         yield return null;
+    }
 
-        // // defaults to the wrong answer
-        // //TODO: let's not have 2 be the wrong answer everytime...
-        // if (!playerAnswered)
-        //     ChooseInsult(2);
+    IEnumerator PlayerTurn() {
+        state = BattleState.PLAYERTURN;
+        battleSpeaker.text = player.name;
+        battleText.text = playerText;
+        //TODO: display ALL enemy lines except the last one before letting player pick a choice
+        yield return null;
     }
 
     // OnClicked functions
     public void ChooseInsult(int selection)
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleState.PLAYERCHOICE)
             return;
 
-        SetChoices(false);
+        // Don't let player pick more than once
+        if (playerAnswered)
+            return;
+
+        // SetChoices(false);
         playerAnswered = true;
 
         StartCoroutine(TryInsult(selection));
     }
 
-    IEnumerator OpponentTurn(string enemyText)
+    IEnumerator OpponentTurn()
     {
         state = BattleState.OPPONENTTURN;
         battleSpeaker.text = opponent.name;
         battleText.text = enemyText;
         playerAnswered = false;
-        //TODO: sync with beatmanager
         //TODO: display ALL enemy lines except the last one before letting player pick a choice
         yield return null;
 
@@ -221,8 +236,10 @@ public class BattleSystem : MonoBehaviour
         choice1.SetActive(active);
         choice2.SetActive(active);
         coolTimer.SetActive(active);
+        choice0.GetComponentInChildren<Button>().interactable = true;
+        choice1.GetComponentInChildren<Button>().interactable = true;
+        choice2.GetComponentInChildren<Button>().interactable = true;
 
-        //TODO: don't hardcode this value!!
         if (active) StartCoroutine(ChoicesTimer(BeatManager.S.SUBDIVISION_CONST));
     }
 
@@ -230,17 +247,21 @@ public class BattleSystem : MonoBehaviour
         Slider slider = coolTimer.GetComponentInChildren<Slider>();
         if (!slider) Debug.LogError("Slider not valid!");
         slider.value = 1;
-        float deltaTime = timeToWait;
 
         // Temporary scaling fix until we can integrate the BeatManager more
         float scalingFactor = 0.8f;
 
         // Decrease slider value over timeToWait seconds
-        while (deltaTime > 0) {
+        while (slider.value > 0) {
             if(coolTimer.activeSelf == false) break;
             slider.value -= scalingFactor * Time.deltaTime/timeToWait;
             yield return null;
         }
+        print("Choices timer completed");
+        //TODO: let's not have 2 be the wrong answer everytime...
+        if (!playerAnswered) ChooseInsult(2);
+
+        SetChoices(false);
     }
 
 }
