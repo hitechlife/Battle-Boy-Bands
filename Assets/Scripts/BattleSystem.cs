@@ -7,6 +7,7 @@ public enum BattleState { START, PLAYERTURN, OPPONENTTURN, WIN, LOSE }
 
 public class BattleSystem : MonoBehaviour
 {
+    //TODO: probably make stuff serialized and not public
     public BattleState state;
 
     //TODO: replace with actual prefabs if needed?
