@@ -477,6 +477,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaceholderOpponent
       objectReference: {fileID: 0}
+    - target: {fileID: 3694179351330072728, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
 --- !u!1 &656175398
@@ -512,7 +516,6 @@ MonoBehaviour:
   beatsPerMinute: 95
   beatSound: {fileID: 1982369210}
   playSound: 0
-  counter: 0
   isFirstLoop: 1
   isEnemyLoop: 0
   isPlayerLoop: 0
@@ -544,7 +547,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: caf6628443cd87845aa01279cf371628, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -700,7 +703,6 @@ MonoBehaviour:
   beatsPerMinute: 95
   beatSound: {fileID: 1982369210}
   playSound: 0
-  counter: 0
   isFirstLoop: 1
   isEnemyLoop: 0
   isPlayerLoop: 0
@@ -1754,6 +1756,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1804070657987355747, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
 --- !u!1001 &3471394943442710246
@@ -1763,6 +1769,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1883632901}
     m_Modifications:
+    - target: {fileID: 254803721176637091, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 254803721176637091, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 254803721176637091, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3471394943294026816, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0

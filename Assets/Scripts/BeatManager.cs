@@ -17,14 +17,14 @@ public class BeatManager : MonoBehaviour
     public readonly int SUBDIVISION_CONST = 4;
     public readonly int NUM_BREAK_BARS = 2;
 
-    public float counter = 0;
+    private float counter = 0;
     public bool isFirstLoop = true;
     public bool isEnemyLoop = false;
     public bool isPlayerLoop = false;
     public bool isPlayerResponseLoop = false;
 
     // Timing vars
-    public float gain = 0.0F;
+    public float gain = 0.5F;
     double nextTick = 0.0F;
     private float amp = 0.0F;
     private float phase = 0.0F;
@@ -50,7 +50,7 @@ public class BeatManager : MonoBehaviour
         nextTick = startTick * sampleRate;
         running = true;
 
-
+        GetComponent<AudioSource>().Play();
     }
 
     // This is from the Unity documentation, thanks Unity!
@@ -59,9 +59,8 @@ public class BeatManager : MonoBehaviour
         if (!running)
             return;
 
-        double samplesPerTick = sampleRate * SECONDS_CONST / beatsPerMinute;
+        double samplesPerTick = sampleRate * 60.0F / beatsPerMinute * 4.0F / SUBDIVISION_CONST;
         double sample = AudioSettings.dspTime * sampleRate;
-
         int dataLen = data.Length / channels;
 
         int n = 0;
@@ -77,12 +76,14 @@ public class BeatManager : MonoBehaviour
             while (sample + n >= nextTick)
             {
                 nextTick += samplesPerTick;
-                
                 amp = 1.0F;
+                print(nextTick + "  " + samplesPerTick);
+
                 if (++accent > SUBDIVISION_CONST)
                 {
                     accent = 1;
-                    amp *= 2.0F;
+                    // This broke it earlier
+                    // amp *= 2.0F;
 
                     counter++;
                 }
@@ -100,6 +101,7 @@ public class BeatManager : MonoBehaviour
                 // Debug.Log("Tick: " + accent + "/" + SUBDIVISION_CONST);
                 // Debug.Log("Bar: " + counter + "/" + NUM_BREAK_BARS);
             }
+
             phase += amp * 0.3F;
             amp *= 0.993F;
             n++;

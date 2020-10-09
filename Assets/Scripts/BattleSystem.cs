@@ -127,6 +127,7 @@ public class BattleSystem : MonoBehaviour
         string winner = numOfX >= 3 ? opponent.name : player.name;
         battleText.text = "And the winner is... " + winner + "!!";
         SetChoices(false);
+        StopAllCoroutines();
     }
 
     IEnumerator TryInsult(int selection)
