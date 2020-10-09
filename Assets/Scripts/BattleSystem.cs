@@ -65,6 +65,7 @@ public class BattleSystem : MonoBehaviour
 
         battleSpeaker.text = "Announcer";
         battleText.text = "You vs. " + opponent.name;
+        // yield return new WaitForSeconds(2f);
 
         // Initial loop
         while (BeatManager.S.isFirstLoop)
@@ -101,6 +102,7 @@ public class BattleSystem : MonoBehaviour
 
             // defaults to the wrong answer if nothing chosen yet
             // does this in Cooldown routine
+            // yield return StartCoroutine(ChoicesTimer(2f /*BeatManager.S.SUBDIVISION_CONST*/));
 
             // Display chosen insult
             yield return StartCoroutine(PlayerTurn());
@@ -121,6 +123,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     void EndBattle() {
+        // Stop music?
         Debug.Log("Ending game");
         gameOver = true;
         battleSpeaker.text = "Announcer";
@@ -191,9 +194,10 @@ public class BattleSystem : MonoBehaviour
         choice0.GetComponentInChildren<Text>().text = "this is correct";
         choice1.GetComponentInChildren<Text>().text = "this is ok";
         choice2.GetComponentInChildren<Text>().text = "this is incorrect";
+        yield return StartCoroutine(ChoicesTimer(BeatManager.S.SUBDIVISION_CONST));
 
         // yield return new WaitForSeconds(2f);
-        yield return null;
+        // yield return null;
     }
 
     IEnumerator PlayerTurn() {
@@ -241,7 +245,7 @@ public class BattleSystem : MonoBehaviour
         choice1.GetComponentInChildren<Button>().interactable = true;
         choice2.GetComponentInChildren<Button>().interactable = true;
 
-        if (active) StartCoroutine(ChoicesTimer(BeatManager.S.SUBDIVISION_CONST));
+        // if (active) StartCoroutine(ChoicesTimer(2f /*BeatManager.S.SUBDIVISION_CONST*/));
     }
 
     IEnumerator ChoicesTimer(float timeToWait) {
@@ -253,7 +257,7 @@ public class BattleSystem : MonoBehaviour
         float scalingFactor = 0.8f;
 
         // Decrease slider value over timeToWait seconds
-        while (slider.value > 0) {
+        while (slider.value > 0 && BeatManager.S.isPlayerLoop) {
             if(coolTimer.activeSelf == false) break;
             slider.value -= scalingFactor * Time.deltaTime/timeToWait;
             yield return null;
