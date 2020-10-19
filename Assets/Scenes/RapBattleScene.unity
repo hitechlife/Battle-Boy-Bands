@@ -288,6 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 503265238}
   - component: {fileID: 503265237}
+  - component: {fileID: 503265239}
   m_Layer: 0
   m_Name: BattleSystem
   m_TagString: Untagged
@@ -336,6 +337,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &503265239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503265236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e1be132d3f42a46b884658abd7ac7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyID: 0
 --- !u!1 &573272158 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3471394943943450296, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
@@ -513,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea452d653538784fa36cba969d22796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beatsPerMinute: 95
+  beatsPerMinute: 105
   beatSound: {fileID: 1982369210}
   playSound: 0
   isFirstLoop: 1
@@ -546,7 +560,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: caf6628443cd87845aa01279cf371628, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 02c74254dd4931b40881cbce4528dda7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

@@ -37,6 +37,16 @@ public class BattleSystem : MonoBehaviour
     public int numOfX;
     public Image[] xs;
 
+    [Header("Line IDs - make sure to only initialize the Enemy ID")]
+    [SerializeField]
+    private int enemyID;
+    [SerializeField]
+    private int currentEnemyLineID;
+    [SerializeField]
+    private int currentPlayerLineID;
+
+    private int selectionNum;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +93,7 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < maxTurns; i++) {
             Debug.Log("On turn " + (i+1));
             // Starts with enemy insult
+
             yield return StartCoroutine(OpponentTurn());
             // yield return new WaitForSeconds(2f);
             while (BeatManager.S.isEnemyLoop)
@@ -137,6 +148,8 @@ public class BattleSystem : MonoBehaviour
     {
         //TODO: stop using Getcomponent so much
         //TODO: don't hardcode good/ok/bad per choice or enemy text
+        currentPlayerLineID = BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selection];
+        selectionNum = selection;
 
         switch (selection) {
             case 0: //good
@@ -190,10 +203,18 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERCHOICE;
         SetChoices(true);
 
+        // 
+        int i = 0;
+        foreach (GameObject choice in new GameObject[] { choice0, choice1, choice2 })
+        {
+            choice.GetComponentInChildren<Text>().text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[i]);
+            i += 1;
+        }
+
         //TODO: obviously... change... these are placeholders
-        choice0.GetComponentInChildren<Text>().text = "this is correct";
-        choice1.GetComponentInChildren<Text>().text = "this is ok";
-        choice2.GetComponentInChildren<Text>().text = "this is incorrect";
+        // choice0.GetComponentInChildren<Text>().text = "this is correct";
+        // choice1.GetComponentInChildren<Text>().text = "this is ok";
+        // choice2.GetComponentInChildren<Text>().text = "this is incorrect";
         yield return StartCoroutine(ChoicesTimer(BeatManager.S.SUBDIVISION_CONST));
 
         // yield return new WaitForSeconds(2f);
@@ -203,7 +224,11 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerTurn() {
         state = BattleState.PLAYERTURN;
         battleSpeaker.text = player.name;
-        battleText.text = playerText;
+        // battleText.text = playerText;
+        // print("player line: " + currentPlayerLineID);
+        // print("enemy line: " + currentEnemyLineID);
+        battleText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]);
+        currentEnemyLineID = BattleLineManager.S.RetrieveEnemyLineID(currentPlayerLineID);
         //TODO: display ALL enemy lines except the last one before letting player pick a choice
         yield return null;
     }
@@ -228,7 +253,8 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.OPPONENTTURN;
         battleSpeaker.text = opponent.name;
-        battleText.text = enemyText;
+        // battleText.text = enemyText;
+        battleText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID);
         playerAnswered = false;
         //TODO: display ALL enemy lines except the last one before letting player pick a choice
         yield return null;
