@@ -30,8 +30,8 @@ public class BattleSystem : MonoBehaviour
 
     private bool gameOver;
     private bool playerAnswered;
-    private string enemyText = "sad rap line";
-    private string playerText = "...";
+    // private string enemyText = "sad rap line";
+    // private string playerText = "...";
 
     // X system
     public int numOfX;
@@ -153,8 +153,8 @@ public class BattleSystem : MonoBehaviour
 
         switch (selection) {
             case 0: //good
-                playerText = choice0.GetComponentInChildren<Text>().text;
-                enemyText = "nice!!!";
+                // playerText = choice0.GetComponentInChildren<Text>().text;
+                // enemyText = "nice!!!";
                 if (numOfX > 0) {
                     numOfX--;
                     xs[numOfX].enabled = false;
@@ -163,15 +163,15 @@ public class BattleSystem : MonoBehaviour
                 choice2.GetComponentInChildren<Button>().interactable = false;
                 break;
             case 1: //ok
-                playerText = choice1.GetComponentInChildren<Text>().text;
-                enemyText = "meh...";
+                // playerText = choice1.GetComponentInChildren<Text>().text;
+                // enemyText = "meh...";
                 choice0.GetComponentInChildren<Button>().interactable = false;
                 choice2.GetComponentInChildren<Button>().interactable = false;
                 break;
             case 2: //bad
-                playerText = choice2.GetComponentInChildren<Text>().text;
+                // playerText = choice2.GetComponentInChildren<Text>().text;
                 //TODO: add "bad" sound for bad choice
-                enemyText = "boooooo";
+                // enemyText = "boooooo";
                 if (numOfX < xs.Length) {
                     xs[numOfX].enabled = true;
                     numOfX++;
@@ -181,7 +181,7 @@ public class BattleSystem : MonoBehaviour
                 break;
             default: //invalid choice
                 //TODO: default to "bad" choice
-                enemyText = "boooooo";
+                // enemyText = "boooooo";
                 break;
         }
 
@@ -207,7 +207,7 @@ public class BattleSystem : MonoBehaviour
         int i = 0;
         foreach (GameObject choice in new GameObject[] { choice0, choice1, choice2 })
         {
-            choice.GetComponentInChildren<Text>().text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[i]);
+            choice.GetComponentInChildren<Text>().text = BattleLineManager.S.RetrieveChoiceLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[i]);
             i += 1;
         }
 
