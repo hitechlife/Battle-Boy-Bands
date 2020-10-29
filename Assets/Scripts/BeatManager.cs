@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class BeatManager : MonoBehaviour
 {
+    private static FMOD.Studio.EventInstance Music;
+
+    [FMODUnity.EventRef]
+    public string fmodEvent;
+
+    private float Points;
+
     // Serialized fields
     [SerializeField]
     private int beatsPerMinute;
     [SerializeField]
     private AudioSource beatSound;
-    [SerializeField]
+    [SerializeField] [Range(0f, 2f)]
     private bool playSound = true;
 
     // Constants
@@ -50,7 +57,16 @@ public class BeatManager : MonoBehaviour
         nextTick = startTick * sampleRate;
         running = true;
 
-        GetComponent<AudioSource>().Play();
+        Music = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Track 1");
+        Music.start();
+        Music.release();
+
+        //GetComponent<AudioSource>().Play();
+    }
+
+    private void Update()
+    {
+        Music.setParameterByName("Points", Points);
     }
 
     // This is from the Unity documentation, thanks Unity!
@@ -142,5 +158,10 @@ public class BeatManager : MonoBehaviour
         }
 
         beatsPerMinute = newBPM;
+    }
+
+    private void OnDestroy()
+    {
+        Music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }
