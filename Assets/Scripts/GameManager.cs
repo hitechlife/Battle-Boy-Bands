@@ -20,10 +20,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        DontDestroyonLoad(this.gameObject);
+        //DontDestroyonLoad(this.gameObject);
 
-        battleScript = GetComponent<BattleManager>();
-        beatScript = GetComponent<BeatManager>();
+        //battleScript = GetComponent<BattleManager>();
+        //beatScript = GetComponent<BeatManager>();
     }
 
     void newBoss()

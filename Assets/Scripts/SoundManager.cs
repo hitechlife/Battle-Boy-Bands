@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+
     // Serialized fields
     [SerializeField]
     private int bpmIncrement = 20;
