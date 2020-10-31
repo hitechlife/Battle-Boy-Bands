@@ -93,7 +93,6 @@ public class BeatManager : MonoBehaviour
             {
                 nextTick += samplesPerTick;
                 amp = 1.0F;
-                print(nextTick + "  " + samplesPerTick);
 
                 if (++accent > SUBDIVISION_CONST)
                 {
