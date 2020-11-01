@@ -35,7 +35,9 @@ public class BattleSystem : MonoBehaviour
 
     // X system
     public int numOfX;
-    public Image[] xs;
+    public SpriteRenderer[] xs;
+    public Sprite disabledX;
+    public Sprite enabledX;
 
     [Header("Line IDs - make sure to only initialize the Enemy ID")]
     [SerializeField]
@@ -65,12 +67,9 @@ public class BattleSystem : MonoBehaviour
         opponent = opponentPrefab.GetComponent<Opponent>();
 
         SetChoices(false);
-        for (int i = 0; i < xs.Length; i++) {
-            // if (i < numOfX) {
-            //     xs[i].enabled = true;
-            // } else {
-                xs[i].enabled = false;
-            // }
+        for (int i = 0; i < xs.Length; i++)
+        {
+            xs[i].sprite = disabledX;
         }
 
         battleSpeaker.text = "Announcer";
@@ -157,7 +156,7 @@ public class BattleSystem : MonoBehaviour
                 // enemyText = "nice!!!";
                 if (numOfX > 0) {
                     numOfX--;
-                    xs[numOfX].enabled = false;
+                    xs[numOfX].sprite = disabledX;
                 }
                 choice1.GetComponentInChildren<Button>().interactable = false;
                 choice2.GetComponentInChildren<Button>().interactable = false;
@@ -173,7 +172,7 @@ public class BattleSystem : MonoBehaviour
                 //TODO: add "bad" sound for bad choice
                 // enemyText = "boooooo";
                 if (numOfX < xs.Length) {
-                    xs[numOfX].enabled = true;
+                    xs[numOfX].sprite = enabledX;
                     numOfX++;
                 }
                 choice1.GetComponentInChildren<Button>().interactable = false;
