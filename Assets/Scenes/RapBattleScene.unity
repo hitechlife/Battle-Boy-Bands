@@ -323,6 +323,9 @@ MonoBehaviour:
   - {fileID: 2048012924}
   - {fileID: 1906054502}
   - {fileID: 1968134288}
+  enemyID: 0
+  currentEnemyLineID: 0
+  currentPlayerLineID: 0
 --- !u!4 &503265238
 Transform:
   m_ObjectHideFlags: 0
@@ -349,7 +352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e1be132d3f42a46b884658abd7ac7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyID: 0
 --- !u!1 &573272158 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3471394943943450296, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
@@ -485,7 +487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694179351330072711, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: name
-      value: Lame Guy
+      value: Lil' Pay
       objectReference: {fileID: 0}
     - target: {fileID: 3694179351330072728, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_Name

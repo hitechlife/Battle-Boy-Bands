@@ -11,11 +11,13 @@ public class BeatManager : MonoBehaviour
     private AudioSource beatSound;
     [SerializeField]
     private bool playSound = true;
+    [SerializeField]
+    public static bool doubleTime = true;
 
     // Constants
     private readonly int SECONDS_CONST = 60;
     public readonly int SUBDIVISION_CONST = 4;
-    public readonly int NUM_BREAK_BARS = 2;
+    public readonly int NUM_BREAK_BARS = doubleTime ? 4 : 2;
 
     private float counter = 0;
     public bool isFirstLoop = true;

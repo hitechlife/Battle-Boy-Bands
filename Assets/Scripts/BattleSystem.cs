@@ -215,7 +215,10 @@ public class BattleSystem : MonoBehaviour
         // choice0.GetComponentInChildren<Text>().text = "this is correct";
         // choice1.GetComponentInChildren<Text>().text = "this is ok";
         // choice2.GetComponentInChildren<Text>().text = "this is incorrect";
-        yield return StartCoroutine(ChoicesTimer(BeatManager.S.SUBDIVISION_CONST));
+
+        int doubleTime = BeatManager.doubleTime ? 2 : 1;
+
+        yield return StartCoroutine(ChoicesTimer(BeatManager.S.SUBDIVISION_CONST * doubleTime));
 
         // yield return new WaitForSeconds(2f);
         // yield return null;
