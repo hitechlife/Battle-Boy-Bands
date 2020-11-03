@@ -201,6 +201,8 @@ public class BattleSystem : MonoBehaviour
     {
         // Let enemy text display while we pick a choice
         state = BattleState.PLAYERCHOICE;
+        battleSpeaker.text = "YOU CHOOSE";
+        battleText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('\n')[0];
         SetChoices(true);
 
         // 
