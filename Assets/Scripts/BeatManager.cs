@@ -12,7 +12,7 @@ public class BeatManager : MonoBehaviour
     [SerializeField]
     private bool playSound = true;
     [SerializeField]
-    public static bool doubleTime = false;
+    public static bool doubleTime = true;
 
     // Constants
     private readonly int SECONDS_CONST = 60;
