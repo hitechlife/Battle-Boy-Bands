@@ -25,6 +25,11 @@ public class BattleLineManager : MonoBehaviour
         {
             new int[] { 9, 10, 11 },
             new int[] { 12, 13, 14 }
+        },
+        new int[][]
+        {
+            new int[] { 9, 10, 11 },
+            new int[] { 12, 13, 14 }
         }
     };
 
@@ -118,6 +123,7 @@ public class BattleLineManager : MonoBehaviour
             "Fourteenth enemy line",
             "Fifteenth enemy line"
         },
+        new string[] { "Next enemy line", "Next next enemy line" },
         new string[] { "Next enemy line", "Next next enemy line" }
     };
 
