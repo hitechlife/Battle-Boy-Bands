@@ -168,8 +168,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: dce23222b4d5b314dba55d9bc4268849, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -433,11 +433,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3694179351330072710, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.68
+      value: 4.52
       objectReference: {fileID: 0}
     - target: {fileID: 3694179351330072710, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.43
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 3694179351330072710, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -477,19 +477,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694179351330072710, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3694179351330072710, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3694179351330072710, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3694179351330072711, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: name
-      value: Lame Guy
+      value: Lil' Pay
       objectReference: {fileID: 0}
     - target: {fileID: 3694179351330072728, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_Name
@@ -867,7 +867,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: fa2e1839f8684384caa709990cbbb0af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1779,11 +1779,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804070657987355745, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.26
+      value: -2.66
       objectReference: {fileID: 0}
     - target: {fileID: 1804070657987355745, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.43
+      value: 2.01
       objectReference: {fileID: 0}
     - target: {fileID: 1804070657987355745, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1823,15 +1823,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804070657987355745, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1804070657987355745, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1804070657987355745, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1804070657987355747, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_Name
