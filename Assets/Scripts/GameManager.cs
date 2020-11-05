@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
         public bool defeated;
     }
     public static GameManager instance = null;
-    private static List<Opponent> opponents;
-
-    //TODO: keep track of boss win or lose
+    public static List<Opponent> opponents;
+    //TODO: add list of sprites, that is initialized by loading assets from some folder? we probably need 1 folder per boss, so maybe a list of list of sprites would be better here (so like first list is boss1, second list boss2, etc)
+    public static int currBoss;
 
     void Awake()
     {
@@ -20,30 +20,34 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            opponents = new List<Opponent>();
             opponents.Add(new Opponent("Wash Depp", false, 6));
             opponents.Add(new Opponent("Kendrick Amore", false, 6));
             opponents.Add(new Opponent("Lil\' Pay", false, 9));
             for (int i = 0; i < opponents.Count; i++) {
-                opponents[i].ID = i;
+                opponents[i].SetID(i);
             }
+            Debug.Log("initalized gamemanager");
         }
         else if (instance != this)
         {
             Destroy(this.gameObject);
+            Debug.Log("destroyed gamemanager");
         }
         DontDestroyOnLoad(this.gameObject);
+
 
         // battleScript = GetComponent<BattleManager>();
         // beatScript = GetComponent<BeatManager>();
     }
 
     public void LoadBoss(int boss) {
+        currBoss = boss;
         //TODO: call this from selection screen
-        //TODO: load opponent info into BattleSystem!!
     }
 
     public void DefeatedBoss(int boss) {
-        opponents[boss].defeated = true;
+        opponents[boss].Defeat();
     }
 
     // void newBoss()

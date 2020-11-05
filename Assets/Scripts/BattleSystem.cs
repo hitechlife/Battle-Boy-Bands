@@ -39,8 +39,7 @@ public class BattleSystem : MonoBehaviour
     public Sprite enabledX;
 
     [Header("Line IDs - make sure to only initialize the Enemy ID")]
-    [SerializeField]
-    private int enemyID; //TODO: initalize this + enemy sprite from Opponent.ID
+    private int enemyID;
     [SerializeField]
     private int currentEnemyLineID;
     [SerializeField]
@@ -62,8 +61,11 @@ public class BattleSystem : MonoBehaviour
         // GameObject playerGO = Instantiate(playerPrefab);
         player = playerPrefab.GetComponent<Player>();
 
+        //TODO: set opponentPrefab.sprite based on currBoss and gamemanager.sprites list
         // GameObject opponentGO = Instantiate(opponentPrefab);
-        opponent = opponentPrefab.GetComponent<Opponent>();
+        opponent = GameManager.opponents[GameManager.currBoss];
+
+        enemyID = opponent.GetID();
 
         SetChoices(false);
         for (int i = 0; i < xs.Length; i++)
@@ -72,7 +74,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         battleSpeaker.text = "Announcer";
-        battleText.text = "You vs. " + opponent.name;
+        battleText.text = "You vs. " + opponent.GetName();
         // yield return new WaitForSeconds(2f);
 
         // Initial loop
@@ -136,7 +138,7 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Ending game");
         gameOver = true;
         battleSpeaker.text = "Announcer";
-        string winner = numOfX >= 3 ? opponent.name : player.name;
+        string winner = numOfX >= 3 ? opponent.GetName() : player.name;
         battleText.text = "And the winner is... " + winner + "!!";
         if (numOfX < 3) {
             GameManager.instance.DefeatedBoss(enemyID);
@@ -253,7 +255,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator OpponentTurn()
     {
         state = BattleState.OPPONENTTURN;
-        battleSpeaker.text = opponent.name;
+        battleSpeaker.text = opponent.GetName();
         // battleText.text = enemyText;
         battleText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID);
         playerAnswered = false;
