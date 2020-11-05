@@ -12,15 +12,20 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     private static List<Opponent> opponents;
 
+    //TODO: keep track of boss win or lose
+
     void Awake()
     {
         //check if instance exists
         if (instance == null)
         {
             instance = this;
-            opponents.Add(new Opponent("Wash Depp", false));
-            opponents.Add(new Opponent("Kendrick Amore", false));
-            opponents.Add(new Opponent("Lil\' Pay", false));
+            opponents.Add(new Opponent("Wash Depp", false, 6));
+            opponents.Add(new Opponent("Kendrick Amore", false, 6));
+            opponents.Add(new Opponent("Lil\' Pay", false, 9));
+            for (int i = 0; i < opponents.Count; i++) {
+                opponents[i].ID = i;
+            }
         }
         else if (instance != this)
         {
@@ -30,6 +35,15 @@ public class GameManager : MonoBehaviour
 
         // battleScript = GetComponent<BattleManager>();
         // beatScript = GetComponent<BeatManager>();
+    }
+
+    public void LoadBoss(int boss) {
+        //TODO: call this from selection screen
+        //TODO: load opponent info into BattleSystem!!
+    }
+
+    public void DefeatedBoss(int boss) {
+        opponents[boss].defeated = true;
     }
 
     // void newBoss()

@@ -10,7 +10,6 @@ public class BattleSystem : MonoBehaviour
     //TODO: probably make stuff serialized and not public
     public BattleState state;
 
-    //TODO: replace with actual prefabs if needed?
     public GameObject playerPrefab;
     public GameObject opponentPrefab;
     public int maxTurns = 3;
@@ -41,7 +40,7 @@ public class BattleSystem : MonoBehaviour
 
     [Header("Line IDs - make sure to only initialize the Enemy ID")]
     [SerializeField]
-    private int enemyID;
+    private int enemyID; //TODO: initalize this + enemy sprite from Opponent.ID
     [SerializeField]
     private int currentEnemyLineID;
     [SerializeField]
@@ -139,6 +138,9 @@ public class BattleSystem : MonoBehaviour
         battleSpeaker.text = "Announcer";
         string winner = numOfX >= 3 ? opponent.name : player.name;
         battleText.text = "And the winner is... " + winner + "!!";
+        if (numOfX < 3) {
+            GameManager.instance.DefeatedBoss(enemyID);
+        }
         SetChoices(false);
         StopAllCoroutines();
     }
