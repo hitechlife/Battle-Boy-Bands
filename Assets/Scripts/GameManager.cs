@@ -41,9 +41,9 @@ public class GameManager : MonoBehaviour
         // beatScript = GetComponent<BeatManager>();
     }
 
+    // Called from selection screen
     public void LoadBoss(int boss) {
         currBoss = boss;
-        //TODO: call this from selection screen
     }
 
     public void DefeatedBoss(int boss) {
