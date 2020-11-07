@@ -12,13 +12,18 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject playerPrefab;
     public GameObject opponentPrefab;
+    public GameObject opponentInfo;
+    //TODO: set opponent info to opponent name, only write "kendrick" for kendrick amore
+    //TODO: show lines one at a time
     public int maxTurns = 3;
 
     Player player;
     Opponent opponent;
 
-    public Text battleText;
+    public Text enemyText;
+    public Text playerText;
     public Text battleSpeaker;
+    public Text announcerText;
 
     // Since we only have 3 choices, easier to access each separately
     // Put into array??
@@ -66,6 +71,7 @@ public class BattleSystem : MonoBehaviour
         opponent = GameManager.opponents[GameManager.currBoss];
 
         enemyID = opponent.GetID();
+        ClearText();
 
         SetChoices(false);
         for (int i = 0; i < xs.Length; i++)
@@ -74,7 +80,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         battleSpeaker.text = "Announcer";
-        battleText.text = "You vs. " + opponent.GetName();
+        announcerText.text = "You vs. " + opponent.GetName();
         // yield return new WaitForSeconds(2f);
 
         // Initial loop
@@ -139,7 +145,8 @@ public class BattleSystem : MonoBehaviour
         gameOver = true;
         battleSpeaker.text = "Announcer";
         string winner = numOfX >= 3 ? opponent.GetName() : player.name;
-        battleText.text = "And the winner is... " + winner + "!!";
+        ClearText();
+        announcerText.text = "And the winner is... " + winner + "!!";
         if (numOfX < 3) {
             GameManager.instance.DefeatedBoss(enemyID);
         }
@@ -202,6 +209,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator StartChoiceSelection()
     {
+        ClearText();
         // Let enemy text display while we pick a choice
         state = BattleState.PLAYERCHOICE;
         SetChoices(true);
@@ -230,7 +238,8 @@ public class BattleSystem : MonoBehaviour
         // battleText.text = playerText;
         // print("player line: " + currentPlayerLineID);
         // print("enemy line: " + currentEnemyLineID);
-        battleText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]);
+        ClearText();
+        playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]);
         currentEnemyLineID = BattleLineManager.S.RetrieveEnemyLineID(currentPlayerLineID);
         //TODO: display ALL enemy lines except the last one before letting player pick a choice
         yield return null;
@@ -257,7 +266,8 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.OPPONENTTURN;
         battleSpeaker.text = opponent.GetName();
         // battleText.text = enemyText;
-        battleText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID);
+        ClearText();
+        enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID);
         playerAnswered = false;
         //TODO: display ALL enemy lines except the last one before letting player pick a choice
         yield return null;
@@ -296,6 +306,12 @@ public class BattleSystem : MonoBehaviour
         if (!playerAnswered) ChooseInsult(2);
 
         SetChoices(false);
+    }
+
+    void ClearText() {
+        playerText.text = "";
+        enemyText.text = "";
+        announcerText.text = "";
     }
 
 }
