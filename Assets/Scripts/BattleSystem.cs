@@ -11,7 +11,7 @@ public class BattleSystem : MonoBehaviour
     private static FMOD.Studio.EventInstance Music;
 
     [FMODUnity.EventRef]
-    public string fmodEvent;
+    public string fmodEvent = "event:/Music/Track 3";
 
     [SerializeField] [Range(-12f, 12f)]
     private float Points;
@@ -80,14 +80,18 @@ public class BattleSystem : MonoBehaviour
         //TODO: need to instantiate at specific coords
         // GameObject playerGO = Instantiate(playerPrefab);
         player = playerPrefab.GetComponent<Player>();
+        opponent = GameManager.opponents[GameManager.currBoss];
 
         //TODO: set opponentPrefab.sprite based on currBoss and gamemanager.sprites list
+    
         //TODO: add opponent intro field and icon field to Opponent.cs
-        //TODO: add beat list to GameManger in which it contains the beat track and the BPM, load the specific one into the beatmanager based on current boss
+
+        //TODO: add beat list to GameManger in which it contains the beat track and the BPM, load the specific one into the beatmanager based on current boss (and also the FMOD project)
+        //fmodEvent = "event:/Music/Track " + GameManager.currBoss;
+
         //TODO: set opponent info text field to opponent name, icon to opponent icon, only write "kendrick" for kendrick amore
+
         //TODO: show lines one at a time
-        // GameObject opponentGO = Instantiate(opponentPrefab);
-        opponent = GameManager.opponents[GameManager.currBoss];
 
         enemyID = opponent.GetID();
         ClearText();
