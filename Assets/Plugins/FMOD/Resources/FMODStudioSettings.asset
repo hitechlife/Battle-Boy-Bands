@@ -11,18 +11,17 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eef8d824ea7b63742966aaa0e94ac383, type: 3}
   m_Name: FMODStudioSettings
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../FMOD Studio/Battle of the Boy Bands/Battle of the Boy
-    Bands.fspro
-  sourceBankPath: ..\..\FMOD Studio\Battle of the Boy Bands\Build
-  SourceBankPathUnformatted:
+  sourceProjectPath: FMOD Studio/Battle of the Boy Bands/Battle of the Boy Bands.fspro
+  sourceBankPath: FMOD Studio\Battle of the Boy Bands\Build
+  SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
   BankLoadType: 0
   AutomaticSampleLoading: 0
-  EncryptionKey:
+  EncryptionKey: 
   ImportType: 0
   TargetAssetPath: FMODBanks
   LoggingLevel: 2

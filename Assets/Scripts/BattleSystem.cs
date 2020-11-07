@@ -126,6 +126,7 @@ public class BattleSystem : MonoBehaviour
                 yield return null;
             }
 
+            int oldNumOfX = numOfX;
             // Player should be choosing answer during this time....
             // Note that cooldown timer coroutine is also started at this point
             yield return StartCoroutine(StartChoiceSelection());
@@ -133,6 +134,17 @@ public class BattleSystem : MonoBehaviour
             while (BeatManager.S.isPlayerLoop)
             {
                 yield return null;
+            }
+
+            // Display bad choice only after timer complete
+            if (oldNumOfX > numOfX) {
+                // good choice
+                xs[numOfX].sprite = disabledX;
+                Points--;
+            } else if (oldNumOfX < numOfX) {
+                // bad choice
+                xs[numOfX].sprite = enabledX;
+                Points++;
             }
 
 
@@ -186,8 +198,8 @@ public class BattleSystem : MonoBehaviour
                 // enemyText = "nice!!!";
                 if (numOfX > 0) {
                     numOfX--;
-                    xs[numOfX].sprite = disabledX;
-                    Points--;
+                    // xs[numOfX].sprite = disabledX;
+                    // Points--;
                     //xs[numOfX].enabled = false;
                 }
                 choice1.GetComponentInChildren<Button>().interactable = false;
@@ -204,9 +216,9 @@ public class BattleSystem : MonoBehaviour
                     //TODO: add "bad" sound for bad choice
                     // enemyText = "boooooo";
                 if (numOfX < xs.Length) {
-                    xs[numOfX].sprite = enabledX;
+                    // xs[numOfX].sprite = enabledX;
                     numOfX++;
-                    Points++;
+                    // Points++;
                 }
                 choice1.GetComponentInChildren<Button>().interactable = false;
                 choice0.GetComponentInChildren<Button>().interactable = false;
