@@ -293,7 +293,7 @@ public class BattleSystem : MonoBehaviour
         slider.value = 1;
 
         // Temporary scaling fix until we can integrate the BeatManager more
-        float scalingFactor = 0.8f;
+        float scalingFactor = 1f;
 
         // Decrease slider value over timeToWait seconds
         while (slider.value > 0 && BeatManager.S.isPlayerLoop) {

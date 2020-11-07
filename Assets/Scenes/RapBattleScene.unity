@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea452d653538784fa36cba969d22796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beatsPerMinute: 105
+  beatsPerMinute: 120
   beatSound: {fileID: 1982369210}
   playSound: 0
   isFirstLoop: 1
@@ -594,7 +594,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 02c74254dd4931b40881cbce4528dda7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b2ed66743b47fb643b6e63717834d3f5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
