@@ -126,7 +126,6 @@ public class BattleSystem : MonoBehaviour
                 yield return null;
             }
 
-            int oldNumOfX = numOfX;
             // Player should be choosing answer during this time....
             // Note that cooldown timer coroutine is also started at this point
             yield return StartCoroutine(StartChoiceSelection());
@@ -136,15 +135,29 @@ public class BattleSystem : MonoBehaviour
                 yield return null;
             }
 
-            // Display bad choice only after timer complete
-            if (oldNumOfX > numOfX) {
-                // good choice
-                xs[numOfX].sprite = disabledX;
-                Points--;
-            } else if (oldNumOfX < numOfX) {
-                // bad choice
-                xs[numOfX].sprite = enabledX;
-                Points++;
+            // Display these after timer complete based on choice
+            switch (selectionNum) {
+                case 0:
+                    xs[numOfX].sprite = disabledX;
+                    Points--;
+                    PlayCheers();
+                    if (numOfX > 0) {
+                        numOfX--;
+                    }
+                    break;
+                case 1:
+                    PlayNeutral();
+                    break;
+                case 2:
+                    xs[numOfX].sprite = enabledX;
+                    Points++;
+                    PlayBoos();
+                    if (numOfX < xs.Length) {
+                        numOfX++;
+                    }
+                    break;
+                default:
+                    break;
             }
 
 
@@ -178,8 +191,11 @@ public class BattleSystem : MonoBehaviour
         string winner = numOfX >= 3 ? opponent.GetName() : player.name;
         ClearText();
         announcerText.text = "And the winner is... " + winner + "!!";
-        if (numOfX < 3) {
+        if (numOfX < xs.Length) {
+            PlayCheers();
             GameManager.instance.DefeatedBoss(enemyID);
+        } else {
+            PlayBoos();
         }
         SetChoices(false);
         StopAllCoroutines();
@@ -196,12 +212,12 @@ public class BattleSystem : MonoBehaviour
             case 0: //good
                 // playerText = choice0.GetComponentInChildren<Text>().text;
                 // enemyText = "nice!!!";
-                if (numOfX > 0) {
-                    numOfX--;
-                    // xs[numOfX].sprite = disabledX;
-                    // Points--;
-                    //xs[numOfX].enabled = false;
-                }
+                // if (numOfX > 0) {
+                //     numOfX--;
+                //     // xs[numOfX].sprite = disabledX;
+                //     // Points--;
+                //     //xs[numOfX].enabled = false;
+                // }
                 choice1.GetComponentInChildren<Button>().interactable = false;
                 choice2.GetComponentInChildren<Button>().interactable = false;
                 break;
@@ -215,11 +231,11 @@ public class BattleSystem : MonoBehaviour
                     // playerText = choice2.GetComponentInChildren<Text>().text;
                     //TODO: add "bad" sound for bad choice
                     // enemyText = "boooooo";
-                if (numOfX < xs.Length) {
-                    // xs[numOfX].sprite = enabledX;
-                    numOfX++;
-                    // Points++;
-                }
+                // if (numOfX < xs.Length) {
+                //     // xs[numOfX].sprite = enabledX;
+                //     numOfX++;
+                //     // Points++;
+                // }
                 choice1.GetComponentInChildren<Button>().interactable = false;
                 choice0.GetComponentInChildren<Button>().interactable = false;
                 break;
