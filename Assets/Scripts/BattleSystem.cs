@@ -13,8 +13,6 @@ public class BattleSystem : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject opponentPrefab;
     public GameObject opponentInfo;
-    //TODO: set opponent info to opponent name, only write "kendrick" for kendrick amore
-    //TODO: show lines one at a time
     public int maxTurns = 3;
 
     Player player;
@@ -67,6 +65,10 @@ public class BattleSystem : MonoBehaviour
         player = playerPrefab.GetComponent<Player>();
 
         //TODO: set opponentPrefab.sprite based on currBoss and gamemanager.sprites list
+        //TODO: add opponent intro field and icon field to Opponent.cs
+        //TODO: add beat list to GameManger in which it contains the beat track and the BPM, load the specific one into the beatmanager based on current boss
+        //TODO: set opponent info text field to opponent name, icon to opponent icon, only write "kendrick" for kendrick amore
+        //TODO: show lines one at a time
         // GameObject opponentGO = Instantiate(opponentPrefab);
         opponent = GameManager.opponents[GameManager.currBoss];
 
