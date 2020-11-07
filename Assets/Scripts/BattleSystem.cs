@@ -10,16 +10,20 @@ public class BattleSystem : MonoBehaviour
     //TODO: probably make stuff serialized and not public
     public BattleState state;
 
-    //TODO: replace with actual prefabs if needed?
     public GameObject playerPrefab;
     public GameObject opponentPrefab;
+    public GameObject opponentInfo;
+    //TODO: set opponent info to opponent name, only write "kendrick" for kendrick amore
+    //TODO: show lines one at a time
     public int maxTurns = 3;
 
     Player player;
     Opponent opponent;
 
-    public Text battleText;
+    public Text enemyText;
+    public Text playerText;
     public Text battleSpeaker;
+    public Text announcerText;
 
     // Since we only have 3 choices, easier to access each separately
     // Put into array??
@@ -35,10 +39,11 @@ public class BattleSystem : MonoBehaviour
 
     // X system
     public int numOfX;
-    public Image[] xs;
+    public SpriteRenderer[] xs;
+    public Sprite disabledX;
+    public Sprite enabledX;
 
     [Header("Line IDs - make sure to only initialize the Enemy ID")]
-    [SerializeField]
     private int enemyID;
     [SerializeField]
     private int currentEnemyLineID;
@@ -61,20 +66,21 @@ public class BattleSystem : MonoBehaviour
         // GameObject playerGO = Instantiate(playerPrefab);
         player = playerPrefab.GetComponent<Player>();
 
+        //TODO: set opponentPrefab.sprite based on currBoss and gamemanager.sprites list
         // GameObject opponentGO = Instantiate(opponentPrefab);
-        opponent = opponentPrefab.GetComponent<Opponent>();
+        opponent = GameManager.opponents[GameManager.currBoss];
+
+        enemyID = opponent.GetID();
+        ClearText();
 
         SetChoices(false);
-        for (int i = 0; i < xs.Length; i++) {
-            // if (i < numOfX) {
-            //     xs[i].enabled = true;
-            // } else {
-                xs[i].enabled = false;
-            // }
+        for (int i = 0; i < xs.Length; i++)
+        {
+            xs[i].sprite = disabledX;
         }
 
         battleSpeaker.text = "Announcer";
-        battleText.text = "You vs. " + opponent.name;
+        announcerText.text = "You vs. " + opponent.GetName();
         // yield return new WaitForSeconds(2f);
 
         // Initial loop
@@ -138,8 +144,12 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Ending game");
         gameOver = true;
         battleSpeaker.text = "Announcer";
-        string winner = numOfX >= 3 ? opponent.name : player.name;
-        battleText.text = "And the winner is... " + winner + "!!";
+        string winner = numOfX >= 3 ? opponent.GetName() : player.name;
+        ClearText();
+        announcerText.text = "And the winner is... " + winner + "!!";
+        if (numOfX < 3) {
+            GameManager.instance.DefeatedBoss(enemyID);
+        }
         SetChoices(false);
         StopAllCoroutines();
     }
@@ -157,7 +167,7 @@ public class BattleSystem : MonoBehaviour
                 // enemyText = "nice!!!";
                 if (numOfX > 0) {
                     numOfX--;
-                    xs[numOfX].enabled = false;
+                    xs[numOfX].sprite = disabledX;
                 }
                 choice1.GetComponentInChildren<Button>().interactable = false;
                 choice2.GetComponentInChildren<Button>().interactable = false;
@@ -173,7 +183,7 @@ public class BattleSystem : MonoBehaviour
                 //TODO: add "bad" sound for bad choice
                 // enemyText = "boooooo";
                 if (numOfX < xs.Length) {
-                    xs[numOfX].enabled = true;
+                    xs[numOfX].sprite = enabledX;
                     numOfX++;
                 }
                 choice1.GetComponentInChildren<Button>().interactable = false;
@@ -199,6 +209,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator StartChoiceSelection()
     {
+        ClearText();
         // Let enemy text display while we pick a choice
         state = BattleState.PLAYERCHOICE;
         battleSpeaker.text = "YOU CHOOSE";
@@ -232,7 +243,8 @@ public class BattleSystem : MonoBehaviour
         // battleText.text = playerText;
         // print("player line: " + currentPlayerLineID);
         // print("enemy line: " + currentEnemyLineID);
-        battleText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]);
+        ClearText();
+        playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]);
         currentEnemyLineID = BattleLineManager.S.RetrieveEnemyLineID(currentPlayerLineID);
         //TODO: display ALL enemy lines except the last one before letting player pick a choice
         yield return null;
@@ -257,9 +269,10 @@ public class BattleSystem : MonoBehaviour
     IEnumerator OpponentTurn()
     {
         state = BattleState.OPPONENTTURN;
-        battleSpeaker.text = opponent.name;
+        battleSpeaker.text = opponent.GetName();
         // battleText.text = enemyText;
-        battleText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID);
+        ClearText();
+        enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID);
         playerAnswered = false;
         //TODO: display ALL enemy lines except the last one before letting player pick a choice
         yield return null;
@@ -298,6 +311,12 @@ public class BattleSystem : MonoBehaviour
         if (!playerAnswered) ChooseInsult(2);
 
         SetChoices(false);
+    }
+
+    void ClearText() {
+        playerText.text = "";
+        enemyText.text = "";
+        announcerText.text = "";
     }
 
 }

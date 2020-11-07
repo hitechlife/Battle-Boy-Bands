@@ -25,6 +25,11 @@ public class BattleLineManager : MonoBehaviour
         {
             new int[] { 9, 10, 11 },
             new int[] { 12, 13, 14 }
+        },
+        new int[][]
+        {
+            new int[] { 9, 10, 11 },
+            new int[] { 12, 13, 14 }
         }
     };
 
@@ -102,9 +107,9 @@ public class BattleLineManager : MonoBehaviour
     // enemyLines[Enemy ID][Response ID]
     public string[][] enemyLines = {
         new string[] { // enemy 1
-            "Welcome to the final now it’s time for Lil’ Pay \nWhen I walk up on the stage y’all know it’s time to lil pray", 
-            "You’re just a Millennial, don’t try to mess with Gen Z \nI already reached platinum with just a single LP", 
-            "They call me lil' pay but I ain't so small \nI'm king of the world, you're a fly on the wall", 
+            "Welcome to the final\nnow it’s time for Lil’ Pay \nWhen I walk up on the stage\ny’all know it’s time to lil pray", 
+            "You’re just a Millennial,\ndon’t try to mess with Gen Z \nI already reached platinum\nwith just a single LP", 
+            "They call me lil' pay\nbut I ain't so small \nI'm king of the world,\nyou're a fly on the wall", 
             "Fourth enemy line", 
             "Fifth enemy line", 
             "Sixth enemy line", 
@@ -118,6 +123,7 @@ public class BattleLineManager : MonoBehaviour
             "Fourteenth enemy line",
             "Fifteenth enemy line"
         },
+        new string[] { "Next enemy line", "Next next enemy line" },
         new string[] { "Next enemy line", "Next next enemy line" }
     };
 
