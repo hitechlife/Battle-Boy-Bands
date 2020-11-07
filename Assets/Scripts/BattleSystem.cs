@@ -7,6 +7,15 @@ public enum BattleState { START, PLAYERTURN, PLAYERCHOICE, OPPONENTTURN, WIN, LO
 
 public class BattleSystem : MonoBehaviour
 {
+    private static FMOD.Studio.EventInstance Sound;
+    private static FMOD.Studio.EventInstance Music;
+
+    [FMODUnity.EventRef]
+    public string fmodEvent;
+
+    [SerializeField] [Range(-12f, 12f)]
+    private float Points;
+
     //TODO: probably make stuff serialized and not public
     public BattleState state;
 
@@ -53,8 +62,16 @@ public class BattleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
+        Music.start();
+
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+    }
+
+    private void Update()
+    {
+        Music.setParameterByName("Points", Points);
     }
 
     // Sets up the initial battle state
@@ -117,7 +134,7 @@ public class BattleSystem : MonoBehaviour
             {
                 yield return null;
             }
-            
+
 
             // defaults to the wrong answer if nothing chosen yet
             // does this in Cooldown routine
@@ -170,6 +187,8 @@ public class BattleSystem : MonoBehaviour
                 if (numOfX > 0) {
                     numOfX--;
                     xs[numOfX].sprite = disabledX;
+                    Points--;
+                    //xs[numOfX].enabled = false;
                 }
                 choice1.GetComponentInChildren<Button>().interactable = false;
                 choice2.GetComponentInChildren<Button>().interactable = false;
@@ -181,12 +200,13 @@ public class BattleSystem : MonoBehaviour
                 choice2.GetComponentInChildren<Button>().interactable = false;
                 break;
             case 2: //bad
-                // playerText = choice2.GetComponentInChildren<Text>().text;
-                //TODO: add "bad" sound for bad choice
-                // enemyText = "boooooo";
+                    // playerText = choice2.GetComponentInChildren<Text>().text;
+                    //TODO: add "bad" sound for bad choice
+                    // enemyText = "boooooo";
                 if (numOfX < xs.Length) {
                     xs[numOfX].sprite = enabledX;
                     numOfX++;
+                    Points++;
                 }
                 choice1.GetComponentInChildren<Button>().interactable = false;
                 choice0.GetComponentInChildren<Button>().interactable = false;
@@ -216,7 +236,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERCHOICE;
         SetChoices(true);
 
-        // 
+        //
         int i = 0;
         foreach (GameObject choice in new GameObject[] { choice0, choice1, choice2 })
         {
@@ -314,6 +334,26 @@ public class BattleSystem : MonoBehaviour
         playerText.text = "";
         enemyText.text = "";
         announcerText.text = "";
+    }
+    public void PlayBoos()
+    {
+        Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Boos");
+        Sound.start();
+        Sound.release();
+    }
+
+    public void PlayCheers()
+    {
+        Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Cheers");
+        Sound.start();
+        Sound.release();
+    }
+
+    public void PlayNeutral()
+    {
+        Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Neutral");
+        Sound.start();
+        Sound.release();
     }
 
 }
