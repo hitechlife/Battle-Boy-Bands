@@ -83,6 +83,7 @@ public class BattleSystem : MonoBehaviour
         opponent = GameManager.opponents[GameManager.currBoss];
 
         //TODO: set opponentPrefab.sprite based on currBoss and gamemanager.sprites list
+        //opponentPrefab.sprite = GameManager.sprites[GameManager.currBoss][0];
     
         //TODO: add opponent intro field and icon field to Opponent.cs
 
