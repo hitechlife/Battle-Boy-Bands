@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BeatManager : MonoBehaviour
 {
+
     // Serialized fields
     [SerializeField]
     private int beatsPerMinute;

@@ -7,14 +7,21 @@ public enum BattleState { START, PLAYERTURN, PLAYERCHOICE, OPPONENTTURN, WIN, LO
 
 public class BattleSystem : MonoBehaviour
 {
+    private static FMOD.Studio.EventInstance Sound;
+    private static FMOD.Studio.EventInstance Music;
+
+    [FMODUnity.EventRef]
+    public string fmodEvent = "event:/Music/Track 3";
+
+    [SerializeField] [Range(-12f, 12f)]
+    private float Points;
+
     //TODO: probably make stuff serialized and not public
     public BattleState state;
 
     public GameObject playerPrefab;
     public GameObject opponentPrefab;
     public GameObject opponentInfo;
-    //TODO: set opponent info to opponent name, only write "kendrick" for kendrick amore
-    //TODO: show lines one at a time
     public int maxTurns = 3;
 
     Player player;
@@ -55,8 +62,16 @@ public class BattleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
+        Music.start();
+
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+    }
+
+    private void Update()
+    {
+        Music.setParameterByName("Points", Points);
     }
 
     // Sets up the initial battle state
@@ -65,10 +80,18 @@ public class BattleSystem : MonoBehaviour
         //TODO: need to instantiate at specific coords
         // GameObject playerGO = Instantiate(playerPrefab);
         player = playerPrefab.GetComponent<Player>();
+        opponent = GameManager.opponents[GameManager.currBoss];
 
         //TODO: set opponentPrefab.sprite based on currBoss and gamemanager.sprites list
-        // GameObject opponentGO = Instantiate(opponentPrefab);
-        opponent = GameManager.opponents[GameManager.currBoss];
+    
+        //TODO: add opponent intro field and icon field to Opponent.cs
+
+        //TODO: add beat list to GameManger in which it contains the beat track and the BPM, load the specific one into the beatmanager based on current boss (and also the FMOD project)
+        //fmodEvent = "event:/Music/Track " + GameManager.currBoss;
+
+        //TODO: set opponent info text field to opponent name, icon to opponent icon, only write "kendrick" for kendrick amore
+
+        //TODO: show lines one at a time
 
         enemyID = opponent.GetID();
         ClearText();
@@ -115,7 +138,32 @@ public class BattleSystem : MonoBehaviour
             {
                 yield return null;
             }
-            
+
+            // Display these after timer complete based on choice
+            switch (selectionNum) {
+                case 0:
+                    if (numOfX > 0) {
+                        numOfX--;
+                    }
+                    xs[numOfX].sprite = disabledX;
+                    Points--;
+                    PlayCheers();
+                    break;
+                case 1:
+                    PlayNeutral();
+                    break;
+                case 2:
+                    xs[numOfX].sprite = enabledX;
+                    Points++;
+                    PlayBoos();
+                    if (numOfX < xs.Length) {
+                        numOfX++;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
 
             // defaults to the wrong answer if nothing chosen yet
             // does this in Cooldown routine
@@ -147,8 +195,11 @@ public class BattleSystem : MonoBehaviour
         string winner = numOfX >= 3 ? opponent.GetName() : player.name;
         ClearText();
         announcerText.text = "And the winner is... " + winner + "!!";
-        if (numOfX < 3) {
+        if (numOfX < xs.Length) {
+            PlayCheers();
             GameManager.instance.DefeatedBoss(enemyID);
+        } else {
+            PlayBoos();
         }
         SetChoices(false);
         StopAllCoroutines();
@@ -165,10 +216,12 @@ public class BattleSystem : MonoBehaviour
             case 0: //good
                 // playerText = choice0.GetComponentInChildren<Text>().text;
                 // enemyText = "nice!!!";
-                if (numOfX > 0) {
-                    numOfX--;
-                    xs[numOfX].sprite = disabledX;
-                }
+                // if (numOfX > 0) {
+                //     numOfX--;
+                //     // xs[numOfX].sprite = disabledX;
+                //     // Points--;
+                //     //xs[numOfX].enabled = false;
+                // }
                 choice1.GetComponentInChildren<Button>().interactable = false;
                 choice2.GetComponentInChildren<Button>().interactable = false;
                 break;
@@ -179,13 +232,14 @@ public class BattleSystem : MonoBehaviour
                 choice2.GetComponentInChildren<Button>().interactable = false;
                 break;
             case 2: //bad
-                // playerText = choice2.GetComponentInChildren<Text>().text;
-                //TODO: add "bad" sound for bad choice
-                // enemyText = "boooooo";
-                if (numOfX < xs.Length) {
-                    xs[numOfX].sprite = enabledX;
-                    numOfX++;
-                }
+                    // playerText = choice2.GetComponentInChildren<Text>().text;
+                    //TODO: add "bad" sound for bad choice
+                    // enemyText = "boooooo";
+                // if (numOfX < xs.Length) {
+                //     // xs[numOfX].sprite = enabledX;
+                //     numOfX++;
+                //     // Points++;
+                // }
                 choice1.GetComponentInChildren<Button>().interactable = false;
                 choice0.GetComponentInChildren<Button>().interactable = false;
                 break;
@@ -216,7 +270,7 @@ public class BattleSystem : MonoBehaviour
         battleText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('\n')[0];
         SetChoices(true);
 
-        // 
+        //
         int i = 0;
         foreach (GameObject choice in new GameObject[] { choice0, choice1, choice2 })
         {
@@ -298,7 +352,7 @@ public class BattleSystem : MonoBehaviour
         slider.value = 1;
 
         // Temporary scaling fix until we can integrate the BeatManager more
-        float scalingFactor = 0.8f;
+        float scalingFactor = 1f;
 
         // Decrease slider value over timeToWait seconds
         while (slider.value > 0 && BeatManager.S.isPlayerLoop) {
@@ -317,6 +371,26 @@ public class BattleSystem : MonoBehaviour
         playerText.text = "";
         enemyText.text = "";
         announcerText.text = "";
+    }
+    public void PlayBoos()
+    {
+        Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Boos");
+        Sound.start();
+        Sound.release();
+    }
+
+    public void PlayCheers()
+    {
+        Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Cheers");
+        Sound.start();
+        Sound.release();
+    }
+
+    public void PlayNeutral()
+    {
+        Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Neutral");
+        Sound.start();
+        Sound.release();
     }
 
 }
