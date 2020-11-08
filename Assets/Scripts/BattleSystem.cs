@@ -142,12 +142,12 @@ public class BattleSystem : MonoBehaviour
             // Display these after timer complete based on choice
             switch (selectionNum) {
                 case 0:
-                    xs[numOfX].sprite = disabledX;
-                    Points--;
-                    PlayCheers();
                     if (numOfX > 0) {
                         numOfX--;
                     }
+                    xs[numOfX].sprite = disabledX;
+                    Points--;
+                    PlayCheers();
                     break;
                 case 1:
                     PlayNeutral();
