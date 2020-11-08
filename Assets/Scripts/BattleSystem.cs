@@ -150,8 +150,11 @@ public class BattleSystem : MonoBehaviour
                         numOfX--;
                     }
                     xs[numOfX].sprite = disabledX;
-                    Points--;
                     PlayCheers();
+                    if (Points > 0)
+                    {
+                        Points--;
+                    }
                     break;
                 case 1:
                     PlayNeutral();
