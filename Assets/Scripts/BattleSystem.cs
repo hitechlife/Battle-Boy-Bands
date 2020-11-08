@@ -83,13 +83,17 @@ public class BattleSystem : MonoBehaviour
         opponent = GameManager.opponents[GameManager.currBoss];
 
         //TODO: set opponentPrefab.sprite based on currBoss and gamemanager.sprites list
-    
+        //opponentPrefab.sprite = GameManager.sprites[GameManager.currBoss][0];
+        opponentPrefab.GetComponent<SpriteRenderer>().sprite = GameManager.sprites[GameManager.currBoss][0];
+
         //TODO: add opponent intro field and icon field to Opponent.cs
+
 
         //TODO: add beat list to GameManger in which it contains the beat track and the BPM, load the specific one into the beatmanager based on current boss (and also the FMOD project)
         //fmodEvent = "event:/Music/Track " + GameManager.currBoss;
 
         //TODO: set opponent info text field to opponent name, icon to opponent icon, only write "kendrick" for kendrick amore
+        //opponent.GetName.Split(' ')[0]
 
         //TODO: show lines one at a time
 
