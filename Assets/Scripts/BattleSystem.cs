@@ -45,7 +45,7 @@ public class BattleSystem : MonoBehaviour
     // private string playerText = "...";
 
     // X system
-    public int numOfX;
+    private int numOfX = 0;
     public SpriteRenderer[] xs;
     public Sprite disabledX;
     public Sprite enabledX;
@@ -66,6 +66,7 @@ public class BattleSystem : MonoBehaviour
         Music.start();
 
         state = BattleState.START;
+        StopAllCoroutines();
         StartCoroutine(SetupBattle());
     }
 
@@ -160,8 +161,10 @@ public class BattleSystem : MonoBehaviour
                     PlayNeutral();
                     break;
                 case 2:
-                    xs[numOfX].sprite = enabledX;
-                    Points++;
+                    xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
+                    if (Points < xs.Length) {
+                        Points++;
+                    }
                     PlayBoos();
                     if (numOfX < xs.Length) {
                         numOfX++;
@@ -171,13 +174,13 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
 
-
             // defaults to the wrong answer if nothing chosen yet
             // does this in Cooldown routine
             // yield return StartCoroutine(ChoicesTimer(2f /*BeatManager.S.SUBDIVISION_CONST*/));
 
             // Display chosen insult
             yield return StartCoroutine(PlayerTurn());
+
             // yield return new WaitForSeconds(4f);
             while (BeatManager.S.isPlayerResponseLoop)
             {
@@ -186,7 +189,7 @@ public class BattleSystem : MonoBehaviour
             // enemy text should be set by TryInsult at this point
 
             // Break out of loop if 3 x's
-            if (numOfX >= 3) {
+            if (numOfX >= xs.Length) {
                 break;
             }
         }
@@ -199,7 +202,7 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Ending game");
         gameOver = true;
         battleSpeaker.text = "Announcer";
-        string winner = numOfX >= 3 ? opponent.GetName() : player.name;
+        string winner = numOfX >= xs.Length ? opponent.GetName() : player.name;
         ClearText();
         announcerText.text = "And the winner is... " + winner + "!!";
         if (numOfX < xs.Length) {
@@ -277,18 +280,12 @@ public class BattleSystem : MonoBehaviour
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('\n')[0];
         SetChoices(true);
 
-        //
         int i = 0;
         foreach (GameObject choice in new GameObject[] { choice0, choice1, choice2 })
         {
             choice.GetComponentInChildren<Text>().text = BattleLineManager.S.RetrieveChoiceLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[i]);
             i += 1;
         }
-
-        //TODO: obviously... change... these are placeholders
-        // choice0.GetComponentInChildren<Text>().text = "this is correct";
-        // choice1.GetComponentInChildren<Text>().text = "this is ok";
-        // choice2.GetComponentInChildren<Text>().text = "this is incorrect";
 
         int doubleTime = BeatManager.doubleTime ? 2 : 1;
 
@@ -360,11 +357,14 @@ public class BattleSystem : MonoBehaviour
 
         // Temporary scaling fix until we can integrate the BeatManager more
         float scalingFactor = 1f;
+        // bool flippedOn = false;
 
         // Decrease slider value over timeToWait seconds
         while (slider.value > 0 && BeatManager.S.isPlayerLoop) {
             if(coolTimer.activeSelf == false) break;
             slider.value -= scalingFactor * Time.deltaTime/timeToWait;
+            // if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn) {
+                // flippedOn = true;
             yield return null;
         }
         print("Choices timer completed");

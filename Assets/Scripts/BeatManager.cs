@@ -20,7 +20,7 @@ public class BeatManager : MonoBehaviour
     public readonly int SUBDIVISION_CONST = 4;
     public readonly int NUM_BREAK_BARS = doubleTime ? 4 : 2;
 
-    private float counter = 0;
+    public int counter = 0;
     public bool isFirstLoop = true;
     public bool isEnemyLoop = false;
     public bool isPlayerLoop = false;
@@ -32,7 +32,7 @@ public class BeatManager : MonoBehaviour
     private float amp = 0.0F;
     private float phase = 0.0F;
     double sampleRate = 0.0F;
-    int accent;
+    public int accent;
     bool running = true;
     bool okToToggle;
 
