@@ -152,19 +152,12 @@ public class BattleSystem : MonoBehaviour
                     }
                     xs[numOfX].sprite = disabledX;
                     PlayCheers();
-                    if (Points > 0)
-                    {
-                        Points--;
-                    }
                     break;
                 case 1:
                     PlayNeutral();
                     break;
                 case 2:
                     xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
-                    if (Points < xs.Length) {
-                        Points++;
-                    }
                     PlayBoos();
                     if (numOfX < xs.Length) {
                         numOfX++;
@@ -357,19 +350,58 @@ public class BattleSystem : MonoBehaviour
 
         // Temporary scaling fix until we can integrate the BeatManager more
         float scalingFactor = 1f;
-        // bool flippedOn = false;
+        bool flippedOn = false;
 
         // Decrease slider value over timeToWait seconds
         while (slider.value > 0 && BeatManager.S.isPlayerLoop) {
             if(coolTimer.activeSelf == false) break;
             slider.value -= scalingFactor * Time.deltaTime/timeToWait;
-            // if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn) {
-                // flippedOn = true;
+            if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn) {
+                flippedOn = true;
+                print ("in switch statement");
+                // Display these after timer complete based on choice
+                switch (selectionNum) {
+                    case 0:
+                        if (Points > 0)
+                        {
+                            Points--;
+                        }
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        if (Points < xs.Length) {
+                            Points++;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
             yield return null;
         }
         print("Choices timer completed");
         //TODO: let's not have 2 be the wrong answer everytime...
         if (!playerAnswered) ChooseInsult(2);
+        if (!flippedOn) {
+            switch (selectionNum) {
+                case 0:
+                    if (Points > 0)
+                    {
+                        Points--;
+                    }
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    if (Points < xs.Length) {
+                        Points++;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
 
         SetChoices(false);
     }
