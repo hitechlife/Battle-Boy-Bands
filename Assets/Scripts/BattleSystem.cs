@@ -21,7 +21,8 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject playerPrefab;
     public GameObject opponentPrefab;
-    public GameObject opponentInfo;
+    public Text opponentInfoText;
+    public Image opponentInfoIcon;
     public int maxTurns = 3;
 
     Player player;
@@ -62,8 +63,8 @@ public class BattleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
-        Music.start();
+        // Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
+        // Music.start();
 
         state = BattleState.START;
         StopAllCoroutines();
@@ -78,28 +79,28 @@ public class BattleSystem : MonoBehaviour
     // Sets up the initial battle state
     IEnumerator SetupBattle()
     {
-        //TODO: need to instantiate at specific coords
-        // GameObject playerGO = Instantiate(playerPrefab);
+        //need to instantiate at specific coords?
         player = playerPrefab.GetComponent<Player>();
         opponent = GameManager.opponents[GameManager.currBoss];
 
-        //TODO: set opponentPrefab.sprite based on currBoss and gamemanager.sprites list
-        //opponentPrefab.sprite = GameManager.sprites[GameManager.currBoss][0];
-        opponentPrefab.GetComponent<SpriteRenderer>().sprite = GameManager.sprites[GameManager.currBoss][0];
+        // Render opponent info and set the track
 
-        //TODO: add opponent intro field and icon field to Opponent.cs
+        // Opponent sprite
+        opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][0];
 
+        // Opponent name and icon
+        opponentInfoText.text = GameManager.currBoss == 1 ? opponent.GetName().Split(' ')[0] : opponent.GetName();;
+        opponentInfoIcon.sprite = opponent.GetSprite();
 
-        //TODO: add beat list to GameManger in which it contains the beat track and the BPM, load the specific one into the beatmanager based on current boss (and also the FMOD project)
-        //fmodEvent = "event:/Music/Track " + GameManager.currBoss;
-
-        //TODO: set opponent info text field to opponent name, icon to opponent icon, only write "kendrick" for kendrick amore
-        //opponent.GetName.Split(' ')[0]
-
-        //TODO: show lines one at a time
-
+        // Max turns and enemy ID
+        maxTurns = opponent.GetTurns();
         enemyID = opponent.GetID();
         ClearText();
+
+        // Track and BPM
+        fmodEvent = "event:/Music/Track " + (GameManager.currBoss + 1);
+        BeatManager.S.beatsPerMinute = GameManager.musicTracks[GameManager.currBoss].BPM;
+        // BeatManager.S.clip?? = GameManager.musicTracks[GameManager.currBoss].clip;
 
         SetChoices(false);
         for (int i = 0; i < xs.Length; i++)
@@ -107,9 +108,13 @@ public class BattleSystem : MonoBehaviour
             xs[i].sprite = disabledX;
         }
 
+        // Start music
+        Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
+        Music.start();
+
         battleSpeaker.text = "Announcer";
         announcerText.text = "You vs. " + opponent.GetName();
-        // yield return new WaitForSeconds(2f);
+        //TODO: play opponent.GetIntro() using this.GetComponent<AudioSource>;
 
         // Initial loop
         while (BeatManager.S.isFirstLoop)
@@ -293,9 +298,9 @@ public class BattleSystem : MonoBehaviour
             i += 1;
         }
 
-        int doubleTime = BeatManager.doubleTime ? 2 : 1;
+        // int doubleTime = BeatManager.doubleTime ? 2 : 1;
 
-        yield return StartCoroutine(ChoicesTimer(BeatManager.S.SUBDIVISION_CONST * doubleTime));
+        yield return StartCoroutine(ChoicesTimer(60f * BeatManager.S.SUBDIVISION_CONST * BeatManager.S.NUM_BREAK_BARS / BeatManager.S.beatsPerMinute));
 
         // yield return new WaitForSeconds(2f);
         // yield return null;
@@ -357,15 +362,13 @@ public class BattleSystem : MonoBehaviour
         if (!slider) Debug.LogError("Slider not valid!");
         slider.value = 1;
 
-        // Temporary scaling fix until we can integrate the BeatManager more
-        float scalingFactor = 1f;
         bool flippedOn = false;
         timeToWait--;
 
         // Decrease slider value over timeToWait seconds
         while (BeatManager.S.isPlayerLoop) {
             if(coolTimer.activeSelf == false) break;
-            slider.value -= scalingFactor * Time.deltaTime/timeToWait;
+            slider.value -= Time.deltaTime/timeToWait;
 
             //TODO: skipping beat bug fix temp
 

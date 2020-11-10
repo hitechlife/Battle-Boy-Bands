@@ -7,7 +7,7 @@ public class BeatManager : MonoBehaviour
 
     // Serialized fields
     [SerializeField]
-    private int beatsPerMinute;
+    public int beatsPerMinute;
     [SerializeField]
     private AudioSource beatSound;
     [SerializeField]
