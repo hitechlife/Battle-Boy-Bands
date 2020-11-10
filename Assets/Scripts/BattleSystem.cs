@@ -68,6 +68,7 @@ public class BattleSystem : MonoBehaviour
         // Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
         // Music.start();
 
+        choicesMap = new int[3];
         state = BattleState.START;
         StopAllCoroutines();
         StartCoroutine(SetupBattle());
@@ -283,11 +284,12 @@ public class BattleSystem : MonoBehaviour
 
         int i = 0;
         int[] arr = {0,1,2};
-        choicesMap = shuffle(arr);
+        int[] randChoice = shuffle(arr);
 
         foreach (GameObject choice in choices)
         {
-            int j = choicesMap[i];
+            int j = randChoice[i];
+            choicesMap[j] = i;
 
             choice.GetComponentInChildren<Text>().text = BattleLineManager.S.RetrieveChoiceLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[j]);
 
