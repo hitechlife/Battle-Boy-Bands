@@ -132,6 +132,12 @@ public class BattleSystem : MonoBehaviour
             // yield return new WaitForSeconds(2f);
             while (BeatManager.S.isEnemyLoop)
             {
+                // First half
+                if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS/2) {
+                    enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
+                } else {
+                    enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[1];
+                }
                 yield return null;
             }
 
@@ -177,8 +183,14 @@ public class BattleSystem : MonoBehaviour
             // yield return new WaitForSeconds(4f);
             while (BeatManager.S.isPlayerResponseLoop)
             {
+                // First half
+                if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS/2) {
+                    // playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[0];
+                } else { //Second half
+                    playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[1];                }
                 yield return null;
             }
+            currentEnemyLineID = BattleLineManager.S.RetrieveEnemyLineID(currentPlayerLineID);
             // enemy text should be set by TryInsult at this point
 
             // Break out of loop if 3 x's
@@ -271,7 +283,7 @@ public class BattleSystem : MonoBehaviour
         // Let enemy text display while we pick a choice
         state = BattleState.PLAYERCHOICE;
         battleSpeaker.text = "YOU CHOOSE";
-        playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('\n')[0];
+        playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
         SetChoices(true);
 
         int i = 0;
@@ -292,13 +304,9 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerTurn() {
         state = BattleState.PLAYERTURN;
         battleSpeaker.text = player.name;
-        // battleText.text = playerText;
-        // print("player line: " + currentPlayerLineID);
-        // print("enemy line: " + currentEnemyLineID);
-        ClearText();
-        playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]);
-        currentEnemyLineID = BattleLineManager.S.RetrieveEnemyLineID(currentPlayerLineID);
-        //TODO: display ALL enemy lines except the last one before letting player pick a choice
+
+        // ClearText();
+        // playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]);
         yield return null;
     }
 
@@ -324,7 +332,7 @@ public class BattleSystem : MonoBehaviour
         battleSpeaker.text = opponent.GetName();
         // battleText.text = enemyText;
         ClearText();
-        enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID);
+        // enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID);
         playerAnswered = false;
         //TODO: display ALL enemy lines except the last one before letting player pick a choice
         yield return null;

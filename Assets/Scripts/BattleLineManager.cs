@@ -56,15 +56,15 @@ public class BattleLineManager : MonoBehaviour
     // playerLines[Player Line ID] => player line as a string
     private Dictionary<int, string> playerLines = new Dictionary<int, string>
     {
-        { 0, "I don't wanna fight a toddler but for now I’ll bend that rule\nWanna pray to a rap god kid? I’ll kick your ass to Sunday school" },
-        { 1, "I don't wanna fight a toddler but for now I’ll bend that rule\n Everytime you see people you always have some drool" },
-        { 2, "I don't wanna fight a toddler but for now I’ll bend that rule\n Your rhymes are so sad" },
-        { 3, "Guess you’re still young enough to be throwing tantrums\nTime to tell your mom to stop buying out your albums" },
-        { 4, "Guess you’re still young enough to be throwing tantrums\nI came to win, you came to have fun" },
-        { 5, "Guess you’re still young enough to be throwing tantrums\nKeep cryin’ all day while I stick you in my van" },
-        { 6, "Nice try kid, but you can't cover up that stink\nAnd like the titanic, your popularity will sink"},
-        { 7, "Nice try kid, but you can't cover up that stink\n It smells so bad the audience fainted, you dink" },
-        { 8, "Nice try kid, but you can't cover up that stink\n You're so small" },
+        { 0, "I don't wanna fight a toddler\nbut for now I’ll bend that rule/Wanna pray to a rap god kid?\nI’ll kick your ass to Sunday school" },
+        { 1, "I don't wanna fight a toddler\nbut for now I’ll bend that rule/ Everytime you see people\nyou always have some drool" },
+        { 2, "I don't wanna fight a toddler\nbut for now I’ll bend that rule/ Your rhymes are so sad" },
+        { 3, "Guess you’re still young enough\nto be throwing tantrums/Time to tell your mom\nto stop buying out your albums" },
+        { 4, "Guess you’re still young enough\nto be throwing tantrums/I came to win,\nyou came to have fun" },
+        { 5, "Guess you’re still young enough\nto be throwing tantrums/Keep cryin’ all day\nwhile I stick you in my van" },
+        { 6, "Nice try kid,\nbut you can't cover up that stink/And like the titanic, your popularity will sink"},
+        { 7, "Nice try kid,\nbut you can't cover up that stink/It smells so bad\nthe audience fainted, you dink" },
+        { 8, "Nice try kid,\nbut you can't cover up that stink/You're so small" },
         { 9, "ninth test line" },
         { 10, "eleventh test line" },
         { 11, "twelfth test line" },
@@ -107,9 +107,9 @@ public class BattleLineManager : MonoBehaviour
     // enemyLines[Enemy ID][Response ID]
     public string[][] enemyLines = {
         new string[] { // enemy 1
-            "Welcome to the final\nnow it’s time for Lil’ Pay \nWhen I walk up on the stage\ny’all know it’s time to lil pray", 
-            "You’re just a Millennial,\ndon’t try to mess with Gen Z \nI already reached platinum\nwith just a single LP", 
-            "They call me lil' pay\nbut I ain't so small \nI'm king of the world,\nyou're a fly on the wall", 
+            "Welcome to the final\nnow it’s time for Lil’ Pay/When I walk up on the stage\ny’all know it’s time to lil pray", 
+            "You’re just a Millennial,\ndon’t try to mess with Gen Z/I already reached platinum\nwith just a single LP", 
+            "They call me lil' pay\nbut I ain't so small/I'm king of the world,\nyou're a fly on the wall", 
             "Fourth enemy line", 
             "Fifth enemy line", 
             "Sixth enemy line", 
