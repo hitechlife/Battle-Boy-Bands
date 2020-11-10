@@ -35,9 +35,11 @@ public class BattleSystem : MonoBehaviour
 
     // Since we only have 3 choices, easier to access each separately
     // Put into array??
-    public GameObject choice0;
-    public GameObject choice1;
-    public GameObject choice2;
+    public GameObject[] choices;
+    // public GameObject choice0;
+    // public GameObject choice1;
+    // public GameObject choice2;
+    private int[] choicesMap;
     public GameObject coolTimer;
 
     private bool gameOver;
@@ -155,29 +157,6 @@ public class BattleSystem : MonoBehaviour
                 yield return null;
             }
 
-            // Display these after timer complete based on choice
-            switch (selectionNum) {
-                case 0:
-                    if (numOfX > 0) {
-                        numOfX--;
-                    }
-                    xs[numOfX].sprite = disabledX;
-                    PlayCheers();
-                    break;
-                case 1:
-                    PlayNeutral();
-                    break;
-                case 2:
-                    xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
-                    PlayBoos();
-                    if (numOfX < xs.Length) {
-                        numOfX++;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
             // defaults to the wrong answer if nothing chosen yet
             // does this in Cooldown routine
             // yield return StartCoroutine(ChoicesTimer(2f /*BeatManager.S.SUBDIVISION_CONST*/));
@@ -185,6 +164,7 @@ public class BattleSystem : MonoBehaviour
             // Display chosen insult
             yield return StartCoroutine(PlayerTurn());
 
+            bool updatedChoice = false;
             // yield return new WaitForSeconds(4f);
             while (BeatManager.S.isPlayerResponseLoop)
             {
@@ -192,9 +172,37 @@ public class BattleSystem : MonoBehaviour
                 if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS/2) {
                     // playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[0];
                 } else { //Second half
-                    playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[1];                }
+                    playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[1];
+
+                    // Display these after timer complete based on choice
+                    if (!updatedChoice) {
+                        updatedChoice = true;
+                        switch (selectionNum) {
+                        case 0:
+                            if (numOfX > 0) {
+                                numOfX--;
+                            }
+                            xs[numOfX].sprite = disabledX;
+                            PlayCheers();
+                            break;
+                        case 1:
+                            PlayNeutral();
+                            break;
+                        case 2:
+                            xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
+                            PlayBoos();
+                            if (numOfX < xs.Length) {
+                                numOfX++;
+                            }
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                }
                 yield return null;
-            }
+            } // end while loop
+
             currentEnemyLineID = BattleLineManager.S.RetrieveEnemyLineID(currentPlayerLineID);
             // enemy text should be set by TryInsult at this point
 
@@ -227,44 +235,26 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator TryInsult(int selection)
     {
-        //TODO: stop using Getcomponent so much
-        //TODO: don't hardcode good/ok/bad per choice or enemy text
         currentPlayerLineID = BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selection];
         selectionNum = selection;
 
         switch (selection) {
             case 0: //good
-                // playerText = choice0.GetComponentInChildren<Text>().text;
-                // enemyText = "nice!!!";
-                // if (numOfX > 0) {
-                //     numOfX--;
-                //     // xs[numOfX].sprite = disabledX;
-                //     // Points--;
-                //     //xs[numOfX].enabled = false;
-                // }
-                choice1.GetComponentInChildren<Button>().interactable = false;
-                choice2.GetComponentInChildren<Button>().interactable = false;
+
+                choices[choicesMap[1]].GetComponentInChildren<Button>().interactable = false;
+                choices[choicesMap[2]].GetComponentInChildren<Button>().interactable = false;
                 break;
             case 1: //ok
-                // playerText = choice1.GetComponentInChildren<Text>().text;
-                // enemyText = "meh...";
-                choice0.GetComponentInChildren<Button>().interactable = false;
-                choice2.GetComponentInChildren<Button>().interactable = false;
+ 
+                choices[choicesMap[0]].GetComponentInChildren<Button>().interactable = false;
+                choices[choicesMap[2]].GetComponentInChildren<Button>().interactable = false;
                 break;
             case 2: //bad
-                    // playerText = choice2.GetComponentInChildren<Text>().text;
-                    //TODO: add "bad" sound for bad choice
-                    // enemyText = "boooooo";
-                // if (numOfX < xs.Length) {
-                //     // xs[numOfX].sprite = enabledX;
-                //     numOfX++;
-                //     // Points++;
-                // }
-                choice1.GetComponentInChildren<Button>().interactable = false;
-                choice0.GetComponentInChildren<Button>().interactable = false;
+     
+                choices[choicesMap[1]].GetComponentInChildren<Button>().interactable = false;
+                choices[choicesMap[0]].GetComponentInChildren<Button>().interactable = false;
                 break;
             default: //invalid choice
-                //TODO: default to "bad" choice
                 // enemyText = "boooooo";
                 break;
         }
@@ -292,9 +282,18 @@ public class BattleSystem : MonoBehaviour
         SetChoices(true);
 
         int i = 0;
-        foreach (GameObject choice in new GameObject[] { choice0, choice1, choice2 })
+        int[] arr = {0,1,2};
+        choicesMap = shuffle(arr);
+
+        foreach (GameObject choice in choices)
         {
-            choice.GetComponentInChildren<Text>().text = BattleLineManager.S.RetrieveChoiceLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[i]);
+            int j = choicesMap[i];
+
+            choice.GetComponentInChildren<Text>().text = BattleLineManager.S.RetrieveChoiceLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[j]);
+
+            choice.GetComponent<Button>().onClick.RemoveAllListeners();
+
+            choice.GetComponent<Button>().onClick.AddListener(() => ChooseInsult(j));
             i += 1;
         }
 
@@ -339,20 +338,19 @@ public class BattleSystem : MonoBehaviour
         ClearText();
         // enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID);
         playerAnswered = false;
-        //TODO: display ALL enemy lines except the last one before letting player pick a choice
         yield return null;
 
         // StartCoroutine(PlayerTurn());
     }
 
     void SetChoices(bool active) {
-        choice0.SetActive(active);
-        choice1.SetActive(active);
-        choice2.SetActive(active);
+        foreach (GameObject choicei in choices) {
+            choicei.SetActive(active);
+        }
         coolTimer.SetActive(active);
-        choice0.GetComponentInChildren<Button>().interactable = true;
-        choice1.GetComponentInChildren<Button>().interactable = true;
-        choice2.GetComponentInChildren<Button>().interactable = true;
+        foreach (GameObject choicei in choices) {
+            choicei.GetComponentInChildren<Button>().interactable = true;
+        }
 
         // if (active) StartCoroutine(ChoicesTimer(2f /*BeatManager.S.SUBDIVISION_CONST*/));
     }
@@ -375,7 +373,6 @@ public class BattleSystem : MonoBehaviour
             // If we are *right before* the end of the timer
             if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn) {
                 flippedOn = true;
-                print ("in switch statement");
                 if (!playerAnswered) ChooseInsult(2);
                 // Display these after timer complete based on choice
                 switch (selectionNum) {
@@ -399,7 +396,6 @@ public class BattleSystem : MonoBehaviour
             yield return null;
         }
         print("Choices timer completed");
-        //TODO: let's not have 2 be the wrong answer everytime...
         // if (!playerAnswered) {
         //     ChooseInsult(2);
         // }
@@ -431,6 +427,28 @@ public class BattleSystem : MonoBehaviour
         Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Neutral");
         Sound.start();
         Sound.release();
+    }
+
+
+    int[] shuffle(int[] array) {
+        var currentIndex = array.Length;
+        int temporaryValue;
+        int randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 != currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Random.Range(0, currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
     }
 
 }
