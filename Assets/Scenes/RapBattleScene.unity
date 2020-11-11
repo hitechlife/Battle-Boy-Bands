@@ -173,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.213}
   m_AnchorMin: {x: 0.053397924, y: 0.07977894}
   m_AnchorMax: {x: 0.31369624, y: 0.9042653}
-  m_AnchoredPosition: {x: -0.13000488, y: 0.21999931}
+  m_AnchoredPosition: {x: -0.13000488, y: 0.22000122}
   m_SizeDelta: {x: -0.32996368, y: -0.19006729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216665617
@@ -2652,7 +2652,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.8228983}
   m_AnchorMax: {x: 0.25, y: 1}
-  m_AnchoredPosition: {x: 0.39999, y: 0}
+  m_AnchoredPosition: {x: 0.4000244, y: 0}
   m_SizeDelta: {x: 0.8000183, y: -0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1857584910
@@ -3651,6 +3651,18 @@ PrefabInstance:
     - target: {fileID: 1259145238, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_FontData.m_BestFit
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259145238, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
+      propertyPath: m_Text
+      value: 'your followers mean shit
+
+        when we know that they''re all bought
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259145238, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 254803721176637091, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchorMin.x
