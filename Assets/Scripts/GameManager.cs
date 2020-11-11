@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
             instance = this;
             sprites = new List<List<Sprite>>();
             musicTracks = new List<track>();
+            currBoss = 2; //TODO: temp testing line
 
             icons = new List<Sprite>();
             boss1 = new List<Sprite>();
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviour
             opponents = new List<Opponent>();
             opponents.Add(new Opponent("Wash Depp", false, 6, icons[0], null));
             opponents.Add(new Opponent("Kendrick Amore", false, 6, icons[1], null));
-            opponents.Add(new Opponent("Lil\' Pay", false, 9, icons[2], null));
+            opponents.Add(new Opponent("Lil\' Pay", false, 5, icons[2], null));
             for (int i = 0; i < opponents.Count; i++) {
                 opponents[i].SetID(i);
             }

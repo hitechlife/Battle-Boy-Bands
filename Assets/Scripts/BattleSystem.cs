@@ -140,6 +140,8 @@ public class BattleSystem : MonoBehaviour
             // yield return new WaitForSeconds(2f);
             while (BeatManager.S.isEnemyLoop)
             {
+                print(enemyID);
+                print(currentEnemyLineID);
                 // First half
                 if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS/2) {
                     enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
