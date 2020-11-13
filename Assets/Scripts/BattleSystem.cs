@@ -32,6 +32,7 @@ public class BattleSystem : MonoBehaviour
     public Text playerText;
     public Text battleSpeaker;
     public Text announcerText;
+    public GameObject ResultsPanel;
 
     // Since we only have 3 choices, easier to access each separately
     // Put into array??
