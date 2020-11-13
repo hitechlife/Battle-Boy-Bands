@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { START, PLAYERTURN, PLAYERCHOICE, OPPONENTTURN, WIN, LOSE }
 
@@ -448,6 +449,13 @@ public class BattleSystem : MonoBehaviour
         Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Neutral");
         Sound.start();
         Sound.release();
+    }
+
+    //TODO: had to put this here because the continue button uses THIS scene's
+    // game manager and not the BOSS SCENE'S game manager which is different??
+    // idk it's weird
+    public void LoadSelectScene(string toLoad) {
+        SceneManager.LoadScene(toLoad);
     }
 
 
