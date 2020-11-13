@@ -115,7 +115,6 @@ public class BeatManager : MonoBehaviour
     {
         if (isFirstLoop)
         {
-            playerLoops = 2;
             isFirstLoop = false;
             isEnemyLoop = true;
         }
@@ -130,6 +129,7 @@ public class BeatManager : MonoBehaviour
             if (playerLoops > 0) return;
             isPlayerLoop = false;
             isPlayerResponseLoop = true;
+            playerLoops = 2;
         }
         else if (isPlayerResponseLoop)
         {
