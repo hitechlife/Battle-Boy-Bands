@@ -592,7 +592,7 @@ MonoBehaviour:
   playerText: {fileID: 1259145238}
   battleSpeaker: {fileID: 1866327585}
   announcerText: {fileID: 69620115}
-  ResultsPanel: {fileID: 0}
+  ResultsPanel: {fileID: 393414185}
   choices:
   - {fileID: 1274671011}
   - {fileID: 1345118731}
@@ -764,7 +764,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.35231534, y: 0.066760294}
   m_AnchorMax: {x: 0.90736926, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1.0099983}
+  m_AnchoredPosition: {x: 0, y: -1.0099945}
   m_SizeDelta: {x: 0, y: 2.0192413}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &589409170

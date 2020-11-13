@@ -73,6 +73,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.START;
         StopAllCoroutines();
         StartCoroutine(SetupBattle());
+        ResultsPanel.SetActive(false);
     }
 
     private void Update()
@@ -235,6 +236,7 @@ public class BattleSystem : MonoBehaviour
             PlayBoos();
         }
         SetChoices(false);
+        ResultsPanel.SetActive(true);
         StopAllCoroutines();
     }
 
