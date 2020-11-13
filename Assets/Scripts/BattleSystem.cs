@@ -32,6 +32,7 @@ public class BattleSystem : MonoBehaviour
     public Text playerText;
     public Text battleSpeaker;
     public Text announcerText;
+    public GameObject ResultsPanel;
 
     // Since we only have 3 choices, easier to access each separately
     // Put into array??
@@ -282,7 +283,6 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERCHOICE;
         battleSpeaker.text = "YOU CHOOSE";
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
-        SetChoices(true);
 
         int i = 0;
         int[] arr = {0,1,2};
@@ -303,7 +303,11 @@ public class BattleSystem : MonoBehaviour
 
         // int doubleTime = BeatManager.doubleTime ? 2 : 1;
 
-        yield return StartCoroutine(ChoicesTimer(60f * BeatManager.S.SUBDIVISION_CONST * BeatManager.S.NUM_BREAK_BARS / BeatManager.S.beatsPerMinute));
+        yield return new WaitUntil(() => BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS/2);
+        SetChoices(true);
+
+        // Runs for 1.5 x BeatManger
+        yield return StartCoroutine(ChoicesTimer(60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS + BeatManager.S.NUM_BREAK_BARS / 2)) / BeatManager.S.beatsPerMinute));
 
         // yield return new WaitForSeconds(2f);
         // yield return null;
@@ -375,7 +379,7 @@ public class BattleSystem : MonoBehaviour
             //TODO: skipping beat bug fix temp
 
             // If we are *right before* the end of the timer
-            if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn) {
+            if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn && slider.value == 0) {
                 flippedOn = true;
                 if (!playerAnswered) ChooseInsult(2);
                 // Display these after timer complete based on choice
