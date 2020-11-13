@@ -38,6 +38,7 @@ public class BeatManager : MonoBehaviour
 
     // Singleton reference
     public static BeatManager S;
+    private int playerLoops = 2;
 
     private void Awake()
     {
@@ -114,6 +115,7 @@ public class BeatManager : MonoBehaviour
     {
         if (isFirstLoop)
         {
+            playerLoops = 2;
             isFirstLoop = false;
             isEnemyLoop = true;
         }
@@ -124,6 +126,8 @@ public class BeatManager : MonoBehaviour
         }
         else if (isPlayerLoop)
         {
+            playerLoops--;
+            if (playerLoops > 0) return;
             isPlayerLoop = false;
             isPlayerResponseLoop = true;
         }
