@@ -93,13 +93,13 @@ public class GameManager : MonoBehaviour
             }
 
             Debug.Log("initalized gamemanager");
+            DontDestroyOnLoad(this.gameObject);
         }
         else if (instance != this)
         {
-            Destroy(this.gameObject);
-            Debug.Log("destroyed gamemanager");
+            // Destroy(this.gameObject);
+            Debug.Log("not the static gamemanager");
         }
-        DontDestroyOnLoad(this.gameObject);
 
 
         // battleScript = GetComponent<BattleManager>();
