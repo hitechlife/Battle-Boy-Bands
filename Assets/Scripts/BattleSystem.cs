@@ -166,6 +166,7 @@ public class BattleSystem : MonoBehaviour
             // yield return StartCoroutine(ChoicesTimer(2f /*BeatManager.S.SUBDIVISION_CONST*/));
 
             // Display chosen insult
+            //TODO: have more theatrics about displaying your chosen lines
             yield return StartCoroutine(PlayerTurn());
 
             bool updatedChoice = false;
@@ -279,10 +280,11 @@ public class BattleSystem : MonoBehaviour
     {
         ClearText();
         selectionNum = -1;
-        // Let enemy text display while we pick a choice
+        //TODO: have giant text flash saying "YOUR TURN"???
         state = BattleState.PLAYERCHOICE;
         battleSpeaker.text = "YOU CHOOSE";
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
+        playerText.text += "\n\n(Get ready to choose a second line...)";
 
         int i = 0;
         int[] arr = {0,1,2};
@@ -305,6 +307,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitUntil(() => BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS/2);
         SetChoices(true);
+        playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
 
         // Runs for 1.5 x BeatManger
         yield return StartCoroutine(ChoicesTimer(60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS + BeatManager.S.NUM_BREAK_BARS / 2)) / BeatManager.S.beatsPerMinute));
