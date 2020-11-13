@@ -50,7 +50,7 @@ public class BattleSystem : MonoBehaviour
 
     // X system
     private int numOfX = 0;
-    public SpriteRenderer[] xs;
+    public Image[] xs;
     public Sprite disabledX;
     public Sprite enabledX;
 
@@ -237,6 +237,14 @@ public class BattleSystem : MonoBehaviour
         }
         SetChoices(false);
         ResultsPanel.SetActive(true);
+        for (int i = 0; i < ResultsPanel.transform.childCount; i++) {
+            GameObject g = ResultsPanel.transform.GetChild(i).gameObject;
+            if (g.name == "CongratsText") { //TODO: change this
+                g.GetComponent<Text>().text = "And the winner is... " + winner + "!!";
+            }
+        }
+        Music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        Music.release();
         StopAllCoroutines();
     }
 

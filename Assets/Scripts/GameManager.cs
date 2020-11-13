@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
             opponents = new List<Opponent>();
             opponents.Add(new Opponent("Wash Depp", false, 6, icons[0], null));
             opponents.Add(new Opponent("Kendrick Amore", false, 6, icons[1], null));
-            opponents.Add(new Opponent("Lil\' Pay", false, 5, icons[2], null));
+            opponents.Add(new Opponent("Lil\' Pay", false, 1, icons[2], null));
             for (int i = 0; i < opponents.Count; i++) {
                 opponents[i].SetID(i);
             }
