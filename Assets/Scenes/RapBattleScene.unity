@@ -196,7 +196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6933cee66ea247f46b7869d1b3275cfe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4cf4be53ff7fac44982da15fd2b1e8eb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3944,7 +3944,7 @@ PrefabInstance:
     - target: {fileID: 2440824331435072690, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6933cee66ea247f46b7869d1b3275cfe, type: 3}
+      objectReference: {fileID: 21300000, guid: 4cf4be53ff7fac44982da15fd2b1e8eb, type: 3}
     - target: {fileID: 2440824331435072690, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_UseSpriteMesh
       value: 0
