@@ -147,9 +147,16 @@ public class BattleSystem : MonoBehaviour
                 print(currentEnemyLineID);
                 // First half
                 if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS/2) {
-                    enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
+                    float delay = 60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS / 2)) / BeatManager.S.beatsPerMinute;
+                    string line = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
+                    yield return StartCoroutine(EnemyTyper(line,delay));
+                    //enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
+
                 } else {
-                    enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[1];
+                    float delay = 60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS / 2)) / BeatManager.S.beatsPerMinute;
+                    string line = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[1];
+                    yield return StartCoroutine(EnemyTyper(line,delay));
+                    //enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[1];
                 }
                 yield return null;
             }
@@ -247,6 +254,20 @@ public class BattleSystem : MonoBehaviour
         Music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         Music.release();
         StopAllCoroutines();
+    }
+
+    IEnumerator EnemyTyper(string line, float delay)
+    {
+        enemyText.text = "";
+        //sets delay for each character
+        delay = (delay-0.5f) / (line.Length);
+        foreach (char c in line)
+        {
+            enemyText.text += c;
+            yield return new WaitForSeconds(delay);
+        }
+        //keep it there for a moment
+        yield return new WaitForSeconds(0.5f);
     }
 
     IEnumerator TryInsult(int selection)
