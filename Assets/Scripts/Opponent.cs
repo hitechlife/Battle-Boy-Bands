@@ -5,6 +5,7 @@ using UnityEngine;
 public class Opponent : MonoBehaviour
 {
     private string name;
+    private string rank;
     //TODO: change to enum?
     private int ID;
     private int turns;
@@ -50,5 +51,13 @@ public class Opponent : MonoBehaviour
 
     public int GetID() {
         return this.ID;
+    }
+
+    public void SetRank(string rank) {
+        this.rank = rank;
+    }
+
+    public string GetRank() {
+        return rank;
     }
 }

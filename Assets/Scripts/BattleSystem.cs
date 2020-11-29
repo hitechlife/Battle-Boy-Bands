@@ -36,6 +36,10 @@ public class BattleSystem : MonoBehaviour
     public Text announcerText;
     public GameObject WinPanel;
     public GameObject LosePanel;
+    public Text LoseRank;
+    public Text LoseScore;
+    public Text WinRank;
+    public Text WinScore;
 
     // Since we only have 3 choices, easier to access each separately
     // Put into array??
@@ -45,6 +49,9 @@ public class BattleSystem : MonoBehaviour
     // public GameObject choice2;
     private int[] choicesMap;
     public GameObject coolTimer;
+
+    // Score system
+    public Slider scoreSlider;
 
     private bool gameOver;
     private bool playerAnswered;
@@ -65,6 +72,8 @@ public class BattleSystem : MonoBehaviour
     private int currentPlayerLineID;
 
     private int selectionNum;
+    [SerializeField] private GameObject[] tierMarkings;
+    [SerializeField] private GameObject[] tierTextMarkings;
 
     // Start is called before the first frame update
     void Start()
@@ -116,6 +125,10 @@ public class BattleSystem : MonoBehaviour
         {
             xs[i].sprite = disabledX;
         }
+
+        // Initialize scoring
+        scoreSlider.value = 0;
+        scoreSlider.maxValue = opponent.GetTurns() * 2;
 
         // Start music
         Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
@@ -202,24 +215,35 @@ public class BattleSystem : MonoBehaviour
                         updatedChoice = true;
                         switch (selectionNum) {
                         case 0:
-                            if (numOfX > 0) {
-                                numOfX--;
-                            }
-                            xs[numOfX].sprite = disabledX;
+                            // if (numOfX > 0) {
+                            //     numOfX--;
+                            // }
+                            // xs[numOfX].sprite = disabledX;
+                            scoreSlider.value += 2;
                             PlayCheers();
                             break;
                         case 1:
                             PlayNeutral();
+                            scoreSlider.value++;
                             break;
                         case 2:
-                            xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
+                            // xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
                             PlayBoos();
-                            if (numOfX < xs.Length) {
-                                numOfX++;
-                            }
+                            // if (numOfX < xs.Length) {
+                            //     numOfX++;
+                            // }
                             break;
                         default:
                             break;
+                        }
+
+                        // Check if we've reached a tier
+                        if (scoreSlider.value / scoreSlider.maxValue >= 0.9) {
+                            ReachedTier(0);
+                        } else if (scoreSlider.value / scoreSlider.maxValue >= 0.75) {
+                            ReachedTier(1);
+                        } else if (scoreSlider.value / scoreSlider.maxValue >= 0.5) {
+                            ReachedTier(2);
                         }
                     }
                 }
@@ -230,9 +254,9 @@ public class BattleSystem : MonoBehaviour
             // enemy text should be set by TryInsult at this point
 
             // Break out of loop if 3 x's
-            if (numOfX >= xs.Length) {
-                break;
-            }
+            // if (numOfX >= xs.Length) {
+            //     break;
+            // }
         }
 
         EndBattle();
@@ -242,17 +266,23 @@ public class BattleSystem : MonoBehaviour
         // Stop music?
         Debug.Log("Ending game");
         gameOver = true;
-        battleSpeaker.text = "Announcer";
-        string winner = numOfX >= xs.Length ? opponent.GetName() : player.name;
-        ClearText();
-        announcerText.text = "And the winner is... " + winner + "!!";
+        // battleSpeaker.text = "Announcer";
+        // string winner = numOfX >= xs.Length ? opponent.GetName() : player.name;
+        // ClearText();
+        // announcerText.text = "And the winner is... " + winner + "!!";
 
-        //TODO: set score and rank in win panel
-        if (numOfX < xs.Length) {
+        string rank = GameManager.instance.GetGrade(scoreSlider.value);
+        opponent.SetRank(rank);
+
+        if (rank == "A" || rank == "A+") {
+            WinRank.text = rank;
+            WinScore.text = "" + scoreSlider.value;
             WinPanel.SetActive(true);
             PlayCheers();
             GameManager.instance.DefeatedBoss(enemyID);
         } else {
+            LoseRank.text = rank;
+            LoseScore.text = "" + scoreSlider.value;
             LosePanel.SetActive(true);
             PlayBoos();
         }
@@ -463,6 +493,18 @@ public class BattleSystem : MonoBehaviour
         playerText.text = "";
         enemyText.text = "";
         announcerText.text = "";
+    }
+
+    // Changes color to white if you reach a tier
+    void ReachedTier(int i) {
+        Image[] images = tierMarkings[i].GetComponentsInChildren<Image>();
+        Text[] texts = tierTextMarkings[i].GetComponentsInChildren<Text>();
+        foreach (Image image in images) {
+            image.color = Color.white;
+        }
+        foreach (Text text in texts) {
+            text.color = Color.white;
+        }
     }
     public void PlayBoos()
     {

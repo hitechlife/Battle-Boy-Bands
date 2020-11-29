@@ -123,6 +123,20 @@ public class GameManager : MonoBehaviour
         opponents[boss].Defeat();
     }
 
+    public string GetGrade(float score) {
+        float maxScore = opponents[currBoss].GetTurns() * 2;
+        if (score == maxScore) return "A+";
+        float percentage = score / maxScore;
+        if (percentage >= 0.9f) return "A";
+        if (percentage >= 0.75f) return "B";
+        if (percentage >= 0.5f) return "C";
+        return "F";
+    }
+
+    public string GetOpponentRank(int opponent) {
+        return opponents[opponent].GetRank();
+    }
+
     // void newBoss()
     // {
     //     BossNum++;
