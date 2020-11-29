@@ -188,7 +188,7 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-7692273578085649166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +283,40 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 36571
+--- !u!114 &-6076657868202480200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 3/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
+--- !u!114 &-6071726712305898008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 1/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &-5962199750324298671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,12 +505,12 @@ MonoBehaviour:
   Path: event:/Music/Track 2
   guid: 864cb781e211a6459446ac5149abc809
   Banks:
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -7705320373962941590}
+  - {fileID: -1173860494720889197}
   MinDistance: 0
   MaxDistance: 0
   Length: 36571
@@ -729,7 +763,7 @@ MonoBehaviour:
   Path: event:/Crowd Noises/Crowd Cheers
   guid: aa453b908e4a264c95df00125b71a94c
   Banks:
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -786,15 +820,33 @@ MonoBehaviour:
   Path: event:/Music/Track 3
   guid: 449b0078a963134b83a3d7505d535e85
   Banks:
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -2189650423687657878}
+  - {fileID: -6076657868202480200}
   MinDistance: 0
   MaxDistance: 0
   Length: 64000
+--- !u!114 &-2553340948172227093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637422603542177078
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-2522027147144975537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,7 +898,7 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-2071646470852658308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,12 +931,12 @@ MonoBehaviour:
   Path: event:/Music/Track 1
   guid: 84e21b32509a4f4a8954b008765e3cc3
   Banks:
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 4871516357420749911}
+  - {fileID: -6071726712305898008}
   MinDistance: 0
   MaxDistance: 0
   Length: 40578
@@ -903,7 +955,7 @@ MonoBehaviour:
   Path: event:/Crowd Noises/Crowd Boos
   guid: 773c179b0681cc47b457b7fa2c765680
   Banks:
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -928,6 +980,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &-1173860494720889197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 2/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &-739895946181341394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,7 +1089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 6206645280582117570}
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   EditorEvents:
   - {fileID: -2585858749371288938}
   - {fileID: 2723353454106213035}
@@ -1032,10 +1101,10 @@ MonoBehaviour:
   - {fileID: -2902610974338315506}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   StringsBanks:
   - {fileID: 6206645280582117570}
-  stringsBankWriteTime: 637419077598408405
+  stringsBankWriteTime: 637422603531297587
   cacheVersion: 3
 --- !u!114 &698738639301839333
 MonoBehaviour:
@@ -1158,7 +1227,7 @@ MonoBehaviour:
   lastModified: 637419077598348560
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &1290987252453408552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1362,7 +1431,7 @@ MonoBehaviour:
   Path: event:/Music/Select Track
   guid: 4ac76e864aeb8143930edf1069758fc8
   Banks:
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1504,7 +1573,7 @@ MonoBehaviour:
   Path: event:/Music/Title Screen Track
   guid: 6bdc66177aa892499246d28d3a2144d1
   Banks:
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1596,7 +1665,7 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &4896424393139644199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1716,7 +1785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637419077598408405
+  lastModified: 637422603531297587
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1890,7 +1959,7 @@ MonoBehaviour:
   Path: event:/Crowd Noises/Crowd Neutral
   guid: 782c8ad32e46464c9cb778fa00e4a0f1
   Banks:
-  - {fileID: 1105839055465624929}
+  - {fileID: -2553340948172227093}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
