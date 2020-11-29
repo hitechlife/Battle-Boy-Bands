@@ -21,6 +21,7 @@ public class Opponent : MonoBehaviour
         this.turns = turns;
         this.sprite = s;
         this.intro = a;
+        this.rank = "";
     }
 
     public void Defeat() {
@@ -58,6 +59,7 @@ public class Opponent : MonoBehaviour
     }
 
     public string GetRank() {
+        if (rank == "") return "?";
         return rank;
     }
 }

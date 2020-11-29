@@ -219,12 +219,12 @@ public class BattleSystem : MonoBehaviour
                             //     numOfX--;
                             // }
                             // xs[numOfX].sprite = disabledX;
-                            scoreSlider.value += 2;
+                            StartCoroutine(FillScore(scoreSlider.value + 2));
                             PlayCheers();
                             break;
                         case 1:
                             PlayNeutral();
-                            scoreSlider.value++;
+                            StartCoroutine(FillScore(scoreSlider.value + 1));
                             break;
                         case 2:
                             // xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
@@ -235,15 +235,6 @@ public class BattleSystem : MonoBehaviour
                             break;
                         default:
                             break;
-                        }
-
-                        // Check if we've reached a tier
-                        if (scoreSlider.value / scoreSlider.maxValue >= 0.9) {
-                            ReachedTier(0);
-                        } else if (scoreSlider.value / scoreSlider.maxValue >= 0.75) {
-                            ReachedTier(1);
-                        } else if (scoreSlider.value / scoreSlider.maxValue >= 0.5) {
-                            ReachedTier(2);
                         }
                     }
                 }
@@ -276,13 +267,13 @@ public class BattleSystem : MonoBehaviour
 
         if (rank == "A" || rank == "A+") {
             WinRank.text = rank;
-            WinScore.text = "" + scoreSlider.value;
+            WinScore.text = "" + Mathf.Floor(scoreSlider.value) + "/" + scoreSlider.maxValue;
             WinPanel.SetActive(true);
             PlayCheers();
             GameManager.instance.DefeatedBoss(enemyID);
         } else {
             LoseRank.text = rank;
-            LoseScore.text = "" + scoreSlider.value;
+            LoseScore.text = "" + Mathf.Floor(scoreSlider.value) + "/" + scoreSlider.maxValue;
             LosePanel.SetActive(true);
             PlayBoos();
         }
@@ -439,6 +430,25 @@ public class BattleSystem : MonoBehaviour
         }
 
         // if (active) StartCoroutine(ChoicesTimer(2f /*BeatManager.S.SUBDIVISION_CONST*/));
+    }
+
+    // Animate the score meter filling up
+    IEnumerator FillScore(float target) {
+        while (scoreSlider.value <= target) {
+            scoreSlider.value += Time.deltaTime;
+            
+            // Check if we've reached a tier
+            if (scoreSlider.value / scoreSlider.maxValue >= 0.9) {
+                ReachedTier(0);
+            }
+            if (scoreSlider.value / scoreSlider.maxValue >= 0.75) {
+                ReachedTier(1);
+            }
+            if (scoreSlider.value / scoreSlider.maxValue >= 0.5) {
+                ReachedTier(2);
+            }
+            yield return null;
+        }
     }
 
     IEnumerator ChoicesTimer(float timeToWait) {

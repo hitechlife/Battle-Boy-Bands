@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Runtime.Versioning;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     public static List<Sprite> icons;
     public static List<Sprite> versus;
     public static List<track> musicTracks;
+    public Text[] bossScores;
     private int[] BPM = { 95, 105, 120 };
 
     
@@ -112,6 +114,14 @@ public class GameManager : MonoBehaviour
 
         // battleScript = GetComponent<BattleManager>();
         // beatScript = GetComponent<BeatManager>();
+    }
+
+    void Start() {
+        if (SceneManager.GetActiveScene().name == "BossSelectionMenu" && bossScores.Length == 3) {
+            for (int i = 0; i < 3; i++) {
+                bossScores[i].text = GetOpponentRank(i);
+            }
+        }
     }
 
     // Called from selection screen
