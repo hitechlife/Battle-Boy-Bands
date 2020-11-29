@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class BeatManager : MonoBehaviour
 {
-    private static FMOD.Studio.EventInstance Music;
-
-    [FMODUnity.EventRef]
-    public string fmodEvent;
-
-    private float Points;
 
     // Serialized fields
     [SerializeField]
-    private int beatsPerMinute;
-    [SerializeField] [Range(0f, 2f)]
+    public int beatsPerMinute;
+    [SerializeField]
     private AudioSource beatSound;
     [SerializeField]
     private bool playSound = true;
+    [SerializeField]
+    public static bool doubleTime = true;
 
     // Constants
     private readonly int SECONDS_CONST = 60;
     public readonly int SUBDIVISION_CONST = 4;
-    public readonly int NUM_BREAK_BARS = 2;
+    public readonly int NUM_BREAK_BARS = doubleTime ? 4 : 2;
 
-    private float counter = 0;
+    public int counter = 0;
     public bool isFirstLoop = true;
     public bool isEnemyLoop = false;
     public bool isPlayerLoop = false;
@@ -36,12 +32,13 @@ public class BeatManager : MonoBehaviour
     private float amp = 0.0F;
     private float phase = 0.0F;
     double sampleRate = 0.0F;
-    int accent;
+    public int accent;
     bool running = true;
     bool okToToggle;
 
     // Singleton reference
     public static BeatManager S;
+    private int playerLoops = 2;
 
     private void Awake()
     {
@@ -57,16 +54,7 @@ public class BeatManager : MonoBehaviour
         nextTick = startTick * sampleRate;
         running = true;
 
-        Music = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Track 1");
-        Music.start();
-        Music.release();
-
-        //GetComponent<AudioSource>().Play();
-    }
-
-    private void Update()
-    {
-        Music.setParameterByName("Points", Points);
+        GetComponent<AudioSource>().Play();
     }
 
     // This is from the Unity documentation, thanks Unity!
@@ -93,7 +81,6 @@ public class BeatManager : MonoBehaviour
             {
                 nextTick += samplesPerTick;
                 amp = 1.0F;
-                print(nextTick + "  " + samplesPerTick);
 
                 if (++accent > SUBDIVISION_CONST)
                 {
@@ -138,8 +125,11 @@ public class BeatManager : MonoBehaviour
         }
         else if (isPlayerLoop)
         {
+            playerLoops--;
+            if (playerLoops > 0) return;
             isPlayerLoop = false;
             isPlayerResponseLoop = true;
+            playerLoops = 2;
         }
         else if (isPlayerResponseLoop)
         {
@@ -158,10 +148,5 @@ public class BeatManager : MonoBehaviour
         }
 
         beatsPerMinute = newBPM;
-    }
-
-    private void OnDestroy()
-    {
-        Music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }
