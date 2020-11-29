@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public static List<Sprite> boss2;
     public static List<Sprite> boss3;
     public static List<Sprite> icons;
+    public static List<Sprite> versus;
     public static List<track> musicTracks;
     private int[] BPM = { 95, 105, 120 };
 
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
             boss1 = new List<Sprite>();
             boss2 = new List<Sprite>();
             boss3 = new List<Sprite>();
+            versus = new List<Sprite>();
 
             object[] loadedSprite = Resources.LoadAll("boss1", typeof(Sprite));
             for (int i = 0; i < loadedSprite.Length; i++)
@@ -64,7 +66,7 @@ public class GameManager : MonoBehaviour
                 boss3.Add((Sprite)loadedSprite[i]);
             }
 
-            loadedSprite = Resources.LoadAll("icons", typeof(Sprite));
+            loadedSprite = Resources.LoadAll("bar with icons", typeof(Sprite));
             for (int i = 0; i < loadedSprite.Length; i++)
             {
                 icons.Add((Sprite)loadedSprite[i]);
@@ -77,6 +79,12 @@ public class GameManager : MonoBehaviour
                     BPM = BPM[i],
                     clip = (AudioClip)loadedSprite[i],
                 });
+            }
+
+            loadedSprite = Resources.LoadAll("versus", typeof(Sprite));
+            for (int i = 0; i < loadedSprite.Length; i++)
+            {
+                versus.Add((Sprite)loadedSprite[i]);
             }
 
 

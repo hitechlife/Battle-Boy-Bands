@@ -22,6 +22,7 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject playerPrefab;
     public GameObject opponentPrefab;
+    public GameObject versusScreen;
     public Text opponentInfoText;
     public Image opponentInfoIcon;
     public int maxTurns = 3;
@@ -33,7 +34,8 @@ public class BattleSystem : MonoBehaviour
     public Text playerText;
     public Text battleSpeaker;
     public Text announcerText;
-    public GameObject ResultsPanel;
+    public GameObject WinPanel;
+    public GameObject LosePanel;
 
     // Since we only have 3 choices, easier to access each separately
     // Put into array??
@@ -73,8 +75,9 @@ public class BattleSystem : MonoBehaviour
         choicesMap = new int[3];
         state = BattleState.START;
         StopAllCoroutines();
+        WinPanel.SetActive(false);
+        LosePanel.SetActive(false);
         StartCoroutine(SetupBattle());
-        ResultsPanel.SetActive(false);
     }
 
     private void Update()
@@ -118,13 +121,19 @@ public class BattleSystem : MonoBehaviour
         Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
         Music.start();
 
+        //Open start screen
+        versusScreen.SetActive(true);
+        versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
+
         battleSpeaker.text = "Announcer";
         announcerText.text = "You vs. " + opponent.GetName();
-        //TODO: play opponent.GetIntro() using this.GetComponent<AudioSource>;
 
         // Initial loop
         while (BeatManager.S.isFirstLoop)
         {
+            if (BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS/2) {
+                versusScreen.SetActive(false);
+            }
             yield return null;
         }
         print("DONE");
@@ -149,14 +158,14 @@ public class BattleSystem : MonoBehaviour
                 if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS/2) {
                     float delay = 60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS / 2)) / BeatManager.S.beatsPerMinute;
                     string line = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
-                    yield return StartCoroutine(EnemyTyper(line,delay));
-                    //enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
+                    // yield return StartCoroutine(EnemyTyper(line,delay));
+                    enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
 
                 } else {
                     float delay = 60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS / 2)) / BeatManager.S.beatsPerMinute;
                     string line = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[1];
-                    yield return StartCoroutine(EnemyTyper(line,delay));
-                    //enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[1];
+                    // yield return StartCoroutine(EnemyTyper(line,delay));
+                    enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[1];
                 }
                 yield return null;
             }
@@ -237,20 +246,24 @@ public class BattleSystem : MonoBehaviour
         string winner = numOfX >= xs.Length ? opponent.GetName() : player.name;
         ClearText();
         announcerText.text = "And the winner is... " + winner + "!!";
+
+        //TODO: set score and rank in win panel
         if (numOfX < xs.Length) {
+            WinPanel.SetActive(true);
             PlayCheers();
             GameManager.instance.DefeatedBoss(enemyID);
         } else {
+            LosePanel.SetActive(true);
             PlayBoos();
         }
         SetChoices(false);
-        ResultsPanel.SetActive(true);
-        for (int i = 0; i < ResultsPanel.transform.childCount; i++) {
-            GameObject g = ResultsPanel.transform.GetChild(i).gameObject;
-            if (g.name == "CongratsText") { //TODO: change this
-                g.GetComponent<Text>().text = "And the winner is... " + winner + "!!";
-            }
-        }
+        // ResultsPanel.SetActive(true);
+        // for (int i = 0; i < ResultsPanel.transform.childCount; i++) {
+        //     GameObject g = ResultsPanel.transform.GetChild(i).gameObject;
+        //     if (g.name == "CongratsText") { //TODO: change this
+        //         g.GetComponent<Text>().text = "And the winner is... " + winner + "!!";
+        //     }
+        // }
         Music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         Music.release();
         StopAllCoroutines();
