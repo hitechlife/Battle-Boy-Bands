@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     
     public static int currBoss;
+    public int bossesDefeated;
 
     void Awake()
     {

@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.095000006, y: 0.901823}
   m_AnchorMax: {x: 0.127, y: 0.9760001}
-  m_AnchoredPosition: {x: -0.38998413, y: 0.7000122}
+  m_AnchoredPosition: {x: -0.3899536, y: 0.7000122}
   m_SizeDelta: {x: -0.61764526, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &10292007
@@ -1316,7 +1316,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922381984}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &922381986
 Camera:
   m_ObjectHideFlags: 0
@@ -1384,6 +1384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 984362645}
   - component: {fileID: 984362646}
+  - component: {fileID: 984362647}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1417,6 +1418,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d334bffd7e44db47bd35e61872cf91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &984362647
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984362644}
+  m_Enabled: 1
 --- !u!1 &1008806970
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,17 @@ public class BeatManager : MonoBehaviour
     [SerializeField]
     public static bool doubleTime = true;
 
+    [Header("Player and Enemy Squishing")]
+    [SerializeField]
+    private Animator playerParentAnimator;
+    [SerializeField]
+    private Animator enemyParentAnimator;
+    public bool squishPlayer;
+    public bool squishOpponent;
+    // [SerializeField]
+    // private float squishAmount = 20.0f;
+
+    [Header("Constants and Misc.")]
     // Constants
     private readonly int SECONDS_CONST = 60;
     public readonly int SUBDIVISION_CONST = 4;
@@ -40,6 +51,13 @@ public class BeatManager : MonoBehaviour
     public static BeatManager S;
     private int playerLoops = 2;
 
+    public int playerLoopInt = 0;
+
+    public bool allowSquishPlayer = true;
+    public bool allowSquishOpponent = true;
+
+    private bool isSecondBoss;
+
     private void Awake()
     {
         S = this;
@@ -55,6 +73,15 @@ public class BeatManager : MonoBehaviour
         running = true;
 
         GetComponent<AudioSource>().Play();
+
+        isSecondBoss = GameManager.instance.bossesDefeated % 2 == 1;
+
+        StartCoroutine(RunAnimations());
+    }
+
+    private void Update()
+    {
+        
     }
 
     // This is from the Unity documentation, thanks Unity!
@@ -85,10 +112,26 @@ public class BeatManager : MonoBehaviour
                 if (++accent > SUBDIVISION_CONST)
                 {
                     accent = 1;
+
                     // This broke it earlier
                     // amp *= 2.0F;
 
                     counter++;
+
+                    if (isPlayerLoop)
+                    {
+                        playerLoopInt++;
+                    }
+
+                    if (allowSquishPlayer)
+                    {
+                        squishPlayer = true;
+                    }
+
+                    if (allowSquishOpponent)
+                    {
+                        squishOpponent = true;
+                    }
                 }
 
                 if (counter > NUM_BREAK_BARS)
@@ -99,6 +142,10 @@ public class BeatManager : MonoBehaviour
                     }
                     counter = 1;
                     okToToggle = true;
+                }
+                else if (counter == NUM_BREAK_BARS)
+                {
+                    ToggleSquishStates();
                 }
 
                 // Debug.Log("Tick: " + accent + "/" + SUBDIVISION_CONST);
@@ -130,11 +177,35 @@ public class BeatManager : MonoBehaviour
             isPlayerLoop = false;
             isPlayerResponseLoop = true;
             playerLoops = 2;
+            playerLoopInt = 0;
         }
         else if (isPlayerResponseLoop)
         {
             isPlayerResponseLoop = false;
             isEnemyLoop = true;
+        }
+    }
+
+    void ToggleSquishStates()
+    {
+        if (isFirstLoop)
+        {
+            allowSquishPlayer = false;
+            allowSquishOpponent = true;
+        }
+        else if (isEnemyLoop)
+        {
+            allowSquishPlayer = true;
+            allowSquishOpponent = false;
+        }
+        else if (isPlayerLoop)
+        {
+
+        }
+        else if (isPlayerResponseLoop)
+        {
+            allowSquishPlayer = false;
+            allowSquishOpponent = true;
         }
     }
 
@@ -148,5 +219,24 @@ public class BeatManager : MonoBehaviour
         }
 
         beatsPerMinute = newBPM;
+    }
+
+    IEnumerator RunAnimations()
+    {
+        while (true)
+        {
+            if (squishPlayer)
+            {
+                playerParentAnimator.SetTrigger("Squish");
+                squishPlayer = false;
+            }
+
+            if (squishOpponent)
+            {
+                enemyParentAnimator.SetTrigger("Squish");
+                squishOpponent = false;
+            }
+            yield return null;
+        }
     }
 }
