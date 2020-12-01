@@ -172,6 +172,7 @@ public class GameManager : MonoBehaviour
     public void DefeatedBoss(int boss)
     {
         opponents[boss].Defeat();
+        bossesDefeated++;
     }
 
     public string GetGrade(float score)
