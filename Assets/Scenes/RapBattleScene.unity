@@ -488,7 +488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.48250502, y: 0.25100002}
   m_AnchorMax: {x: 0.53716457, y: 0.55}
-  m_AnchoredPosition: {x: 0.099998474, y: 0.0000019073486}
+  m_AnchoredPosition: {x: 0.099998474, y: 0.0000038146973}
   m_SizeDelta: {x: 0.000015258789, y: 0.000005722046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &378604794
@@ -619,6 +619,7 @@ GameObject:
   - component: {fileID: 393414186}
   - component: {fileID: 393414188}
   - component: {fileID: 393414187}
+  - component: {fileID: 393414189}
   m_Layer: 5
   m_Name: WinPanel
   m_TagString: Untagged
@@ -686,6 +687,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393414185}
   m_CullTransparentMesh: 0
+--- !u!114 &393414189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393414185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Music/Win Track
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &454395748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1669,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.55}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000005722046}
+  m_AnchoredPosition: {x: 0, y: -0.0000038146973}
   m_SizeDelta: {x: 0, y: 0.00002670288}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &670030789
@@ -1788,6 +1812,7 @@ GameObject:
   - component: {fileID: 736487820}
   - component: {fileID: 736487822}
   - component: {fileID: 736487821}
+  - component: {fileID: 736487823}
   m_Layer: 5
   m_Name: LosePanel
   m_TagString: Untagged
@@ -1855,6 +1880,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736487819}
   m_CullTransparentMesh: 0
+--- !u!114 &736487823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736487819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Music/Lose Track
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &752535978
 GameObject:
   m_ObjectHideFlags: 0
@@ -2444,7 +2492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.75, y: 0.6627309}
   m_AnchorMax: {x: 0.76, y: 0.88745385}
-  m_AnchoredPosition: {x: 0.30000305, y: 0.42000008}
+  m_AnchoredPosition: {x: 0.30000305, y: 0.41999817}
   m_SizeDelta: {x: 1, y: 0.55820847}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &971708018
@@ -2651,7 +2699,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.9, y: 0.6627309}
   m_AnchorMax: {x: 0.9125309, y: 0.88745385}
-  m_AnchoredPosition: {x: 0, y: 0.42000008}
+  m_AnchoredPosition: {x: 0, y: 0.41999817}
   m_SizeDelta: {x: 0, y: 0.55820847}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1009789549
@@ -2873,7 +2921,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.73, y: 0.25100002}
   m_AnchorMax: {x: 0.785, y: 0.55}
-  m_AnchoredPosition: {x: 0.40000153, y: 0.0000019073486}
+  m_AnchoredPosition: {x: 0.3999939, y: 0.0000038146973}
   m_SizeDelta: {x: 0.000015258789, y: 0.000005722046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1072014062
@@ -3063,7 +3111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.6627309}
   m_AnchorMax: {x: 0.51, y: 0.88745385}
-  m_AnchoredPosition: {x: 0.29999995, y: 0.42000008}
+  m_AnchoredPosition: {x: 0.29999995, y: 0.41999817}
   m_SizeDelta: {x: 1, y: 0.55820847}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222025715
@@ -3140,7 +3188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.13121063, y: 0.047427747}
   m_AnchorMax: {x: 0.957, y: 0.26965705}
-  m_AnchoredPosition: {x: -6.699997, y: 1.4999695}
+  m_AnchoredPosition: {x: -6.6999817, y: 1.4999695}
   m_SizeDelta: {x: 15.206604, y: 1.0462189}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1234817505
@@ -4145,7 +4193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.87900007, y: 0.25100002}
   m_AnchorMax: {x: 0.93500006, y: 0.55}
-  m_AnchoredPosition: {x: 0, y: 0.0000019073486}
+  m_AnchoredPosition: {x: 0, y: 0.0000038146973}
   m_SizeDelta: {x: 0.00001335144, y: 0.000005722046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1536617984
@@ -4224,7 +4272,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.11674999, y: 0.5}
   m_AnchorMax: {x: 0.2205, y: 0.6091963}
-  m_AnchoredPosition: {x: 0, y: 0.00023841858}
+  m_AnchoredPosition: {x: 0, y: 0.00023651123}
   m_SizeDelta: {x: -0.0000076293945, y: 0.00047302246}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1558892607
@@ -5373,7 +5421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.11674999, y: 0.5}
   m_AnchorMax: {x: 0.2205, y: 0.6091963}
-  m_AnchoredPosition: {x: 0, y: 0.00023841858}
+  m_AnchoredPosition: {x: 0, y: 0.00023651123}
   m_SizeDelta: {x: -0.0000076293945, y: 0.00047302246}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2033222356
@@ -5452,7 +5500,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.8228983}
   m_AnchorMax: {x: 0.75, y: 1}
-  m_AnchoredPosition: {x: 0.40014648, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0.40014648, y: -0.000030517578}
   m_SizeDelta: {x: -0.80023193, y: 0.000022888184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2048012922
@@ -6066,7 +6114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1659030809342228764, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1659030809342228764, guid: 1d3bf7547adbfa8429d32934378efa14, type: 3}
       propertyPath: m_AnchoredPosition.y

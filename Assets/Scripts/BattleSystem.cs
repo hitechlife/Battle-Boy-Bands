@@ -237,7 +237,6 @@ public class BattleSystem : MonoBehaviour
 
                                 //changing sprites
                                 //opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][1];
-
                                 StartCoroutine(FillScore(scoreSlider.value + 2));
                                 PlayCheers();
 
@@ -513,18 +512,18 @@ public class BattleSystem : MonoBehaviour
                 switch (selectionNum)
                 {
                     case 0:
-                        if (Points > 0)
-                        {
-                            Points--;
-                        }
+                     //   if (Points > 0)
+                      //  {
+                      //      Points--;
+                      //  }
                         break;
                     case 1:
                         break;
                     case 2:
-                        if (Points < xs.Length)
-                        {
-                            Points++;
-                        }
+                   //     if (Points < xs.Length)
+                     //   {
+                     //       Points++;
+                       // }
                         break;
                     default:
                         break;
@@ -564,6 +563,10 @@ public class BattleSystem : MonoBehaviour
     public void PlayBoos()
     {
         Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Boos");
+        if (Points < xs.Length)
+        {
+            Points++;
+        }
         Sound.start();
         Sound.release();
     }
@@ -571,6 +574,10 @@ public class BattleSystem : MonoBehaviour
     public void PlayCheers()
     {
         Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Cheers");
+        if (Points > 0)
+        {
+            Points--;
+        }
         Sound.start();
         Sound.release();
     }

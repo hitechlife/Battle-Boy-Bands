@@ -17,6 +17,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 1
+--- !u!114 &-9142633050453836771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 1/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &-8974617920464605288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28,6 +45,23 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Track 3/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &-8859291572725115999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 2/Points
   m_EditorClassIdentifier: 
   Name: Points
   Min: 0
@@ -75,6 +109,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-8715588028871039304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 1/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &-8651602744944637537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +257,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 1
+--- !u!114 &-7193746159362280034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 3/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &-6987754267875295671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +320,41 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Track 2/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &-6683154238053717193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637419077598348560
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-6606768108273122723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 1/Points
   m_EditorClassIdentifier: 
   Name: Points
   Min: 0
@@ -378,6 +481,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 64000
+--- !u!114 &-5570861698705838042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637424350343457552
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-5548925490426084124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,12 +626,12 @@ MonoBehaviour:
   Path: event:/Music/Track 2
   guid: 864cb781e211a6459446ac5149abc809
   Banks:
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -1173860494720889197}
+  - {fileID: 1956893626263980049}
   MinDistance: 0
   MaxDistance: 0
   Length: 36571
@@ -645,6 +766,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &-4020840973422394223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 3/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &-4018903318984885665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -763,7 +901,7 @@ MonoBehaviour:
   Path: event:/Crowd Noises/Crowd Cheers
   guid: aa453b908e4a264c95df00125b71a94c
   Banks:
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -820,12 +958,12 @@ MonoBehaviour:
   Path: event:/Music/Track 3
   guid: 449b0078a963134b83a3d7505d535e85
   Banks:
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -6076657868202480200}
+  - {fileID: -7193746159362280034}
   MinDistance: 0
   MaxDistance: 0
   Length: 64000
@@ -931,12 +1069,12 @@ MonoBehaviour:
   Path: event:/Music/Track 1
   guid: 84e21b32509a4f4a8954b008765e3cc3
   Banks:
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -6071726712305898008}
+  - {fileID: -9142633050453836771}
   MinDistance: 0
   MaxDistance: 0
   Length: 40578
@@ -955,7 +1093,7 @@ MonoBehaviour:
   Path: event:/Crowd Noises/Crowd Boos
   guid: 773c179b0681cc47b457b7fa2c765680
   Banks:
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -980,6 +1118,29 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &-1223554334876364826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Win Track
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Win Track
+  guid: 2107c79984c0aa4880c5c84cbd072501
+  Banks:
+  - {fileID: -478368748449615666}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 15483
 --- !u!114 &-1173860494720889197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,6 +1199,24 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &-478368748449615666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637424355832631101
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-322017057462821352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,7 +1268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 6206645280582117570}
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   EditorEvents:
   - {fileID: -2585858749371288938}
   - {fileID: 2723353454106213035}
@@ -1099,12 +1278,14 @@ MonoBehaviour:
   - {fileID: -1827265193207004419}
   - {fileID: -5100327483414453874}
   - {fileID: -2902610974338315506}
+  - {fileID: -1223554334876364826}
+  - {fileID: 5969229434042199606}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   StringsBanks:
   - {fileID: 6206645280582117570}
-  stringsBankWriteTime: 637422603531297587
+  stringsBankWriteTime: 637424355832760757
   cacheVersion: 3
 --- !u!114 &698738639301839333
 MonoBehaviour:
@@ -1297,6 +1478,41 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &1731351146384934793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637424354594895380
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &1956893626263980049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 2/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &2019684800681183083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1431,7 +1647,7 @@ MonoBehaviour:
   Path: event:/Music/Select Track
   guid: 4ac76e864aeb8143930edf1069758fc8
   Banks:
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1573,7 +1789,7 @@ MonoBehaviour:
   Path: event:/Music/Title Screen Track
   guid: 6bdc66177aa892499246d28d3a2144d1
   Banks:
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1684,6 +1900,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &5024398916658129441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 2/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &5355171070021616138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1753,6 +1986,29 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &5969229434042199606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Lose Track
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Lose Track
+  guid: 685ed005b1db6740b219722884aec66c
+  Banks:
+  - {fileID: -478368748449615666}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 14250
 --- !u!114 &6127746537509289002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1771,6 +2027,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &6151037134319391548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 2/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &6206645280582117570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1785,13 +2058,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637422603531297587
+  lastModified: 637424355832760757
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1130
+    Value: 1212
   Exists: 1
 --- !u!114 &6340040279957258602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 1/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &6428956572768720152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1959,7 +2249,7 @@ MonoBehaviour:
   Path: event:/Crowd Noises/Crowd Neutral
   guid: 782c8ad32e46464c9cb778fa00e4a0f1
   Banks:
-  - {fileID: -2553340948172227093}
+  - {fileID: -478368748449615666}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2008,6 +2298,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 5761
+--- !u!114 &8655925085735383516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 3/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &8675487735294454814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2068,3 +2375,20 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 6222
+--- !u!114 &9219764718154505225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 3/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
