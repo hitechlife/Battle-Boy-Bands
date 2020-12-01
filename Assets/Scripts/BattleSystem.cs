@@ -228,12 +228,38 @@ public class BattleSystem : MonoBehaviour
             yield return StartCoroutine(PlayerTurn());
 
             bool updatedChoice = false;
+            bool updatedPoints = false;
             // yield return new WaitForSeconds(4f);
             while (BeatManager.S.isPlayerResponseLoop)
             {
                 // First half
                 if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS / 2)
                 {
+                    if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS / 2 && !updatedPoints)
+                    {
+                        updatedPoints = true;
+                        // Display these after timer complete based on choice
+                        switch (selectionNum)
+                        {
+                            case 0:
+                                if (Points > 0)
+                                {
+                                    Points--;
+                                }
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                if (Points < xs.Length)
+                                {
+                                    Points++;
+                                    print("increased points");
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     // playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[0];
                 }
                 else
@@ -582,10 +608,10 @@ public class BattleSystem : MonoBehaviour
     public void PlayBoos()
     {
         Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Boos");
-        if (Points < xs.Length)
-        {
-            Points++;
-        }
+        // if (Points < xs.Length)
+        // {
+        //     Points++;
+        // }
         Sound.start();
         Sound.release();
     }
@@ -593,10 +619,10 @@ public class BattleSystem : MonoBehaviour
     public void PlayCheers()
     {
         Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Cheers");
-        if (Points > 0)
-        {
-            Points--;
-        }
+        // if (Points > 0)
+        // {
+        //     Points--;
+        // }
         Sound.start();
         Sound.release();
     }
