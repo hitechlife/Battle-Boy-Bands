@@ -14,7 +14,8 @@ public class BattleSystem : MonoBehaviour
     [FMODUnity.EventRef]
     public string fmodEvent = "event:/Music/Track 3";
 
-    [SerializeField] [Range(-12f, 12f)]
+    [SerializeField]
+    [Range(-12f, 12f)]
     private float Points;
 
     //TODO: probably make stuff serialized and not public
@@ -22,6 +23,7 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject playerPrefab;
     public GameObject opponentPrefab;
+    public GameObject versusScreen;
     public Text opponentInfoText;
     public Image opponentInfoIcon;
     public int maxTurns = 3;
@@ -33,7 +35,12 @@ public class BattleSystem : MonoBehaviour
     public Text playerText;
     public Text battleSpeaker;
     public Text announcerText;
-    public GameObject ResultsPanel;
+    public GameObject WinPanel;
+    public GameObject LosePanel;
+    public Text LoseRank;
+    public Text LoseScore;
+    public Text WinRank;
+    public Text WinScore;
 
     // Since we only have 3 choices, easier to access each separately
     // Put into array??
@@ -43,6 +50,9 @@ public class BattleSystem : MonoBehaviour
     // public GameObject choice2;
     private int[] choicesMap;
     public GameObject coolTimer;
+
+    // Score system
+    public Slider scoreSlider;
 
     private bool gameOver;
     private bool playerAnswered;
@@ -63,6 +73,8 @@ public class BattleSystem : MonoBehaviour
     private int currentPlayerLineID;
 
     private int selectionNum;
+    [SerializeField] private GameObject[] tierMarkings;
+    [SerializeField] private GameObject[] tierTextMarkings;
 
     // Start is called before the first frame update
     void Start()
@@ -73,8 +85,9 @@ public class BattleSystem : MonoBehaviour
         choicesMap = new int[3];
         state = BattleState.START;
         StopAllCoroutines();
+        WinPanel.SetActive(false);
+        LosePanel.SetActive(false);
         StartCoroutine(SetupBattle());
-        ResultsPanel.SetActive(false);
     }
 
     private void Update()
@@ -94,8 +107,11 @@ public class BattleSystem : MonoBehaviour
         // Opponent sprite
         opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][0];
 
+        // Opponent first line
+        //opponentPrefab.GetComponent<AudioSource>().clip = GameManager.voicelines[GameManager.currBoss][0];
+
         // Opponent name and icon
-        opponentInfoText.text = GameManager.currBoss == 1 ? opponent.GetName().Split(' ')[0] : opponent.GetName();;
+        opponentInfoText.text = GameManager.currBoss == 1 ? opponent.GetName().Split(' ')[0] : opponent.GetName(); ;
         opponentInfoIcon.sprite = opponent.GetSprite();
 
         // Max turns and enemy ID
@@ -114,17 +130,28 @@ public class BattleSystem : MonoBehaviour
             xs[i].sprite = disabledX;
         }
 
+        // Initialize scoring
+        scoreSlider.value = 0;
+        scoreSlider.maxValue = opponent.GetTurns() * 2;
+
         // Start music
         Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
         Music.start();
 
+        //Open start screen
+        versusScreen.SetActive(true);
+        versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
+
         battleSpeaker.text = "Announcer";
         announcerText.text = "You vs. " + opponent.GetName();
-        //TODO: play opponent.GetIntro() using this.GetComponent<AudioSource>;
 
         // Initial loop
         while (BeatManager.S.isFirstLoop)
         {
+            if (BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS / 2)
+            {
+                versusScreen.SetActive(false);
+            }
             yield return null;
         }
         print("DONE");
@@ -132,11 +159,13 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(BattleRoutine());
     }
 
-    IEnumerator BattleRoutine() {
+    IEnumerator BattleRoutine()
+    {
         Debug.Log("starting battle routine");
         // Game always ends on your turn
-        for (int i = 0; i < maxTurns; i++) {
-            Debug.Log("On turn " + (i+1));
+        for (int i = 0; i < maxTurns; i++)
+        {
+            Debug.Log("On turn " + (i + 1));
             // Starts with enemy insult
 
             yield return StartCoroutine(OpponentTurn());
@@ -146,9 +175,19 @@ public class BattleSystem : MonoBehaviour
                 print(enemyID);
                 print(currentEnemyLineID);
                 // First half
-                if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS/2) {
+                if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS / 2)
+                {
+                    float delay = 60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS / 2)) / BeatManager.S.beatsPerMinute;
+                    string line = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
+                    // yield return StartCoroutine(EnemyTyper(line,delay));
                     enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[0];
-                } else {
+
+                }
+                else
+                {
+                    float delay = 60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS / 2)) / BeatManager.S.beatsPerMinute;
+                    string line = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[1];
+                    // yield return StartCoroutine(EnemyTyper(line,delay));
                     enemyText.text = BattleLineManager.S.RetrieveEnemyLine(enemyID, currentEnemyLineID).Split('/')[1];
                 }
                 yield return null;
@@ -176,34 +215,47 @@ public class BattleSystem : MonoBehaviour
             while (BeatManager.S.isPlayerResponseLoop)
             {
                 // First half
-                if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS/2) {
+                if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS / 2)
+                {
                     // playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[0];
-                } else { //Second half
+                }
+                else
+                { //Second half
                     playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[1];
 
                     // Display these after timer complete based on choice
-                    if (!updatedChoice) {
+                    if (!updatedChoice)
+                    {
                         updatedChoice = true;
-                        switch (selectionNum) {
-                        case 0:
-                            if (numOfX > 0) {
-                                numOfX--;
-                            }
-                            xs[numOfX].sprite = disabledX;
-                            PlayCheers();
-                            break;
-                        case 1:
-                            PlayNeutral();
-                            break;
-                        case 2:
-                            xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
-                            PlayBoos();
-                            if (numOfX < xs.Length) {
-                                numOfX++;
-                            }
-                            break;
-                        default:
-                            break;
+                        switch (selectionNum)
+                        {
+                            case 0:
+                                // if (numOfX > 0) {
+                                //     numOfX--;
+                                // }
+                                // xs[numOfX].sprite = disabledX;
+
+                                //changing sprites
+                                //opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][1];
+                                StartCoroutine(FillScore(scoreSlider.value + 2));
+                                PlayCheers();
+
+                                //changing back
+                                //opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][0];
+                                break;
+                            case 1:
+                                PlayNeutral();
+                                StartCoroutine(FillScore(scoreSlider.value + 1));
+                                break;
+                            case 2:
+                                // xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
+                                PlayBoos();
+                                // if (numOfX < xs.Length) {
+                                //     numOfX++;
+                                // }
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
@@ -214,39 +266,67 @@ public class BattleSystem : MonoBehaviour
             // enemy text should be set by TryInsult at this point
 
             // Break out of loop if 3 x's
-            if (numOfX >= xs.Length) {
-                break;
-            }
+            // if (numOfX >= xs.Length) {
+            //     break;
+            // }
         }
 
         EndBattle();
     }
 
-    void EndBattle() {
+    void EndBattle()
+    {
         // Stop music?
         Debug.Log("Ending game");
         gameOver = true;
-        battleSpeaker.text = "Announcer";
-        string winner = numOfX >= xs.Length ? opponent.GetName() : player.name;
-        ClearText();
-        announcerText.text = "And the winner is... " + winner + "!!";
-        if (numOfX < xs.Length) {
+        // battleSpeaker.text = "Announcer";
+        // string winner = numOfX >= xs.Length ? opponent.GetName() : player.name;
+        // ClearText();
+        // announcerText.text = "And the winner is... " + winner + "!!";
+
+        string rank = GameManager.instance.GetGrade(scoreSlider.value);
+        opponent.SetRank(rank);
+
+        if (rank == "A" || rank == "A+")
+        {
+            WinRank.text = rank;
+            WinScore.text = "" + Mathf.Floor(scoreSlider.value) + "/" + scoreSlider.maxValue;
+            WinPanel.SetActive(true);
             PlayCheers();
             GameManager.instance.DefeatedBoss(enemyID);
-        } else {
+        }
+        else
+        {
+            LoseRank.text = rank;
+            LoseScore.text = "" + Mathf.Floor(scoreSlider.value) + "/" + scoreSlider.maxValue;
+            LosePanel.SetActive(true);
             PlayBoos();
         }
         SetChoices(false);
-        ResultsPanel.SetActive(true);
-        for (int i = 0; i < ResultsPanel.transform.childCount; i++) {
-            GameObject g = ResultsPanel.transform.GetChild(i).gameObject;
-            if (g.name == "CongratsText") { //TODO: change this
-                g.GetComponent<Text>().text = "And the winner is... " + winner + "!!";
-            }
-        }
+        // ResultsPanel.SetActive(true);
+        // for (int i = 0; i < ResultsPanel.transform.childCount; i++) {
+        //     GameObject g = ResultsPanel.transform.GetChild(i).gameObject;
+        //     if (g.name == "CongratsText") { //TODO: change this
+        //         g.GetComponent<Text>().text = "And the winner is... " + winner + "!!";
+        //     }
+        // }
         Music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         Music.release();
         StopAllCoroutines();
+    }
+
+    IEnumerator EnemyTyper(string line, float delay)
+    {
+        enemyText.text = "";
+        //sets delay for each character
+        delay = (delay - 0.5f) / (line.Length);
+        foreach (char c in line)
+        {
+            enemyText.text += c;
+            yield return new WaitForSeconds(delay);
+        }
+        //keep it there for a moment
+        yield return new WaitForSeconds(0.5f);
     }
 
     IEnumerator TryInsult(int selection)
@@ -254,19 +334,20 @@ public class BattleSystem : MonoBehaviour
         currentPlayerLineID = BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selection];
         selectionNum = selection;
 
-        switch (selection) {
+        switch (selection)
+        {
             case 0: //good
 
                 choices[choicesMap[1]].GetComponentInChildren<Button>().interactable = false;
                 choices[choicesMap[2]].GetComponentInChildren<Button>().interactable = false;
                 break;
             case 1: //ok
- 
+
                 choices[choicesMap[0]].GetComponentInChildren<Button>().interactable = false;
                 choices[choicesMap[2]].GetComponentInChildren<Button>().interactable = false;
                 break;
             case 2: //bad
-     
+
                 choices[choicesMap[1]].GetComponentInChildren<Button>().interactable = false;
                 choices[choicesMap[0]].GetComponentInChildren<Button>().interactable = false;
                 break;
@@ -298,7 +379,7 @@ public class BattleSystem : MonoBehaviour
         playerText.text += "\n\n(Get ready to choose a second line...)";
 
         int i = 0;
-        int[] arr = {0,1,2};
+        int[] arr = { 0, 1, 2 };
         int[] randChoice = shuffle(arr);
 
         foreach (GameObject choice in choices)
@@ -318,7 +399,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitUntil(() => BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS/2);
         yield return new WaitUntil(() => BeatManager.S.playerLoopInt >= 2 * GameManager.instance.bossesDefeated + 2);
-        
+
         SetChoices(true);
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
 
@@ -329,7 +410,8 @@ public class BattleSystem : MonoBehaviour
         // yield return null;
     }
 
-    IEnumerator PlayerTurn() {
+    IEnumerator PlayerTurn()
+    {
         state = BattleState.PLAYERTURN;
         battleSpeaker.text = player.name;
 
@@ -367,19 +449,47 @@ public class BattleSystem : MonoBehaviour
         // StartCoroutine(PlayerTurn());
     }
 
-    void SetChoices(bool active) {
-        foreach (GameObject choicei in choices) {
+    void SetChoices(bool active)
+    {
+        foreach (GameObject choicei in choices)
+        {
             choicei.SetActive(active);
         }
         coolTimer.SetActive(active);
-        foreach (GameObject choicei in choices) {
+        foreach (GameObject choicei in choices)
+        {
             choicei.GetComponentInChildren<Button>().interactable = true;
         }
 
         // if (active) StartCoroutine(ChoicesTimer(2f /*BeatManager.S.SUBDIVISION_CONST*/));
     }
 
-    IEnumerator ChoicesTimer(float timeToWait) {
+    // Animate the score meter filling up
+    IEnumerator FillScore(float target)
+    {
+        while (scoreSlider.value <= target)
+        {
+            scoreSlider.value += Time.deltaTime;
+
+            // Check if we've reached a tier
+            if (scoreSlider.value / scoreSlider.maxValue >= 0.9)
+            {
+                ReachedTier(0);
+            }
+            if (scoreSlider.value / scoreSlider.maxValue >= 0.75)
+            {
+                ReachedTier(1);
+            }
+            if (scoreSlider.value / scoreSlider.maxValue >= 0.5)
+            {
+                ReachedTier(2);
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator ChoicesTimer(float timeToWait)
+    {
         Slider slider = coolTimer.GetComponentInChildren<Slider>();
         if (!slider) Debug.LogError("Slider not valid!");
         slider.value = 1;
@@ -388,30 +498,34 @@ public class BattleSystem : MonoBehaviour
         timeToWait--;
 
         // Decrease slider value over timeToWait seconds
-        while (BeatManager.S.isPlayerLoop) {
-            if(coolTimer.activeSelf == false) break;
-            slider.value -= Time.deltaTime/timeToWait;
+        while (BeatManager.S.isPlayerLoop)
+        {
+            if (coolTimer.activeSelf == false) break;
+            slider.value -= Time.deltaTime / timeToWait;
 
             //TODO: skipping beat bug fix temp
 
             // If we are *right before* the end of the timer
-            if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn && slider.value == 0) {
+            if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn && slider.value == 0)
+            {
                 flippedOn = true;
                 if (!playerAnswered) ChooseInsult(2);
                 // Display these after timer complete based on choice
-                switch (selectionNum) {
+                switch (selectionNum)
+                {
                     case 0:
-                        if (Points > 0)
-                        {
-                            Points--;
-                        }
+                     //   if (Points > 0)
+                      //  {
+                      //      Points--;
+                      //  }
                         break;
                     case 1:
                         break;
                     case 2:
-                        if (Points < xs.Length) {
-                            Points++;
-                        }
+                   //     if (Points < xs.Length)
+                     //   {
+                     //       Points++;
+                       // }
                         break;
                     default:
                         break;
@@ -427,14 +541,34 @@ public class BattleSystem : MonoBehaviour
         SetChoices(false);
     }
 
-    void ClearText() {
+    void ClearText()
+    {
         playerText.text = "";
         enemyText.text = "";
         announcerText.text = "";
     }
+
+    // Changes color to white if you reach a tier
+    void ReachedTier(int i)
+    {
+        Image[] images = tierMarkings[i].GetComponentsInChildren<Image>();
+        Text[] texts = tierTextMarkings[i].GetComponentsInChildren<Text>();
+        foreach (Image image in images)
+        {
+            image.color = Color.white;
+        }
+        foreach (Text text in texts)
+        {
+            text.color = Color.white;
+        }
+    }
     public void PlayBoos()
     {
         Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Boos");
+        if (Points < xs.Length)
+        {
+            Points++;
+        }
         Sound.start();
         Sound.release();
     }
@@ -442,6 +576,10 @@ public class BattleSystem : MonoBehaviour
     public void PlayCheers()
     {
         Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Crowd Noises/Crowd Cheers");
+        if (Points > 0)
+        {
+            Points--;
+        }
         Sound.start();
         Sound.release();
     }
@@ -456,18 +594,21 @@ public class BattleSystem : MonoBehaviour
     //TODO: had to put this here because the continue button uses THIS scene's
     // game manager and not the BOSS SCENE'S game manager which is different??
     // idk it's weird
-    public void LoadSelectScene(string toLoad) {
+    public void LoadSelectScene(string toLoad)
+    {
         SceneManager.LoadScene(toLoad);
     }
 
 
-    int[] shuffle(int[] array) {
+    int[] shuffle(int[] array)
+    {
         var currentIndex = array.Length;
         int temporaryValue;
         int randomIndex;
 
         // While there remain elements to shuffle...
-        while (0 != currentIndex) {
+        while (0 != currentIndex)
+        {
 
             // Pick a remaining element...
             randomIndex = Random.Range(0, currentIndex);

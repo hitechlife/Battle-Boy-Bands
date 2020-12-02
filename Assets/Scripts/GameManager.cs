@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Runtime.Versioning;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class GameManager : MonoBehaviour
     //     public bool defeated;
     // }
 
-    public struct track {
+    public struct track
+    {
         public int BPM;
         public AudioClip clip;
     }
@@ -25,10 +27,19 @@ public class GameManager : MonoBehaviour
     public static List<Sprite> boss2;
     public static List<Sprite> boss3;
     public static List<Sprite> icons;
+    public static List<Sprite> versus;
+
+    //voicelines for each boss
+    public static List<List<AudioClip>> voicelines;
+    public static List<AudioClip> boss1voice;
+    public static List<AudioClip> boss2voice;
+    public static List<AudioClip> boss3voice;
+
     public static List<track> musicTracks;
+    public Text[] bossScores;
     private int[] BPM = { 95, 105, 120 };
 
-    
+
     public static int currBoss;
     public int bossesDefeated;
 
@@ -39,6 +50,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             sprites = new List<List<Sprite>>();
+            voicelines = new List<List<AudioClip>>();
             musicTracks = new List<track>();
             currBoss = 2; //TODO: temp testing line
 
@@ -46,6 +58,11 @@ public class GameManager : MonoBehaviour
             boss1 = new List<Sprite>();
             boss2 = new List<Sprite>();
             boss3 = new List<Sprite>();
+            versus = new List<Sprite>();
+
+            boss1voice = new List<AudioClip>();
+            boss2voice = new List<AudioClip>();
+            boss3voice = new List<AudioClip>();
 
             object[] loadedSprite = Resources.LoadAll("boss1", typeof(Sprite));
             for (int i = 0; i < loadedSprite.Length; i++)
@@ -65,7 +82,7 @@ public class GameManager : MonoBehaviour
                 boss3.Add((Sprite)loadedSprite[i]);
             }
 
-            loadedSprite = Resources.LoadAll("icons", typeof(Sprite));
+            loadedSprite = Resources.LoadAll("bar with icons", typeof(Sprite));
             for (int i = 0; i < loadedSprite.Length; i++)
             {
                 icons.Add((Sprite)loadedSprite[i]);
@@ -74,10 +91,17 @@ public class GameManager : MonoBehaviour
             loadedSprite = Resources.LoadAll("tracks", typeof(AudioClip));
             for (int i = 0; i < loadedSprite.Length; i++)
             {
-                musicTracks.Add(new track {
+                musicTracks.Add(new track
+                {
                     BPM = BPM[i],
                     clip = (AudioClip)loadedSprite[i],
                 });
+            }
+
+            loadedSprite = Resources.LoadAll("versus", typeof(Sprite));
+            for (int i = 0; i < loadedSprite.Length; i++)
+            {
+                versus.Add((Sprite)loadedSprite[i]);
             }
 
 
@@ -85,11 +109,32 @@ public class GameManager : MonoBehaviour
             sprites.Add(boss2);
             sprites.Add(boss3);
 
+            object[] loadedVoice = Resources.LoadAll("boss1voice", typeof(AudioClip));
+            for (int i = 0; i < loadedVoice.Length; i++)
+            {
+                boss1voice.Add((AudioClip)loadedVoice[i]);
+            }
+            loadedVoice = Resources.LoadAll("boss2voice", typeof(AudioClip));
+            for (int i = 0; i < loadedVoice.Length; i++)
+            {
+                boss2voice.Add((AudioClip)loadedVoice[i]);
+            }
+            loadedVoice = Resources.LoadAll("boss3voice", typeof(AudioClip));
+            for (int i = 0; i < loadedVoice.Length; i++)
+            {
+                boss3voice.Add((AudioClip)loadedVoice[i]);
+            }
+
+            voicelines.Add(boss1voice);
+            voicelines.Add(boss2voice);
+            voicelines.Add(boss3voice);
+
             opponents = new List<Opponent>();
             opponents.Add(new Opponent("Wash Depp", false, 6, icons[0], null));
             opponents.Add(new Opponent("Kendrick Amore", false, 6, icons[1], null));
             opponents.Add(new Opponent("Lil\' Pay", false, 3, icons[2], null));
-            for (int i = 0; i < opponents.Count; i++) {
+            for (int i = 0; i < opponents.Count; i++)
+            {
                 opponents[i].SetID(i);
             }
 
@@ -107,13 +152,42 @@ public class GameManager : MonoBehaviour
         // beatScript = GetComponent<BeatManager>();
     }
 
+    void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "BossSelectionMenu" && bossScores.Length == 3)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                bossScores[i].text = GetOpponentRank(i);
+            }
+        }
+    }
+
     // Called from selection screen
-    public void LoadBoss(int boss) {
+    public void LoadBoss(int boss)
+    {
         currBoss = boss;
     }
 
-    public void DefeatedBoss(int boss) {
+    public void DefeatedBoss(int boss)
+    {
         opponents[boss].Defeat();
+    }
+
+    public string GetGrade(float score)
+    {
+        float maxScore = opponents[currBoss].GetTurns() * 2;
+        if (score == maxScore) return "A+";
+        float percentage = score / maxScore;
+        if (percentage >= 0.9f) return "A";
+        if (percentage >= 0.75f) return "B";
+        if (percentage >= 0.5f) return "C";
+        return "F";
+    }
+
+    public string GetOpponentRank(int opponent)
+    {
+        return opponents[opponent].GetRank();
     }
 
     // void newBoss()
