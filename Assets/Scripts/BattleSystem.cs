@@ -76,6 +76,16 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private GameObject[] tierMarkings;
     [SerializeField] private GameObject[] tierTextMarkings;
 
+    [SerializeField]
+    private GameObject pauseMenu;
+
+    private float baseTimeScale;
+
+    private void Awake()
+    {
+        baseTimeScale = Time.timeScale;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +103,13 @@ public class BattleSystem : MonoBehaviour
     private void Update()
     {
         Music.setParameterByName("Points", Points);
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameOver)
+        {
+            // Fix this later
+            // Time.timeScale = Time.timeScale == baseTimeScale ? 0.0f : baseTimeScale;
+            // pauseMenu.SetActive(Time.timeScale != baseTimeScale);
+        }
     }
 
     // Sets up the initial battle state
