@@ -19,12 +19,17 @@ public class BattleLineManager : MonoBehaviour
             new int[] { 3, 4, 5 },
             new int[] { 6, 7, 8 },
             new int[] { 9, 10, 11 },
-            new int[] { 12, 13, 14 }
+            new int[] { 12, 13, 14 },
+            new int[] { 15, 16, 17 },
         },
         new int[][]
         {
+            new int[] { 0, 1, 2 },
+            new int[] { 3, 4, 5 },
+            new int[] { 6, 7, 8 },
             new int[] { 9, 10, 11 },
-            new int[] { 12, 13, 14 }
+            new int[] { 12, 13, 14 },
+            new int[] { 15, 16, 17 },
         },
         new int[][]
         {
@@ -119,8 +124,16 @@ public class BattleLineManager : MonoBehaviour
 
     // enemyLines[Enemy ID][Response ID]
     public string[][] enemyLines = {
-        new string[] { "Next enemy line", "Next next enemy line" },
-        new string[] { "Next enemy line", "Next next enemy line" },
+        new string[] { "Welcome to the final\nnow it’s time for Wash Depp/When I walk up on the stage\ny’all know it’s time to lil pray", 
+            "Bitch I’m 9 years old\n 'n I’m already flexin millions/Lil Pay’s on Call of Duty\nwhile ur ass is a civilian", 
+            "Ok Boomer you're just mad\ncuz I’m already verified/Lil Pay’s an asteroid,\ncall this stage a genocide", 
+            "You’re just a Millennial,\ndon’t try to mess with Gen Z/I already reached platinum\nwith just a single LP", 
+            "They call me lil' pay\nbut I ain't so small/ I'm king of the world,\nyou're a fly on the wall", },
+        new string[] {  "Welcome to the final\nnow it’s time for Kendrick Amore/When I walk up on the stage\ny’all know it’s time to lil pray", 
+            "Bitch I’m 9 years old\n 'n I’m already flexin millions/Lil Pay’s on Call of Duty\nwhile ur ass is a civilian", 
+            "Ok Boomer you're just mad\ncuz I’m already verified/Lil Pay’s an asteroid,\ncall this stage a genocide", 
+            "You’re just a Millennial,\ndon’t try to mess with Gen Z/I already reached platinum\nwith just a single LP", 
+            "They call me lil' pay\nbut I ain't so small/ I'm king of the world,\nyou're a fly on the wall", },
         new string[] { // enemy 3
             "Welcome to the final\nnow it’s time for Lil’ Pay/When I walk up on the stage\ny’all know it’s time to lil pray", 
             "Bitch I’m 9 years old\n 'n I’m already flexin millions/Lil Pay’s on Call of Duty\nwhile ur ass is a civilian", 
