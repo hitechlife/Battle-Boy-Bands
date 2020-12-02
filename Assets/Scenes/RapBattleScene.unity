@@ -2082,7 +2082,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.78125006, y: 0.45333052}
   m_AnchorMax: {x: 0.9272501, y: 0.6091963}
-  m_AnchoredPosition: {x: -0.42999268, y: -0.07999992}
+  m_AnchoredPosition: {x: -0.42999268, y: -0.08000183}
   m_SizeDelta: {x: 0.5445709, y: 0.17056274}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &724988304
@@ -2955,6 +2955,18 @@ MonoBehaviour:
           m_StringArgument: BossSelectionMenu
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1439750881}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayWinLoseSelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1007161135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3561,7 +3573,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1234817506}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1439750881}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ChoiceSelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1234817506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3692,7 +3716,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1274671014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1439750881}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ChoiceSelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1274671014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3823,6 +3859,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: RapBattleScene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1439750881}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayWinLoseSelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1282398270
@@ -4023,7 +4071,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1345118734}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1439750881}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ChoiceSelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1345118734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4248,6 +4308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d334bffd7e44db47bd35e61872cf91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fmodEvent: event:/Music/Select
+  fmodEvent1: event:/Music/Win Lose Select
+  fmodEvent2: event:/Music/Choice Select
   bossScores: []
   bossesDefeated: 0
 --- !u!1 &1450906240
@@ -4395,7 +4458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 18.800003, y: 129}
+  m_AnchoredPosition: {x: 18.799988, y: 129}
   m_SizeDelta: {x: -27.57135, y: -273.0475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1474542541
@@ -4597,7 +4660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.87900007, y: 0.25100002}
   m_AnchorMax: {x: 0.96750504, y: 0.55}
-  m_AnchoredPosition: {x: 0.039993286, y: 0}
+  m_AnchoredPosition: {x: 0.039978027, y: 0}
   m_SizeDelta: {x: 0.087976456, y: 0.000005722046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1536617984
@@ -4834,7 +4897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.75625, y: 0.4}
   m_AnchorMax: {x: 0.9562501, y: 0.8671598}
-  m_AnchoredPosition: {x: -620.5, y: -295.80002}
+  m_AnchoredPosition: {x: -620.50006, y: -295.80005}
   m_SizeDelta: {x: 491.90814, y: 625.3064}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1628460983
@@ -6559,6 +6622,18 @@ MonoBehaviour:
           m_StringArgument: RapBattleScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1439750881}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayWinLoseSelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2057729085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6821,6 +6896,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: BossSelectionMenu
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1439750881}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayWinLoseSelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2080588662

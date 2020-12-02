@@ -7,6 +7,16 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    private static FMOD.Studio.EventInstance selectSound;
+    private static FMOD.Studio.EventInstance winloseselectSound;
+    private static FMOD.Studio.EventInstance choiceselectSound;
+
+    [FMODUnity.EventRef]
+    public string fmodEvent = "event:/Music/Main Menu Select";
+    public string fmodEvent1 = "event:/Music/Win Lose Select";
+    public string fmodEvent2 = "event:/Music/Choice Select";
+
+
     // struct enemy {
     //     public string name;
     //     public bool defeated;
@@ -206,5 +216,23 @@ public class GameManager : MonoBehaviour
     {
         //set up scene and stuff
         SceneManager.LoadScene(newScene);
+    }
+
+    public void PlaySelectSound()
+    {
+         selectSound = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
+         selectSound.start();
+    }
+
+    public void PlayWinLoseSelectSound()
+    {
+        winloseselectSound = FMODUnity.RuntimeManager.CreateInstance(fmodEvent1);
+        winloseselectSound.start();
+    }
+
+    public void ChoiceSelectSound()
+    {
+        choiceselectSound = FMODUnity.RuntimeManager.CreateInstance(fmodEvent2);
+        choiceselectSound.start();
     }
 }

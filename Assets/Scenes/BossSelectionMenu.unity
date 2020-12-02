@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.095000006, y: 0.901823}
   m_AnchorMax: {x: 0.127, y: 0.9760001}
-  m_AnchoredPosition: {x: -0.38998413, y: 0.7000122}
+  m_AnchoredPosition: {x: -0.3899536, y: 0.7000122}
   m_SizeDelta: {x: -0.61764526, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &10292007
@@ -386,7 +386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.66238517, y: 0.050387923}
   m_AnchorMax: {x: 0.93637824, y: 0.77800006}
-  m_AnchoredPosition: {x: 0.5, y: -1.6833038}
+  m_AnchoredPosition: {x: 0.5, y: -1.6832886}
   m_SizeDelta: {x: 5.722595, y: -3.3664246}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &53270789
@@ -454,6 +454,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: RapBattleScene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 984362646}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlaySelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &53270790
@@ -601,7 +613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.009000001, y: 0.901823}
   m_AnchorMax: {x: 0.039, y: 0.9760001}
-  m_AnchoredPosition: {x: -0.39996338, y: 0.69999695}
+  m_AnchoredPosition: {x: -0.4000244, y: 0.7000122}
   m_SizeDelta: {x: 1.3823547, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &93884179
@@ -719,7 +731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.3461468}
   m_AnchorMax: {x: 0.97723293, y: 0.49314678}
-  m_AnchoredPosition: {x: 0.055603027, y: 0.20000076}
+  m_AnchoredPosition: {x: 0.055603027, y: 0.19999695}
   m_SizeDelta: {x: 0.2740326, y: 1.2185211}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &146233321
@@ -798,7 +810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.053232856, y: 0}
   m_AnchorMax: {x: 1, y: 0.31527984}
-  m_AnchoredPosition: {x: -0.27000046, y: 0.69999695}
+  m_AnchoredPosition: {x: -0.27000427, y: 0.69999695}
   m_SizeDelta: {x: 0.532074, y: 1.3917847}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &315007841
@@ -956,7 +968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.060000002, y: 0.81252694}
   m_AnchorMax: {x: 0.3413852, y: 0.94136554}
-  m_AnchoredPosition: {x: -1.0899963, y: 0.9600067}
+  m_AnchoredPosition: {x: -1.0899963, y: 0.95999146}
   m_SizeDelta: {x: 1.2963104, y: 0.1078949}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &471872237
@@ -1111,6 +1123,18 @@ MonoBehaviour:
           m_StringArgument: RapBattleScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 984362646}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlaySelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &515168691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,6 +1281,18 @@ MonoBehaviour:
           m_StringArgument: RapBattleScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 984362646}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlaySelectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &578432289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,7 +1365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.356}
   m_AnchorMax: {x: 0.9710001, y: 0.5}
-  m_AnchoredPosition: {x: 1.1819916, y: -0.021060944}
+  m_AnchoredPosition: {x: 1.1819916, y: -0.021057129}
   m_SizeDelta: {x: 1.6352844, y: -2.3708801}
   m_Pivot: {x: 0.5, y: 0.6668452}
 --- !u!114 &861382332
@@ -1613,6 +1649,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d334bffd7e44db47bd35e61872cf91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fmodEvent: event:/Music/Main Menu Select
+  fmodEvent1: event:/Music/Win Lose Select
+  fmodEvent2: event:/Music/Choice Select
   bossScores:
   - {fileID: 471872237}
   - {fileID: 1073285961}
@@ -1812,7 +1851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.208, y: 0.114784695}
   m_AnchorMax: {x: 0.4, y: 0.883}
-  m_AnchoredPosition: {x: 0, y: 0.49998474}
+  m_AnchoredPosition: {x: 0, y: 0.5}
   m_SizeDelta: {x: 0.8641968, y: -0.15014648}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1134182311
