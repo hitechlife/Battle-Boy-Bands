@@ -330,7 +330,7 @@ public class BattleSystem : MonoBehaviour
         string rank = GameManager.instance.GetGrade(scoreSlider.value);
         opponent.SetRank(rank);
 
-        if (rank == "A" || rank == "A+")
+        if (rank.Contains("Rap"))
         {
             WinRank.text = rank;
             WinScore.text = "" + Mathf.Floor(scoreSlider.value) + "/" + scoreSlider.maxValue;

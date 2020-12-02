@@ -158,7 +158,12 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                bossScores[i].text = GetOpponentRank(i);
+                bossScores[i].text = "Your rank:\n" + GetOpponentRank(i);
+                if (bossScores[i].text.Contains("Rap")) {
+                    bossScores[i].color = Color.green;
+                } else {
+                    bossScores[i].color = Color.white;
+                }
             }
         }
     }
@@ -178,12 +183,12 @@ public class GameManager : MonoBehaviour
     public string GetGrade(float score)
     {
         float maxScore = opponents[currBoss].GetTurns() * 2;
-        if (score == maxScore) return "A+";
+        if (score == maxScore) return "Rap God";
         float percentage = score / maxScore;
-        if (percentage >= 0.9f) return "A";
-        if (percentage >= 0.75f) return "B";
-        if (percentage >= 0.5f) return "C";
-        return "F";
+        if (percentage >= 0.9f) return "Rap Genius";
+        if (percentage >= 0.75f) return "Rap Amateur";
+        if (percentage >= 0.5f) return "Rap Noob";
+        return "Fail";
     }
 
     public string GetOpponentRank(int opponent)

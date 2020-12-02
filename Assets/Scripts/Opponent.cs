@@ -59,7 +59,7 @@ public class Opponent : MonoBehaviour
     }
 
     public string GetRank() {
-        if (rank == "") return "?";
+        if (rank == "") return "Unknown";
         return rank;
     }
 }
