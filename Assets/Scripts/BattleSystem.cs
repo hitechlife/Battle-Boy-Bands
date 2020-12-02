@@ -78,6 +78,7 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField]
     private GameObject pauseMenu;
+    [SerializeField] private GameObject crowd;
 
     private float baseTimeScale;
 
@@ -97,6 +98,7 @@ public class BattleSystem : MonoBehaviour
         StopAllCoroutines();
         WinPanel.SetActive(false);
         LosePanel.SetActive(false);
+        crowd.SetActive(false);
         StartCoroutine(SetupBattle());
     }
 
@@ -282,6 +284,7 @@ public class BattleSystem : MonoBehaviour
                                 //opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][1];
                                 StartCoroutine(FillScore(scoreSlider.value + 2));
                                 PlayCheers();
+                                StartCoroutine(AnimateCrowd());
 
                                 //changing back
                                 //opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][0];
@@ -505,6 +508,26 @@ public class BattleSystem : MonoBehaviour
         }
 
         // if (active) StartCoroutine(ChoicesTimer(2f /*BeatManager.S.SUBDIVISION_CONST*/));
+    }
+
+    IEnumerator AnimateCrowd() {
+        crowd.SetActive(true);
+        object[] loadedSprite = Resources.LoadAll("Crowd", typeof(Sprite));
+        // FMOD.Studio.PLAYBACK_STATE state = FMOD.Studio.PLAYBACK_STATE.PLAYING;
+        float timer = 0;
+        float animateInterval = 0.05f;
+        while (timer <= 3.5f) { // hardcoded len of crowd noise
+            foreach (object obj in loadedSprite) {
+                Sprite s = (Sprite)obj;
+                crowd.GetComponent<Image>().sprite = s;
+                timer += animateInterval;
+                yield return new WaitForSeconds(animateInterval);
+            }
+            timer += Time.deltaTime;
+            yield return null;
+            // Sound.getPlaybackState(out state);
+        }
+        crowd.SetActive(false);
     }
 
     // Animate the score meter filling up
