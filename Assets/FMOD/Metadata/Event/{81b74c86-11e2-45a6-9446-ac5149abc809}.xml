@@ -259,6 +259,9 @@
 		<property name="length">
 			<value>18.285714285714281</value>
 		</property>
+		<property name="quantizationInterval">
+			<value>8</value>
+		</property>
 		<relationship name="timeline">
 			<destination>{97fe673e-04e3-4175-97cf-f88385b0f7fc}</destination>
 		</relationship>
@@ -278,6 +281,9 @@
 		</property>
 		<property name="length">
 			<value>9.1428571428571423</value>
+		</property>
+		<property name="quantizationInterval">
+			<value>8</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{97fe673e-04e3-4175-97cf-f88385b0f7fc}</destination>
@@ -299,6 +305,9 @@
 		<property name="length">
 			<value>9.1428571428571423</value>
 		</property>
+		<property name="quantizationInterval">
+			<value>8</value>
+		</property>
 		<relationship name="timeline">
 			<destination>{97fe673e-04e3-4175-97cf-f88385b0f7fc}</destination>
 		</relationship>
@@ -318,6 +327,9 @@
 		</property>
 		<property name="length">
 			<value>9.1428571428571423</value>
+		</property>
+		<property name="quantizationInterval">
+			<value>8</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{97fe673e-04e3-4175-97cf-f88385b0f7fc}</destination>
