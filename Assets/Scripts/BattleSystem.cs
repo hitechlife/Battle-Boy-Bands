@@ -565,12 +565,13 @@ public class BattleSystem : MonoBehaviour
         // FMOD.Studio.PLAYBACK_STATE state = FMOD.Studio.PLAYBACK_STATE.PLAYING;
         float timer = 0;
         float animateInterval = 0.05f;
-        while (timer <= 3.5f) { // hardcoded len of crowd noise
+        while (timer <= 3.5f && BeatManager.S.isPlayerResponseLoop) { // hardcoded len of crowd noise
             foreach (object obj in loadedSprite) {
                 Sprite s = (Sprite)obj;
                 crowd.GetComponent<Image>().sprite = s;
                 timer += animateInterval;
                 yield return new WaitForSeconds(animateInterval);
+                if (timer >= 3.5f) break;
             }
             timer += Time.deltaTime;
             yield return null;
