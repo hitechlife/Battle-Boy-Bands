@@ -618,7 +618,7 @@ public class BattleSystem : MonoBehaviour
         slider.value = 1;
 
         bool flippedOn = false;
-        timeToWait -= (60f * 1f) / (BeatManager.S.beatsPerMinute);
+        // timeToWait -= (60f * 1f) / (BeatManager.S.beatsPerMinute);
 
         // Decrease slider value over timeToWait seconds
         while (BeatManager.S.isPlayerLoop)
@@ -631,44 +631,44 @@ public class BattleSystem : MonoBehaviour
 
             //TODO: skipping beat bug fix temp
 
-            // If we are *right before* the end of the timer
-            if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn && slider.value == 0)
-            {
-                flippedOn = true;
-                if (!playerAnswered) {
-                    // yield return null;
-                    // EventSystem.current.SetSelectedGameObject(null);
-                    // EventSystem.current.SetSelectedGameObject(choices[choicesMap[2]]);
-                    // choices[choicesMap[2]].GetComponent<Button>().Select();
-                    ChooseInsult(2);
-                }
-                // Display these after timer complete based on choice
-                switch (selectionNum)
-                {
-                    case 0:
-                     //   if (Points > 0)
-                      //  {
-                      //      Points--;
-                      //  }
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                   //     if (Points < xs.Length)
-                     //   {
-                     //       Points++;
-                       // }
-                        break;
-                    default:
-                        break;
-                }
-            }
+            // // If we are *right before* the end of the timer
+            // if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn && slider.value == 0)
+            // {
+            //     flippedOn = true;
+            //     if (!playerAnswered) {
+            //         // yield return null;
+            //         // EventSystem.current.SetSelectedGameObject(null);
+            //         // EventSystem.current.SetSelectedGameObject(choices[choicesMap[2]]);
+            //         // choices[choicesMap[2]].GetComponent<Button>().Select();
+            //         ChooseInsult(2);
+            //     }
+            //     // Display these after timer complete based on choice
+            //     switch (selectionNum)
+            //     {
+            //         case 0:
+            //          //   if (Points > 0)
+            //           //  {
+            //           //      Points--;
+            //           //  }
+            //             break;
+            //         case 1:
+            //             break;
+            //         case 2:
+            //        //     if (Points < xs.Length)
+            //          //   {
+            //          //       Points++;
+            //            // }
+            //             break;
+            //         default:
+            //             break;
+            //     }
+            // }
             yield return null;
         }
         print("Choices timer completed");
-        // if (!playerAnswered) {
-        //     ChooseInsult(2);
-        // }
+        if (!playerAnswered) {
+            ChooseInsult(2);
+        }
 
         SetChoices(false);
     }

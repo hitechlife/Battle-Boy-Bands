@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
             sprites = new List<List<Sprite>>();
             voicelines = new List<List<AudioClip>>();
             musicTracks = new List<track>();
-            currBoss = 2; //TODO: temp testing line
-            bossesDefeated = 0;
+            currBoss = 1; //TODO: temp testing line
+            bossesDefeated = 1;
 
             icons = new List<Sprite>();
             boss1 = new List<Sprite>();
