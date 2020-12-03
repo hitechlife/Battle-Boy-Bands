@@ -431,13 +431,14 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator TryInsult(int selection)
     {
+        yield return null;
+        choices[choicesMap[selection]].GetComponent<Button>().Select();
         currentPlayerLineID = BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selection];
         selectionNum = selection;
 
         switch (selection)
         {
             case 0: //good
-
                 choices[choicesMap[1]].GetComponentInChildren<Button>().interactable = false;
                 choices[choicesMap[2]].GetComponentInChildren<Button>().interactable = false;
                 break;
