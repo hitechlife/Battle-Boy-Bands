@@ -19,6 +19,8 @@ public class BattleSystem : MonoBehaviour
     private float Points;
 
     //TODO: probably make stuff serialized and not public
+
+    [SerializeField] private AudioSource voicePlayer;
     public BattleState state;
 
     public GameObject playerPrefab;
@@ -200,6 +202,7 @@ public class BattleSystem : MonoBehaviour
             playerLosePrefab.SetActive(false);
             opponentPose.sprite = GameManager.sprites[GameManager.currBoss][1];
             playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][0];
+            PlayVoiceLine(currentEnemyLineID);
 
             // yield return new WaitForSeconds(2f);
             while (BeatManager.S.isEnemyLoop)
@@ -224,6 +227,8 @@ public class BattleSystem : MonoBehaviour
                 }
                 yield return null;
             }
+
+            voicePlayer.Stop();
 
             // Opponent challenging, player challenging
             opponentPose.sprite = GameManager.sprites[GameManager.currBoss][0];
@@ -671,6 +676,14 @@ public class BattleSystem : MonoBehaviour
         // }
         Sound.start();
         Sound.release();
+    }
+
+    public void PlayVoiceLine(int lineToPlay)
+    {
+        if (GameManager.voicelines[GameManager.currBoss].Count <= lineToPlay) return;
+
+        voicePlayer.clip = GameManager.voicelines[GameManager.currBoss][lineToPlay];
+        voicePlayer.Play();
     }
 
     public void PlayCheers()
