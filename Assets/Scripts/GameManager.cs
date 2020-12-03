@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     public static List<AudioClip> boss1voice;
     public static List<AudioClip> boss2voice;
     public static List<AudioClip> boss3voice;
+    public static List<AudioClip> mcVoice;
+    public static List<AudioClip> announcerVoice;
 
     public static List<track> musicTracks;
     public Text[] bossScores;
@@ -77,6 +79,8 @@ public class GameManager : MonoBehaviour
             boss1voice = new List<AudioClip>();
             boss2voice = new List<AudioClip>();
             boss3voice = new List<AudioClip>();
+            mcVoice = new List<AudioClip>();
+            announcerVoice = new List<AudioClip>();
 
             object[] loadedSprite = Resources.LoadAll("boss1", typeof(Sprite));
             for (int i = 0; i < loadedSprite.Length; i++)
@@ -145,15 +149,27 @@ public class GameManager : MonoBehaviour
             {
                 boss3voice.Add((AudioClip)loadedVoice[i]);
             }
+            loadedVoice = Resources.LoadAll("mcvoice", typeof(AudioClip));
+            for (int i = 0; i < loadedVoice.Length; i++)
+            {
+                mcVoice.Add((AudioClip)loadedVoice[i]);
+            }
+            loadedVoice = Resources.LoadAll("announcervoice", typeof(AudioClip));
+            for (int i = 0; i < loadedVoice.Length; i++)
+            {
+                announcerVoice.Add((AudioClip)loadedVoice[i]);
+            }
 
             voicelines.Add(boss1voice);
             voicelines.Add(boss2voice);
             voicelines.Add(boss3voice);
+            voicelines.Add(mcVoice);
+            voicelines.Add(announcerVoice);
 
             opponents = new List<Opponent>();
-            opponents.Add(new Opponent("Wash Depp", false, 6, icons[0], null));
-            opponents.Add(new Opponent("Kendrick Amore", false, 6, icons[1], null));
-            opponents.Add(new Opponent("Lil\' Pay", false, 3, icons[2], null));
+            opponents.Add(new Opponent("Wash Depp", false, 9, icons[0], null));
+            opponents.Add(new Opponent("Kendrick Amore", false, 9, icons[1], null));
+            opponents.Add(new Opponent("Lil\' Pay", false, 10, icons[2], null));
             for (int i = 0; i < opponents.Count; i++)
             {
                 opponents[i].SetID(i);

@@ -19,6 +19,8 @@ public class BattleSystem : MonoBehaviour
     private float Points;
 
     //TODO: probably make stuff serialized and not public
+
+    [SerializeField] private AudioSource voicePlayer;
     public BattleState state;
 
     public GameObject playerPrefab;
@@ -77,7 +79,7 @@ public class BattleSystem : MonoBehaviour
 
     private int selectionNum;
     [SerializeField] private GameObject[] tierMarkings;
-    [SerializeField] private GameObject[] tierTextMarkings;
+    // [SerializeField] private GameObject[] tierTextMarkings;
 
     [SerializeField]
     private GameObject pauseMenu;
@@ -88,6 +90,8 @@ public class BattleSystem : MonoBehaviour
     private void Awake()
     {
         baseTimeScale = Time.timeScale;
+        versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
+        versusScreen.SetActive(true);
     }
 
     // Start is called before the first frame update
@@ -103,7 +107,9 @@ public class BattleSystem : MonoBehaviour
         StopAllCoroutines();
         WinPanel.SetActive(false);
         LosePanel.SetActive(false);
-        crowd.SetActive(false);
+        versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
+
+        // crowd.SetActive(false);
         StartCoroutine(SetupBattle());
     }
 
@@ -162,10 +168,11 @@ public class BattleSystem : MonoBehaviour
         // Start music
         Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
         Music.start();
+        PlayAnnouncerVoiceLine(GameManager.currBoss);
 
         //Open start screen
-        versusScreen.SetActive(true);
-        versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
+        // versusScreen.SetActive(true);
+        // versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
 
         battleSpeaker.text = "Announcer";
         announcerText.text = "You vs. " + opponent.GetName();
@@ -176,6 +183,8 @@ public class BattleSystem : MonoBehaviour
             if (BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS / 2)
             {
                 versusScreen.SetActive(false);
+            } else {
+                versusScreen.SetActive(true);
             }
             yield return null;
         }
@@ -200,12 +209,18 @@ public class BattleSystem : MonoBehaviour
             playerLosePrefab.SetActive(false);
             opponentPose.sprite = GameManager.sprites[GameManager.currBoss][1];
             playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][0];
+            bool played = false;
 
             // yield return new WaitForSeconds(2f);
             while (BeatManager.S.isEnemyLoop)
             {
                 // print(enemyID);
                 // print(currentEnemyLineID);
+                if (!played) {
+                    played = true;
+                    voicePlayer.Stop();
+                    PlayEnemyVoiceLine(currentEnemyLineID);
+                }
                 // First half
                 if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS / 2)
                 {
@@ -252,9 +267,15 @@ public class BattleSystem : MonoBehaviour
 
             bool updatedChoice = false;
             bool updatedPoints = false;
+            played = false;
             // yield return new WaitForSeconds(4f);
             while (BeatManager.S.isPlayerResponseLoop)
             {
+                if (!played) {
+                    played = true;
+                    voicePlayer.Stop();
+                    PlayPlayerVoiceLine(currentPlayerLineID);
+                }
                 // First half
                 if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS / 2)
                 {
@@ -545,23 +566,24 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator AnimateCrowd() {
-        crowd.SetActive(true);
+        // crowd.SetActive(true);
         object[] loadedSprite = Resources.LoadAll("Crowd", typeof(Sprite));
         // FMOD.Studio.PLAYBACK_STATE state = FMOD.Studio.PLAYBACK_STATE.PLAYING;
-        float timer = 0;
+        // float timer = 0;
         float animateInterval = 0.05f;
-        while (timer <= 3.5f) { // hardcoded len of crowd noise
+        while (BeatManager.S.isPlayerResponseLoop) { // hardcoded len of crowd noise
             foreach (object obj in loadedSprite) {
                 Sprite s = (Sprite)obj;
                 crowd.GetComponent<Image>().sprite = s;
-                timer += animateInterval;
+                // timer += animateInterval;
                 yield return new WaitForSeconds(animateInterval);
+                if (!BeatManager.S.isPlayerResponseLoop) break;
             }
-            timer += Time.deltaTime;
+            // timer += Time.deltaTime;
             yield return null;
             // Sound.getPlaybackState(out state);
         }
-        crowd.SetActive(false);
+        // crowd.SetActive(false);
     }
 
     // Animate the score meter filling up
@@ -652,14 +674,9 @@ public class BattleSystem : MonoBehaviour
     void ReachedTier(int i)
     {
         Image[] images = tierMarkings[i].GetComponentsInChildren<Image>();
-        Text[] texts = tierTextMarkings[i].GetComponentsInChildren<Text>();
         foreach (Image image in images)
         {
             image.color = Color.white;
-        }
-        foreach (Text text in texts)
-        {
-            text.color = Color.white;
         }
     }
     public void PlayBoos()
@@ -671,6 +688,30 @@ public class BattleSystem : MonoBehaviour
         // }
         Sound.start();
         Sound.release();
+    }
+
+    public void PlayEnemyVoiceLine(int lineToPlay)
+    {
+        if (GameManager.voicelines[GameManager.currBoss].Count <= lineToPlay) return;
+
+        voicePlayer.clip = GameManager.voicelines[GameManager.currBoss][lineToPlay];
+        voicePlayer.Play();
+    }
+
+    public void PlayPlayerVoiceLine(int lineToPlay)
+    {
+        if (GameManager.voicelines[GameManager.opponents.Count].Count <= lineToPlay) return;
+
+        voicePlayer.clip = GameManager.voicelines[GameManager.opponents.Count][lineToPlay];
+        voicePlayer.Play();
+    }
+
+    public void PlayAnnouncerVoiceLine(int lineToPlay)
+    {
+        if (GameManager.voicelines[GameManager.opponents.Count+1].Count <= lineToPlay) return;
+
+        voicePlayer.clip = GameManager.voicelines[GameManager.opponents.Count+1][lineToPlay];
+        voicePlayer.Play();
     }
 
     public void PlayCheers()
