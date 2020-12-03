@@ -164,6 +164,7 @@ public class BattleSystem : MonoBehaviour
         // Start music
         Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
         Music.start();
+        PlayAnnouncerVoiceLine(GameManager.currBoss);
 
         //Open start screen
         versusScreen.SetActive(true);
@@ -202,11 +203,16 @@ public class BattleSystem : MonoBehaviour
             playerLosePrefab.SetActive(false);
             opponentPose.sprite = GameManager.sprites[GameManager.currBoss][1];
             playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][0];
-            PlayVoiceLine(currentEnemyLineID);
+            bool played = false;
 
             // yield return new WaitForSeconds(2f);
             while (BeatManager.S.isEnemyLoop)
             {
+                if (!played) {
+                    played = true;
+                    voicePlayer.Stop();
+                    PlayEnemyVoiceLine(currentEnemyLineID);
+                }
                 print(enemyID);
                 print(currentEnemyLineID);
                 // First half
@@ -227,8 +233,6 @@ public class BattleSystem : MonoBehaviour
                 }
                 yield return null;
             }
-
-            voicePlayer.Stop();
 
             // Opponent challenging, player challenging
             opponentPose.sprite = GameManager.sprites[GameManager.currBoss][0];
@@ -257,9 +261,15 @@ public class BattleSystem : MonoBehaviour
 
             bool updatedChoice = false;
             bool updatedPoints = false;
+            played = false;
             // yield return new WaitForSeconds(4f);
             while (BeatManager.S.isPlayerResponseLoop)
             {
+                if (!played) {
+                    played = true;
+                    voicePlayer.Stop();
+                    PlayPlayerVoiceLine(currentPlayerLineID);
+                }
                 // First half
                 if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS / 2)
                 {
@@ -678,11 +688,27 @@ public class BattleSystem : MonoBehaviour
         Sound.release();
     }
 
-    public void PlayVoiceLine(int lineToPlay)
+    public void PlayEnemyVoiceLine(int lineToPlay)
     {
         if (GameManager.voicelines[GameManager.currBoss].Count <= lineToPlay) return;
 
         voicePlayer.clip = GameManager.voicelines[GameManager.currBoss][lineToPlay];
+        voicePlayer.Play();
+    }
+
+    public void PlayPlayerVoiceLine(int lineToPlay)
+    {
+        if (GameManager.voicelines[GameManager.opponents.Count].Count <= lineToPlay) return;
+
+        voicePlayer.clip = GameManager.voicelines[GameManager.opponents.Count][lineToPlay];
+        voicePlayer.Play();
+    }
+
+    public void PlayAnnouncerVoiceLine(int lineToPlay)
+    {
+        if (GameManager.voicelines[GameManager.opponents.Count+1].Count <= lineToPlay) return;
+
+        voicePlayer.clip = GameManager.voicelines[GameManager.opponents.Count+1][lineToPlay];
         voicePlayer.Play();
     }
 
