@@ -22,6 +22,7 @@ public class BattleSystem : MonoBehaviour
     public BattleState state;
 
     public GameObject playerPrefab;
+    public GameObject playerLosePrefab;
     public GameObject opponentPrefab;
     private Image playerPose;
     private Image opponentPose;
@@ -195,6 +196,8 @@ public class BattleSystem : MonoBehaviour
             yield return StartCoroutine(OpponentTurn());
 
             // Opponent singing, player challenging
+            playerPrefab.SetActive(true);
+            playerLosePrefab.SetActive(false);
             opponentPose.sprite = GameManager.sprites[GameManager.currBoss][1];
             playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][0];
 
@@ -296,7 +299,9 @@ public class BattleSystem : MonoBehaviour
 
                                 // Opponent winning, player losing
                                 opponentPose.sprite = GameManager.sprites[GameManager.currBoss][3];
-                                playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][2];
+                                playerPrefab.SetActive(false);
+                                playerLosePrefab.SetActive(true);
+                                // playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][2];
                                 PlayBoos();
                                 // if (numOfX < xs.Length) {
                                 //     numOfX++;
