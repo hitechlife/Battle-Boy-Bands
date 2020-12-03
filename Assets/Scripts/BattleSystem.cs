@@ -179,6 +179,8 @@ public class BattleSystem : MonoBehaviour
             if (BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS / 2)
             {
                 versusScreen.SetActive(false);
+            } else {
+                versusScreen.SetActive(true);
             }
             yield return null;
         }
