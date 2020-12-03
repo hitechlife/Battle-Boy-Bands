@@ -90,6 +90,8 @@ public class BattleSystem : MonoBehaviour
     private void Awake()
     {
         baseTimeScale = Time.timeScale;
+        versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
+        versusScreen.SetActive(true);
     }
 
     // Start is called before the first frame update
@@ -106,7 +108,7 @@ public class BattleSystem : MonoBehaviour
         WinPanel.SetActive(false);
         LosePanel.SetActive(false);
         versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
-        versusScreen.SetActive(true);
+
         // crowd.SetActive(false);
         StartCoroutine(SetupBattle());
     }
