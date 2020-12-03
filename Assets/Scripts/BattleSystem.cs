@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public enum BattleState { START, PLAYERTURN, PLAYERCHOICE, OPPONENTTURN, WIN, LOSE }
 
@@ -430,9 +431,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator TryInsult(int selection)
-    {
-        yield return null;
-        choices[choicesMap[selection]].GetComponent<Button>().Select();
+    {     
         currentPlayerLineID = BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selection];
         selectionNum = selection;
 
@@ -533,6 +532,8 @@ public class BattleSystem : MonoBehaviour
 
         // SetChoices(false);
         playerAnswered = true;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(choices[choicesMap[selection]]);
 
         StartCoroutine(TryInsult(selection));
     }
@@ -631,7 +632,13 @@ public class BattleSystem : MonoBehaviour
             if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !flippedOn && slider.value == 0)
             {
                 flippedOn = true;
-                if (!playerAnswered) ChooseInsult(2);
+                if (!playerAnswered) {
+                    // yield return null;
+                    // EventSystem.current.SetSelectedGameObject(null);
+                    // EventSystem.current.SetSelectedGameObject(choices[choicesMap[2]]);
+                    // choices[choicesMap[2]].GetComponent<Button>().Select();
+                    ChooseInsult(2);
+                }
                 // Display these after timer complete based on choice
                 switch (selectionNum)
                 {

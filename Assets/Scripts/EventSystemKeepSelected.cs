@@ -19,7 +19,7 @@
                  {
                      lastSelected = eventSystem.currentSelectedGameObject;
                  }
-                 else
+                 else if (lastSelected != null)
                  {
                      eventSystem.SetSelectedGameObject(lastSelected);
                  }
