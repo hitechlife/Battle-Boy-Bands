@@ -3814,7 +3814,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.13121063, y: 0.047427747}
   m_AnchorMax: {x: 0.957, y: 0.26965705}
-  m_AnchoredPosition: {x: -6.700012, y: 1.4999619}
+  m_AnchoredPosition: {x: -6.700012, y: 1.4998627}
   m_SizeDelta: {x: 15.206604, y: 1.0462189}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1234817505
@@ -7681,7 +7681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3471394945163246384, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -12.780037
+      value: -12.780029
       objectReference: {fileID: 0}
     - target: {fileID: 3471394945163246384, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7802,6 +7802,18 @@ PrefabInstance:
     - target: {fileID: 7734924029094690105, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_Color.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7734924029094690105, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
+      propertyPath: m_Text
+      value: you vs. kendrick amore
+      objectReference: {fileID: 0}
+    - target: {fileID: 7734924029094690105, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 7734924029094690105, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}

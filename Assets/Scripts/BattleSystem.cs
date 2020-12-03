@@ -563,17 +563,17 @@ public class BattleSystem : MonoBehaviour
         crowd.SetActive(true);
         object[] loadedSprite = Resources.LoadAll("Crowd", typeof(Sprite));
         // FMOD.Studio.PLAYBACK_STATE state = FMOD.Studio.PLAYBACK_STATE.PLAYING;
-        float timer = 0;
+        // float timer = 0;
         float animateInterval = 0.05f;
-        while (timer <= 3.5f && BeatManager.S.isPlayerResponseLoop) { // hardcoded len of crowd noise
+        while (BeatManager.S.isPlayerResponseLoop) { // hardcoded len of crowd noise
             foreach (object obj in loadedSprite) {
                 Sprite s = (Sprite)obj;
                 crowd.GetComponent<Image>().sprite = s;
-                timer += animateInterval;
+                // timer += animateInterval;
                 yield return new WaitForSeconds(animateInterval);
-                if (timer >= 3.5f) break;
+                if (!BeatManager.S.isPlayerResponseLoop) break;
             }
-            timer += Time.deltaTime;
+            // timer += Time.deltaTime;
             yield return null;
             // Sound.getPlaybackState(out state);
         }
