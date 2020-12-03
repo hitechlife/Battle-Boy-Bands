@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     public static List<track> musicTracks;
     public Text[] bossScores;
     public GameObject[] redX;
+    public GameObject endScreenButton;
     private int[] BPM = { 95, 105, 120 };
 
 
@@ -187,6 +188,10 @@ public class GameManager : MonoBehaviour
                 if (opponents[i].GetDefeated()) {
                     redX[i].SetActive(true);
                 }
+            }
+
+            if (bossesDefeated >= opponents.Count) {
+                endScreenButton.SetActive(true);
             }
         }
     }
