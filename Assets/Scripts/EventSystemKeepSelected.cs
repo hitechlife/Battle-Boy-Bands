@@ -11,10 +11,17 @@
              eventSystem = GetComponent<EventSystem>();
          }
      
+        private bool updatedChoice = false;
          void Update()
          {
              if (eventSystem != null)
              {
+                 if (BeatManager.S.isPlayerLoop && !updatedChoice) {
+                     lastSelected = null;
+                     updatedChoice = true;
+                 } else if (BeatManager.S.isPlayerLoop == false) {
+                     updatedChoice = false;
+                 }
                  if (eventSystem.currentSelectedGameObject != null)
                  {
                      lastSelected = eventSystem.currentSelectedGameObject;
