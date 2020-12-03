@@ -105,7 +105,7 @@ public class BattleSystem : MonoBehaviour
         StopAllCoroutines();
         WinPanel.SetActive(false);
         LosePanel.SetActive(false);
-        crowd.SetActive(false);
+        // crowd.SetActive(false);
         StartCoroutine(SetupBattle());
     }
 
@@ -562,7 +562,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator AnimateCrowd() {
-        crowd.SetActive(true);
+        // crowd.SetActive(true);
         object[] loadedSprite = Resources.LoadAll("Crowd", typeof(Sprite));
         // FMOD.Studio.PLAYBACK_STATE state = FMOD.Studio.PLAYBACK_STATE.PLAYING;
         // float timer = 0;
@@ -579,7 +579,7 @@ public class BattleSystem : MonoBehaviour
             yield return null;
             // Sound.getPlaybackState(out state);
         }
-        crowd.SetActive(false);
+        // crowd.SetActive(false);
     }
 
     // Animate the score meter filling up
