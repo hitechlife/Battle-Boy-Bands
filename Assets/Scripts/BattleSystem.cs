@@ -79,7 +79,7 @@ public class BattleSystem : MonoBehaviour
 
     private int selectionNum;
     [SerializeField] private GameObject[] tierMarkings;
-    [SerializeField] private GameObject[] tierTextMarkings;
+    // [SerializeField] private GameObject[] tierTextMarkings;
 
     [SerializeField]
     private GameObject pauseMenu;
@@ -670,14 +670,9 @@ public class BattleSystem : MonoBehaviour
     void ReachedTier(int i)
     {
         Image[] images = tierMarkings[i].GetComponentsInChildren<Image>();
-        Text[] texts = tierTextMarkings[i].GetComponentsInChildren<Text>();
         foreach (Image image in images)
         {
             image.color = Color.white;
-        }
-        foreach (Text text in texts)
-        {
-            text.color = Color.white;
         }
     }
     public void PlayBoos()
