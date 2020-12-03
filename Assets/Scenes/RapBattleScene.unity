@@ -1533,11 +1533,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1788180490617959940, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.40000153
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1788180490617959940, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.100006
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1788180490617959940, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1545,23 +1545,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1788180490617959940, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 504.8401
+      value: 501.8401
       objectReference: {fileID: 0}
     - target: {fileID: 1788180490617959940, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.402
+      value: 0.41273773
       objectReference: {fileID: 0}
     - target: {fileID: 1788180490617959940, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5132121
+      value: 0.48919696
       objectReference: {fileID: 0}
     - target: {fileID: 1788180490617959940, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.75433975
+      value: 0.76500005
       objectReference: {fileID: 0}
     - target: {fileID: 1788180490617959940, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.77127296
+      value: 0.7508031
       objectReference: {fileID: 0}
     - target: {fileID: 1788180490617959940, guid: 590adde945c70214696b4e917f6db2b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7224,19 +7224,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1259145237, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.4953003
+      value: -0.7290344
       objectReference: {fileID: 0}
     - target: {fileID: 1259145237, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1259145237, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 2.9158936
+      value: 1.4578247
       objectReference: {fileID: 0}
     - target: {fileID: 1259145237, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -2.9087982
+      value: -0.9087982
       objectReference: {fileID: 0}
     - target: {fileID: 1259145237, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7248,11 +7248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1259145237, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.39257675
+      value: 0.39789394
       objectReference: {fileID: 0}
     - target: {fileID: 1259145237, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.019000001
       objectReference: {fileID: 0}
     - target: {fileID: 1259145238, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_FontData.m_BestFit
@@ -7262,8 +7262,8 @@ PrefabInstance:
       propertyPath: m_Text
       value: 'I don''t wanna talk to toddlers
 
-        when we know that they''re
-        all bought
+        you think you''re better than
+        the veteran? fool
 
 '
       objectReference: {fileID: 0}
@@ -7357,8 +7357,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3471394943679059752, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_Text
-      value: "when i walk up on the stage \ny\u2019all know it\u2019s time to lil
-        pray"
+      value: "you think you're better than the veteran?\ny\u2019all know it\u2019s
+        time to lil pray"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3471394943679059752, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3471394943679059755, guid: 2a573421f47eec54f817724c6e5b18fa, type: 3}
       propertyPath: m_AnchoredPosition.x
