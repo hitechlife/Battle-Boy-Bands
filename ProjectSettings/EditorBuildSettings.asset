@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 3515baf81c817014c839e13218d7ccfc
+  - enabled: 1
     path: Assets/Scenes/BossSelectionMenu.unity
     guid: 4b9a06b2456fd984f806550ed35316ea
   - enabled: 1
     path: Assets/Scenes/RapBattleScene.unity
     guid: feb7fe27dc2deff4597d896b3e212da2
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 6cf9c12bb1297b8439045045657e187c
   m_configObjects: {}
