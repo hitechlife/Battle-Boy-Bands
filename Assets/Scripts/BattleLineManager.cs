@@ -152,9 +152,9 @@ public class BattleLineManager : MonoBehaviour
         { 82, 8 },
         { 83, 8 },
         // We never reach this point
-        { 84, 2 },
-        { 85, 2 },
-        { 86, 2 },
+        { 84, 9 },
+        { 85, 9 },
+        { 86, 9 },
         { 87, 3 },
         { 88, 3 },
         { 89, 3 }
