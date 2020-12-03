@@ -105,6 +105,8 @@ public class BattleSystem : MonoBehaviour
         StopAllCoroutines();
         WinPanel.SetActive(false);
         LosePanel.SetActive(false);
+        versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
+        versusScreen.SetActive(true);
         // crowd.SetActive(false);
         StartCoroutine(SetupBattle());
     }
@@ -167,8 +169,8 @@ public class BattleSystem : MonoBehaviour
         PlayAnnouncerVoiceLine(GameManager.currBoss);
 
         //Open start screen
-        versusScreen.SetActive(true);
-        versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
+        // versusScreen.SetActive(true);
+        // versusScreen.GetComponent<Image>().sprite = GameManager.versus[GameManager.currBoss];
 
         battleSpeaker.text = "Announcer";
         announcerText.text = "You vs. " + opponent.GetName();
