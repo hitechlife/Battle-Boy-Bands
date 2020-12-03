@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             sprites = new List<List<Sprite>>();
             voicelines = new List<List<AudioClip>>();
             musicTracks = new List<track>();
-            currBoss = 0; //TODO: temp testing line
+            currBoss = 0;
             bossesDefeated = 0;
 
             icons = new List<Sprite>();
@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            if (bossesDefeated >= opponents.Count) {
+            if (GameManager.instance.bossesDefeated >= opponents.Count) {
                 endScreenButton.SetActive(true);
             }
         }
