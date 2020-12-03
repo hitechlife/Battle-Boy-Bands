@@ -498,13 +498,13 @@ public class BattleSystem : MonoBehaviour
         // int doubleTime = BeatManager.doubleTime ? 2 : 1;
 
         yield return new WaitUntil(() => BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS/2);
-        yield return new WaitUntil(() => BeatManager.S.playerLoopInt >= 2 * GameManager.instance.bossesDefeated + 2);
+        yield return new WaitUntil(() => BeatManager.S.playerLoopInt >= 2 * Mathf.Min(2, GameManager.instance.bossesDefeated) + 2);
 
         SetChoices(true);
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
 
         // Runs for 1.5 x BeatManger
-        yield return StartCoroutine(ChoicesTimer(60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS + BeatManager.S.NUM_BREAK_BARS / 2)) / (BeatManager.S.beatsPerMinute) - (4 * GameManager.instance.bossesDefeated)));
+        yield return StartCoroutine(ChoicesTimer(60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS + BeatManager.S.NUM_BREAK_BARS / 2)) / (BeatManager.S.beatsPerMinute) - (4 * Mathf.Min(2, GameManager.instance.bossesDefeated))));
 
         // yield return new WaitForSeconds(2f);
         // yield return null;
@@ -618,12 +618,15 @@ public class BattleSystem : MonoBehaviour
         slider.value = 1;
 
         bool flippedOn = false;
-        timeToWait--;
+        timeToWait -= (60f * 1f) / (BeatManager.S.beatsPerMinute);
 
         // Decrease slider value over timeToWait seconds
         while (BeatManager.S.isPlayerLoop)
         {
-            if (coolTimer.activeSelf == false) break;
+            if (coolTimer.activeSelf == false) {
+                slider.value = 0;
+                break;
+            }
             slider.value -= Time.deltaTime / timeToWait;
 
             //TODO: skipping beat bug fix temp

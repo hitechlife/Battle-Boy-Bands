@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
             voicelines = new List<List<AudioClip>>();
             musicTracks = new List<track>();
             currBoss = 2; //TODO: temp testing line
+            bossesDefeated = 0;
 
             icons = new List<Sprite>();
             boss1 = new List<Sprite>();
@@ -221,15 +222,15 @@ public class GameManager : MonoBehaviour
     public void DefeatedBoss(int boss)
     {
         opponents[boss].Defeat();
-        if (bossesDefeated <= opponents.Count) bossesDefeated++;
+        if (bossesDefeated < opponents.Count) bossesDefeated++;
     }
 
     public string GetGrade(float score)
     {
         float maxScore = opponents[currBoss].GetTurns() * 2;
-        if (score == maxScore) return "Rap God";
+        if (score == maxScore) return "Rap Legend";
         float percentage = score / maxScore;
-        if (percentage >= 0.9f) return "Rap Genius";
+        if (percentage >= 0.9f) return "Rap God";
         if (percentage >= 0.75f) return "Rap Amateur";
         if (percentage >= 0.5f) return "Rap Noob";
         return "Fail";
