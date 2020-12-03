@@ -231,7 +231,7 @@ public class BattleLineManager : MonoBehaviour
 
          // Lil Pay
         { 60, "I don't wanna fight a toddler\nbut for now I’ll bend that rule/Wanna pray to a rap god kid?\nI’ll kick your ass to Sunday school" },
-        { 61, "I don't wanna fight a toddler\nbut for now I’ll bend that rule/ I’m gonna trounce you\nsince I’m so cool" },
+        { 61, "I don't wanna fight a toddler\nbut for now I’ll bend that rule/I’m gonna trounce you\nsince I’m so cool" },
         { 62, "I don't wanna fight a toddler\nbut for now I’ll bend that rule/haha you suck,\nand that’s the truth" },
         { 63, "You're talkin\' like a soldier\nbut ain’t old enough to draft/Kid you wanna be on COD\nbut you're still stuck on Minecraft" },
         { 64, "You're talkin\' like a soldier\nbut ain’t old enough to draft/your rap game just died,\npress F in chat" },
@@ -402,7 +402,7 @@ public class BattleLineManager : MonoBehaviour
         },
         new string[] { // Lil Pay
             "Welcome to the final\nnow it’s time for Lil’ Pay/When I walk up on the stage\ny’all know it’s time to lil pray", 
-            "Bitch I’m 9 years old\n 'n I’m already flexin millions/Lil Pay’s on Call of Duty\nwhile ur ass is a civilian", 
+            "Bitch I’m 9 years old\n 'n I’m already flexin millions/Lil Pay’s on Call of Duty\nwhile your ass is a civilian", 
             "Ok Boomer you're just mad\ncuz I’m already verified/Lil Pay’s an asteroid,\ncall this stage a genocide", 
             "You’re just a Millennial,\ndon’t try to mess with Gen Z/I already reached platinum\nwith just a single LP", 
             "They call me Lil' Pay\nbut I ain't so small/ I'm king of the world,\nyou're a fly on the wall",
