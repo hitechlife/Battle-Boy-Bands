@@ -504,7 +504,7 @@ public class BattleSystem : MonoBehaviour
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
 
         // Runs for 1.5 x BeatManger
-        yield return StartCoroutine(ChoicesTimer(60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS + BeatManager.S.NUM_BREAK_BARS / 2)) / (BeatManager.S.beatsPerMinute) - (4 * Mathf.Min(2, GameManager.instance.bossesDefeated))));
+        yield return StartCoroutine(ChoicesTimer(60f * (BeatManager.S.SUBDIVISION_CONST * (BeatManager.S.NUM_BREAK_BARS + BeatManager.S.NUM_BREAK_BARS / 2) - (4f * 2*Mathf.Min(2, GameManager.instance.bossesDefeated))) / (BeatManager.S.beatsPerMinute)));
 
         // yield return new WaitForSeconds(2f);
         // yield return null;
