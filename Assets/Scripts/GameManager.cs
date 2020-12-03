@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public static List<Sprite> boss2;
     public static List<Sprite> boss3;
     public static List<Sprite> icons;
+    public static List<Sprite> mc;
     public static List<Sprite> versus;
 
     //voicelines for each boss
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     public static List<track> musicTracks;
     public Text[] bossScores;
+    public GameObject[] redX;
     private int[] BPM = { 95, 105, 120 };
 
 
@@ -68,6 +70,7 @@ public class GameManager : MonoBehaviour
             boss1 = new List<Sprite>();
             boss2 = new List<Sprite>();
             boss3 = new List<Sprite>();
+            mc = new List<Sprite>();
             versus = new List<Sprite>();
 
             boss1voice = new List<AudioClip>();
@@ -90,6 +93,12 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < loadedSprite.Length; i++)
             {
                 boss3.Add((Sprite)loadedSprite[i]);
+            }
+
+            loadedSprite = Resources.LoadAll("MC", typeof(Sprite));
+            for (int i = 0; i < loadedSprite.Length; i++)
+            {
+                mc.Add((Sprite)loadedSprite[i]);
             }
 
             loadedSprite = Resources.LoadAll("bar with icons", typeof(Sprite));
@@ -118,6 +127,7 @@ public class GameManager : MonoBehaviour
             sprites.Add(boss1);
             sprites.Add(boss2);
             sprites.Add(boss3);
+            sprites.Add(mc);
 
             object[] loadedVoice = Resources.LoadAll("boss1voice", typeof(AudioClip));
             for (int i = 0; i < loadedVoice.Length; i++)
@@ -173,6 +183,9 @@ public class GameManager : MonoBehaviour
                     bossScores[i].color = Color.green;
                 } else {
                     bossScores[i].color = Color.white;
+                }
+                if (opponents[i].GetDefeated()) {
+                    redX[i].SetActive(true);
                 }
             }
         }

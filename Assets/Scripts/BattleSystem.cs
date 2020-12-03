@@ -23,6 +23,8 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject playerPrefab;
     public GameObject opponentPrefab;
+    private Image playerPose;
+    private Image opponentPose;
     public GameObject versusScreen;
     public Text opponentInfoText;
     public Image opponentInfoIcon;
@@ -93,6 +95,8 @@ public class BattleSystem : MonoBehaviour
         // Music = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
         // Music.start();
 
+        playerPose = playerPrefab.GetComponent<Image>();
+        opponentPose = opponentPrefab.GetComponent<Image>();
         choicesMap = new int[3];
         state = BattleState.START;
         StopAllCoroutines();
@@ -123,8 +127,9 @@ public class BattleSystem : MonoBehaviour
 
         // Render opponent info and set the track
 
-        // Opponent sprite
-        opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][0];
+        // Setup challenger sprites: 0 challenge, 1 sing, 2 loss, 3 win
+        opponentPose.sprite = GameManager.sprites[GameManager.currBoss][0];
+        playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][0];
 
         // Opponent first line
         //opponentPrefab.GetComponent<AudioSource>().clip = GameManager.voicelines[GameManager.currBoss][0];
@@ -188,6 +193,11 @@ public class BattleSystem : MonoBehaviour
             // Starts with enemy insult
 
             yield return StartCoroutine(OpponentTurn());
+
+            // Opponent singing, player challenging
+            opponentPose.sprite = GameManager.sprites[GameManager.currBoss][1];
+            playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][0];
+
             // yield return new WaitForSeconds(2f);
             while (BeatManager.S.isEnemyLoop)
             {
@@ -212,6 +222,10 @@ public class BattleSystem : MonoBehaviour
                 yield return null;
             }
 
+            // Opponent challenging, player challenging
+            opponentPose.sprite = GameManager.sprites[GameManager.currBoss][0];
+            playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][0];
+
             // Player should be choosing answer during this time....
             // Note that cooldown timer coroutine is also started at this point
             yield return StartCoroutine(StartChoiceSelection());
@@ -229,6 +243,10 @@ public class BattleSystem : MonoBehaviour
             //TODO: have more theatrics about displaying your chosen lines
             yield return StartCoroutine(PlayerTurn());
 
+            // Opponent challenging, player singing
+            opponentPose.sprite = GameManager.sprites[GameManager.currBoss][0];
+            playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][1];
+
             bool updatedChoice = false;
             bool updatedPoints = false;
             // yield return new WaitForSeconds(4f);
@@ -237,7 +255,60 @@ public class BattleSystem : MonoBehaviour
                 // First half
                 if (BeatManager.S.counter <= BeatManager.S.NUM_BREAK_BARS / 2)
                 {
-                    if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS / 2 && !updatedPoints)
+                    // playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[0];
+                }
+                else
+                { //Second half
+                    playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[1];
+
+                    // Display these after timer complete based on choice
+                    if (!updatedChoice)
+                    {
+                        updatedChoice = true;
+                        switch (selectionNum)
+                        {
+                            case 0:
+                                // if (numOfX > 0) {
+                                //     numOfX--;
+                                // }
+                                // xs[numOfX].sprite = disabledX;
+
+                                // Opponent losing, player winning
+                                opponentPose.sprite = GameManager.sprites[GameManager.currBoss][2];
+                                playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][3];
+
+                                StartCoroutine(FillScore(scoreSlider.value + 2));
+                                PlayCheers();
+                                StartCoroutine(AnimateCrowd());
+
+                                //changing back
+                                //opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][0];
+                                break;
+                            case 1:
+
+                                // No sprite change
+
+                                PlayNeutral();
+                                StartCoroutine(FillScore(scoreSlider.value + 1));
+                                break;
+                            case 2:
+                                // xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
+
+                                // Opponent winning, player losing
+                                opponentPose.sprite = GameManager.sprites[GameManager.currBoss][3];
+                                playerPose.sprite = GameManager.sprites[GameManager.opponents.Count][2];
+                                PlayBoos();
+                                // if (numOfX < xs.Length) {
+                                //     numOfX++;
+                                // }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    // Temp fix to transitioning to next bar
+                    if (BeatManager.S.accent == BeatManager.S.SUBDIVISION_CONST && BeatManager.S.counter == BeatManager.S.NUM_BREAK_BARS && !updatedPoints)
                     {
                         updatedPoints = true;
                         // Display these after timer complete based on choice
@@ -257,48 +328,6 @@ public class BattleSystem : MonoBehaviour
                                     Points++;
                                     print("increased points");
                                 }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    // playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[0];
-                }
-                else
-                { //Second half
-                    playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[selectionNum]).Split('/')[1];
-
-                    // Display these after timer complete based on choice
-                    if (!updatedChoice)
-                    {
-                        updatedChoice = true;
-                        switch (selectionNum)
-                        {
-                            case 0:
-                                // if (numOfX > 0) {
-                                //     numOfX--;
-                                // }
-                                // xs[numOfX].sprite = disabledX;
-
-                                //changing sprites
-                                //opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][1];
-                                StartCoroutine(FillScore(scoreSlider.value + 2));
-                                PlayCheers();
-                                StartCoroutine(AnimateCrowd());
-
-                                //changing back
-                                //opponentPrefab.GetComponent<Image>().sprite = GameManager.sprites[GameManager.currBoss][0];
-                                break;
-                            case 1:
-                                PlayNeutral();
-                                StartCoroutine(FillScore(scoreSlider.value + 1));
-                                break;
-                            case 2:
-                                // xs[Mathf.Min(numOfX,xs.Length-1)].sprite = enabledX;
-                                PlayBoos();
-                                // if (numOfX < xs.Length) {
-                                //     numOfX++;
-                                // }
                                 break;
                             default:
                                 break;

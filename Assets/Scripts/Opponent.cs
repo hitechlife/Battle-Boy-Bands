@@ -28,6 +28,10 @@ public class Opponent : MonoBehaviour
         defeated = true;
     }
 
+    public bool GetDefeated() {
+        return defeated;
+    }
+
     public string GetName() {
         return name;
     }
