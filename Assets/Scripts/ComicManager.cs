@@ -7,6 +7,7 @@ public class ComicManager : MonoBehaviour
 {
     [SerializeField] GameObject[] panels;
     [SerializeField] GameObject continueButton;
+    [SerializeField] GameObject title;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class ComicManager : MonoBehaviour
         }
 
         continueButton.SetActive(true);
+        title.SetActive(true);
     }
 
 

@@ -352,7 +352,7 @@ public class BattleSystem : MonoBehaviour
                                 if (Points < xs.Length)
                                 {
                                     Points++;
-                                    print("increased points");
+                                    // print("increased points");
                                 }
                                 break;
                             default:
@@ -471,6 +471,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator StartChoiceSelection()
     {
         ClearText();
+        EventSystem.current.SetSelectedGameObject(null);
         selectionNum = -1;
         //TODO: have giant text flash saying "YOUR TURN"???
         state = BattleState.PLAYERCHOICE;
@@ -665,7 +666,7 @@ public class BattleSystem : MonoBehaviour
             // }
             yield return null;
         }
-        print("Choices timer completed");
+        // print("Choices timer completed");
         if (!playerAnswered) {
             ChooseInsult(2);
         }

@@ -1946,7 +1946,7 @@ MonoBehaviour:
   - {fileID: 577835143}
   - {fileID: 1037844896}
   - {fileID: 971480150}
-  endScreenButton: {fileID: 0}
+  endScreenButton: {fileID: 624426528}
   bossesDefeated: 0
 --- !u!1 &1008806970
 GameObject:

@@ -16,14 +16,10 @@
          {
              if (eventSystem != null)
              {
-                 if (BeatManager.S.isPlayerLoop && !updatedChoice) {
+                 if (BeatManager.S.isPlayerLoop == false) {
                      lastSelected = null;
-                     updatedChoice = true;
-                 } else if (updatedChoice && BeatManager.S.isPlayerLoop == false) {
-                     updatedChoice = false;
-                 }
-
-                 if (eventSystem.currentSelectedGameObject != null)
+                     eventSystem.SetSelectedGameObject(null);
+                 } else if (eventSystem.currentSelectedGameObject != null)
                  {
                      lastSelected = eventSystem.currentSelectedGameObject;
                  }

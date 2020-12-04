@@ -792,6 +792,7 @@ MonoBehaviour:
   - {fileID: 326962094}
   - {fileID: 604872745}
   continueButton: {fileID: 652097247}
+  title: {fileID: 290981930}
 --- !u!1 &604872745
 GameObject:
   m_ObjectHideFlags: 0
