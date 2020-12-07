@@ -213,6 +213,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
     // Called from selection screen
     public void LoadBoss(int boss)
     {
