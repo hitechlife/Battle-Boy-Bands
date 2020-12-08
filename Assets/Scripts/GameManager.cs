@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public Text[] bossScores;
     public GameObject[] redX;
     public GameObject endScreenButton;
+    public GameObject exitPanel;
     private int[] BPM = { 95, 105, 120 };
 
 
@@ -259,6 +260,16 @@ public class GameManager : MonoBehaviour
     {
         //set up scene and stuff
         SceneManager.LoadScene(newScene);
+    }
+
+    public void ToggleExitPanel() {
+        if (exitPanel != null) {
+            exitPanel.SetActive(!(exitPanel.activeSelf));
+        }
+    }
+
+    public void Quit() {
+        Application.Quit();
     }
 
     public void PlaySelectSound()
