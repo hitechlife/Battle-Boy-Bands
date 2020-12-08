@@ -86,6 +86,8 @@ public class BattleSystem : MonoBehaviour
     private GameObject pauseMenu;
     [SerializeField] private GameObject crowd;
 
+    [SerializeField] private GameObject thoughtBubble;
+
     private float baseTimeScale;
 
     private void Awake()
@@ -478,6 +480,7 @@ public class BattleSystem : MonoBehaviour
         battleSpeaker.text = "YOU CHOOSE";
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
         playerText.text += "\n\n(Get ready to choose a second line...)";
+        thoughtBubble.SetActive(true);
 
         int i = 0;
         int[] arr = { 0, 1, 2 };
@@ -671,6 +674,7 @@ public class BattleSystem : MonoBehaviour
             ChooseInsult(2);
         }
 
+        thoughtBubble.SetActive(false);
         SetChoices(false);
     }
 
