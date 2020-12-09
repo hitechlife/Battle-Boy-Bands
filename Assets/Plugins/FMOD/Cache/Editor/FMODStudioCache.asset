@@ -66,7 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637429559847613210
+  lastModified: 637431094945342270
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -88,7 +88,7 @@ MonoBehaviour:
   guid: 6bdc66177aa892499246d28d3a2144d1
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   guid: 2107c79984c0aa4880c5c84cbd072501
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   guid: aa453b908e4a264c95df00125b71a94c
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -216,7 +216,7 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-7145901578713220346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,12 +250,12 @@ MonoBehaviour:
   guid: 84e21b32509a4f4a8954b008765e3cc3
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -1469960531837311757}
+  - {fileID: -2142279814872539150}
   MinDistance: 0
   MaxDistance: 0
   Length: 40578
@@ -293,7 +293,7 @@ MonoBehaviour:
   guid: 4ac76e864aeb8143930edf1069758fc8
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
   Path: event:/Music/Win Lose Select
   guid: 934c9bf694da724b95f7751fbea42c62
   Banks:
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -444,12 +444,12 @@ MonoBehaviour:
   guid: 449b0078a963134b83a3d7505d535e85
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -1251248215669734796}
+  - {fileID: -4045468864015164771}
   MinDistance: 0
   MaxDistance: 0
   Length: 64000
@@ -556,7 +556,7 @@ MonoBehaviour:
   guid: 782c8ad32e46464c9cb778fa00e4a0f1
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -634,6 +634,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-4045468864015164771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 3/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &-3643775771051615790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,6 +770,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &-2142279814872539150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 1/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &-1972951432051095551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,7 +837,7 @@ MonoBehaviour:
   guid: 685ed005b1db6740b219722884aec66c
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -845,7 +879,7 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1440488055913724925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,7 +897,7 @@ MonoBehaviour:
   lastModified: 637429559847544893
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1251248215669734796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,7 +914,7 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-945619257684742534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,6 +949,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &-474005982098146629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 2/Points
+  m_EditorClassIdentifier: 
+  Name: Points
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &-445656780308182799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,7 +997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -8625308623040152376}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   EditorEvents:
   - {fileID: -8349088808790719465}
   - {fileID: -5197208771481285081}
@@ -963,10 +1014,10 @@ MonoBehaviour:
   - {fileID: 1902837042047540330}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   StringsBanks:
   - {fileID: -8625308623040152376}
-  stringsBankWriteTime: 637429559847613210
+  stringsBankWriteTime: 637431094945342270
   cacheVersion: 3
 --- !u!114 &692268901985590193
 MonoBehaviour:
@@ -1103,7 +1154,7 @@ MonoBehaviour:
   Path: event:/Music/Choice Select
   guid: 6ae7852d649c144887ea62ae7fcd84de
   Banks:
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1127,12 +1178,12 @@ MonoBehaviour:
   guid: 864cb781e211a6459446ac5149abc809
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -7602597062680275992}
+  - {fileID: -474005982098146629}
   MinDistance: 0
   MaxDistance: 0
   Length: 36571
@@ -1376,7 +1427,7 @@ MonoBehaviour:
   guid: 773c179b0681cc47b457b7fa2c765680
   Banks:
   - {fileID: -6084632659146895913}
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1537,7 +1588,7 @@ MonoBehaviour:
   Path: event:/Music/Main Menu Select
   guid: b255b7752603444fab53fa1d453eb4de
   Banks:
-  - {fileID: -1440488055913724925}
+  - {fileID: 8946597497832533236}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1560,6 +1611,24 @@ MonoBehaviour:
   Path: Assets/FMOD/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637424416769846853
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &8946597497832533236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637431094945313312
   LoadResult: 0
   FileSizes: []
   Exists: 1
