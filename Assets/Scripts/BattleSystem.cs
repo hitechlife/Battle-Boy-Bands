@@ -779,4 +779,10 @@ public class BattleSystem : MonoBehaviour
         return array;
     }
 
+    public void StopMusic()
+    {
+        Music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        Music.release();
+    }
+
 }
