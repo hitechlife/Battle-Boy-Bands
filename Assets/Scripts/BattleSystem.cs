@@ -87,6 +87,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private GameObject crowd;
 
     [SerializeField] private GameObject thoughtBubble;
+    [SerializeField] GameObject[] banans;
 
     private float baseTimeScale;
 
@@ -642,6 +643,14 @@ public class BattleSystem : MonoBehaviour
             }
             slider.value -= Time.deltaTime / timeToWait;
 
+
+            if (playerAnswered) {
+                if (GameManager.opponents[GameManager.currBoss].GetBanana() == false) {
+                    banans[GameManager.currBoss].SetActive(true);
+                }
+                EventSystem.current.SetSelectedGameObject(choices[choicesMap[selectionNum]]);
+            }
+
             // Play announcer quip if we have enough time left
             if (playerAnswered && !quipPlayed) {
                 if (GameManager.announcerQuips.Count > 0) {
@@ -690,6 +699,8 @@ public class BattleSystem : MonoBehaviour
             // }
             yield return null;
         }
+
+        banans[GameManager.currBoss].SetActive(false);
         // print("Choices timer completed");
         if (!playerAnswered) {
             ChooseInsult(2);

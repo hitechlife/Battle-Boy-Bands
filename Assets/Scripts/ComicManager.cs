@@ -24,7 +24,7 @@ public class ComicManager : MonoBehaviour
             // Skip panel if this is the final comic
             if (i == panels.Length - 1) continue;
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(3.25f);
             yield return DoFadeOut(img, 0.8f);
             panels[i].SetActive(false);
         }
