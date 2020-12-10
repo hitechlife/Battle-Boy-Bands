@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public static List<track> musicTracks;
     public Text[] bossScores;
     public GameObject[] redX;
+    public GameObject[] banans;
     public GameObject endScreenButton;
     private int[] BPM = { 95, 105, 120 };
 
@@ -213,6 +214,10 @@ public class GameManager : MonoBehaviour
                 if (opponents[i].GetDefeated()) {
                     redX[i].SetActive(true);
                 }
+                if (opponents[i].GetBanana())
+                {
+                    banans[i].SetActive(true);
+                }
             }
 
             if (GameManager.instance.bossesDefeated >= opponents.Count) {
@@ -239,6 +244,11 @@ public class GameManager : MonoBehaviour
     {
         opponents[boss].Defeat();
         if (bossesDefeated < opponents.Count) bossesDefeated++;
+    }
+
+    public void GotBanana(int boss)
+    {
+        opponents[boss].Banana();
     }
 
     public string GetGrade(float score)
