@@ -648,7 +648,7 @@ public class BattleSystem : MonoBehaviour
             // Display banana with 1/3 chance
             if (playerAnswered) {
                 if (!hatDisplayed && GameManager.opponents[GameManager.currBoss].GetBanana() == false) {
-                    if (Random.Range(0, 7) == 6) {
+                    if (Random.Range(0, 5) == 4) {
                         banans[GameManager.currBoss].SetActive(true);
                     }
                     hatDisplayed = true;
