@@ -404,14 +404,14 @@ public class BattleLineManager : MonoBehaviour
             "Alright kid, I’m your elder,\nlet me school ya/you’re just a wannabe,\nI’m still the main feature"
         },
         new string[] { // Kendrick Amore
-            "Hey there handsome, get your hands up\n'cuz it’s time for your surrender/I’m the OG ladies man\nand you're a little pretender",
-            "Open up your girl’s DMs\nyou’ll find 'em full of this MC/See, you’re getting heated\n'cuz your Stan’s all Hyung up on me",
+            "Hey there handsome, put your hands up\n'cuz it’s time for your surrender/I’m the OG ladies man\nyou're just a little pretender",
+            "Open up your girl’s DMs\nyou’ll find 'em full of this MC/you’re already getting heated\n'cuz your Stan’s all Hyung up on me",
             "Your dumb face is so damn plain\nhonestly it’s such a pity/you’re a peasant\nI’m the king of the pretty boy committee",
-            "I’d say you better watch yourself -\nbut I’d hate to take that chance/’cuz your face is so damn ugly,\nyou breakin’ mirrors with a glance",
-            "I got looks so good,\nthey’re known to disarm/so don’t beat yourself up\nwhen you’re drawn to my charm",
-            "I’m so damn hot\nwhen I’m walking down the street/bitches be comin’ up to me\nlike they in heat",
-            "You know, this look\ntook 2 full hours/Meanwhile, you don’t even\nlook like you took a shower",
-            "I’m the guy she tells you\nnot to worry about/'Cause when they see me,\nshe and all the other girls shout",
+            "I’d say you better watch yourself -\nbut I’d hate to take that chance/’cuz your face is so damn ugly,\nyou'd break a mirror with a glance",
+            "I got looks so good,\nthey’re known to disarm/so don’t beat yourself up\nwhen you’re just drawn to my charm",
+            "Call me MC Daddy\n'cuz when I’m walking down the street/I got ladies comin' to me\nlike they're bitches all in heat",
+            "My look is so on-point\nbecause this hairstyle took an hour/Your rhymes stink like your ass\ndo you even fucking shower?",
+            "When your girl sees me,\nshe and all her lady friends shout/'cuz I'm the guy she tells you\nnot to worry 'bout",
             "Bask in my presence,\nI’m oozing with style/Looks like you pulled those clothes\nout of a trash pile"
         },
         new string[] { // Lil Pay

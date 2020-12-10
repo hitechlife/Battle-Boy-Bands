@@ -632,6 +632,7 @@ public class BattleSystem : MonoBehaviour
         slider.value = 1;
 
         bool quipPlayed = false;
+        bool hatDisplayed = false;
         // timeToWait -= (60f * 1f) / (BeatManager.S.beatsPerMinute);
 
         // Decrease slider value over timeToWait seconds
@@ -644,9 +645,13 @@ public class BattleSystem : MonoBehaviour
             slider.value -= Time.deltaTime / timeToWait;
 
 
+            // Display banana with 1/3 chance
             if (playerAnswered) {
-                if (GameManager.opponents[GameManager.currBoss].GetBanana() == false) {
-                    banans[GameManager.currBoss].SetActive(true);
+                if (!hatDisplayed && GameManager.opponents[GameManager.currBoss].GetBanana() == false) {
+                    if (Random.Range(0, 3) == 2) {
+                        banans[GameManager.currBoss].SetActive(true);
+                    }
+                    hatDisplayed = true;
                 }
                 else {
                     EventSystem.current.SetSelectedGameObject(choices[choicesMap[selectionNum]]);
