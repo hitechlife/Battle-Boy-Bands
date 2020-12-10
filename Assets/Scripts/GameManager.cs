@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     public static List<AudioClip> boss3voice;
     public static List<AudioClip> mcVoice;
     public static List<AudioClip> announcerVoice;
+    public static List<AudioClip> announcerQuips;
 
     public static List<track> musicTracks;
     public Text[] bossScores;
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
             boss3voice = new List<AudioClip>();
             mcVoice = new List<AudioClip>();
             announcerVoice = new List<AudioClip>();
+            announcerQuips = new List<AudioClip>();
 
             object[] loadedSprite = Resources.LoadAll("boss1", typeof(Sprite));
             for (int i = 0; i < loadedSprite.Length; i++)
@@ -160,12 +162,18 @@ public class GameManager : MonoBehaviour
             {
                 announcerVoice.Add((AudioClip)loadedVoice[i]);
             }
+            loadedVoice = Resources.LoadAll("announcerQuips", typeof(AudioClip));
+            for (int i = 0; i < loadedVoice.Length; i++)
+            {
+                announcerQuips.Add((AudioClip)loadedVoice[i]);
+            }
 
             voicelines.Add(boss1voice);
             voicelines.Add(boss2voice);
             voicelines.Add(boss3voice);
             voicelines.Add(mcVoice);
             voicelines.Add(announcerVoice);
+            voicelines.Add(announcerQuips);
 
             opponents = new List<Opponent>();
             opponents.Add(new Opponent("Wash Depp", false, 9, icons[0], null));

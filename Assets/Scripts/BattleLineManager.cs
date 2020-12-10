@@ -454,4 +454,18 @@ public class BattleLineManager : MonoBehaviour
     public string RetrieveChoiceLine(int playerLineID) {
         return choiceLines[playerLineID];
     }
+
+    public string[] funFacts = 
+    {
+        "Fun Fact: Ryan Gosling was almost\na Backstreet Boy.",
+        "Fun Fact: Backstreet Boys never had a\n#1 single in America.",  
+        "Fun Fact: \'N Sync made a cameo appearance in Star Wars Episode II: Attack of the Clones but their scenes were cut.",
+        "Fun Fact: \'N Sync and Backstreet Boys\nwere created by the same man.",
+        "Fun Fact: \'N Sync is an acronym using\nthe last letter of each member’s first name:\nJustiN, ChriS, JoeY, JasoN, and JC.",
+        "Fun Fact: Nick Carter of the Backstreet Boys\nhad a minor background role\nin the movie, Edward Scissorhands.",
+        "Fun Fact: Backstreet Boys was\na bigger deal in Europe first",
+        "Fun Fact: Elvis Presley’s 35-year Billboard\nrecord was broken by Boyz II Men",
+        "Fun Fact: New Kids on the Block\nformed a Megaband with Backstreet Boys called NKOTBSB",
+        "Fun Fact: Boyz II Men practiced singing\nin their high school bathrooms",
+    }
 }
