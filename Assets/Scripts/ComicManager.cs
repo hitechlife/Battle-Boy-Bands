@@ -7,6 +7,7 @@ public class ComicManager : MonoBehaviour
 {
     [SerializeField] GameObject[] panels;
     [SerializeField] GameObject continueButton;
+    [SerializeField] GameObject quitButton;
     [SerializeField] GameObject title;
     // Start is called before the first frame update
     void Start()
@@ -20,15 +21,16 @@ public class ComicManager : MonoBehaviour
             Image img = panels[i].GetComponent<Image>();
             yield return DoFadeIn(img, 0.8f);
 
-            yield return new WaitForSeconds(3f);
-
             // Skip panel if this is the final comic
             if (i == panels.Length - 1) continue;
+
+            yield return new WaitForSeconds(3f);
             yield return DoFadeOut(img, 0.8f);
             panels[i].SetActive(false);
         }
 
         continueButton.SetActive(true);
+        quitButton.SetActive(true);
         title.SetActive(true);
     }
 
