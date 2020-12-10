@@ -648,7 +648,9 @@ public class BattleSystem : MonoBehaviour
                 if (GameManager.opponents[GameManager.currBoss].GetBanana() == false) {
                     banans[GameManager.currBoss].SetActive(true);
                 }
-                EventSystem.current.SetSelectedGameObject(choices[choicesMap[selectionNum]]);
+                else {
+                    EventSystem.current.SetSelectedGameObject(choices[choicesMap[selectionNum]]);
+                }
             }
 
             // Play announcer quip if we have enough time left
