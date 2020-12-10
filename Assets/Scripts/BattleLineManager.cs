@@ -164,7 +164,7 @@ public class BattleLineManager : MonoBehaviour
     private Dictionary<int, string> playerLines = new Dictionary<int, string>
     {
         // Wash Depp
-        { 0, "You’re an old van,\nbut I’m a hot rod at large/If you wanna win this battle,\nyou'll need a turbocharge"},
+        { 0, "You’re an old van,\nbut I’m a hot rod at large/If you wanna win this battle,\nyou're gonna need a turbocharge"},
         { 1, "You’re an old van,\nbut I’m a hot rod at large/I kill with my raps,\nyou pull yours from a jar"},
         { 2, "You’re an old van,\nbut I’m a hot rod at large/I drive really fast,\nso YOU don’t catch up"},
         { 3, "You’re an outdated book,\nan expired piece of meat/Too old to recognize\nwhen you’re obsolete"},
@@ -182,7 +182,7 @@ public class BattleLineManager : MonoBehaviour
         { 15, "You say you’re immortal,\nbut that makes me a god/Just watch, as I say this,\nthe crowds will applaud"},
         { 16, "You say you’re immortal,\nbut that makes me a god/I’m the leader of youth,\nyou’re a noisy tightwad"},
         { 17, "You say you’re immortal,\nbut that makes me a god/Now get me some grapes,\nand send me your prayers"},
-        { 18, "You're way too old,\nyou've got no new adventures/Wanna chew up and spit?\nBetter fix up your dentures"},
+        { 18, "You're way too old,\nyou've got no new adventures/Wanna chew up and spit?\nBetter fix your dentures"},
         { 19, "You're way too old,\nyou've got no new adventures/I'm the one up to bat,\nyou've just been a bencher"},
         { 20, "You're way too old,\nyou've got no new adventures/Your time has passed,\nnow lay down and cry"},
         { 21, "Bragging about your pipes\nas if you’re Neil Young/The only thing you and Bob Dylan share\nis smoker’s lung"},
@@ -214,7 +214,7 @@ public class BattleLineManager : MonoBehaviour
         { 44, "I don’t need arms to beat you,\nI can just use my words/Bird bird bird,\nbird is the word"},
         { 45, "I’m cool as a cucumber,\nI'm the one they always ask for/You think you’ve got bitches\nbut I’m the one they adore"},
         { 46, "I’m cool as a cucumber,\nI'm the one they always ask for/You wanna keep walkin'?\nI'll show you to the door"},
-        { 47, "I’m cool as a cucumber,\nI'm the one they always ask for/And then I answer “hell yeah”\n'cuz I’m maybe just a good sport"},
+        { 47, "I’m cool as a cucumber,\nI'm the one they always ask for/And then I answer “hell yeah”\n'cuz I’m maybe just a good sport?"},
         { 48, "Bro you put on so much hairspray\nit got to your brain/Can’t take you seriously\nwith that ridiculous mane"},
         { 49, "Bro you put on so much hairspray\nit got to your brain/If I imitated you,\nI’d have nothing to gain"},
         { 50, "Bro you put on so much hairspray\nit got to your brain/Your hair is so fake\nyour parents, uh, think you're lame"},
@@ -247,7 +247,7 @@ public class BattleLineManager : MonoBehaviour
         { 74, "Nice try kid,\nbut you can't cover up that stink/You are a baby,\nwho went a poopy" },
         { 75, "Hate to break it to you, kid,\nbut there's more to the world/Than just your favorite Peppa Pig,\nSpongebob, and Big Bird" },
         { 76, "Hate to break it to you, kid,\nbut there's more to the world/Than dancing,\nand how to do a twirl" },
-        { 77, "Hate to break it to you, kid,\nbut there's more to the world/Than you,\n'cuz you’re so small" },
+        { 77, "Hate to break it to you, kid,\nbut there's more to the world/Than you,\nbecause you’re so small" },
         { 78, "Funny, your mom’s spaghetti\nis extremely stiff/When I came over last night,\nI had a whiff" },
         { 79, "Funny, your mom’s spaghetti\nis extremely stiff/I’m gonna rap so hard\nyou’ll go jump off a cliff" },
         { 80, "Funny, your mom’s spaghetti\nis extremely stiff/My mom’s is better,\nyou should try it" },
@@ -365,16 +365,16 @@ public class BattleLineManager : MonoBehaviour
 
     private Dictionary<int, string> funFacts = new Dictionary<int, string>
     {
-        { 1, "Did you know: Ryan Gosling was\nalmost a Backstreet Boy." },
-        { 2, "Fun Fact: Backstreet Boys never\nhad a #1 single in America." },
-        { 3, "Guess what: 'N Sync made a cameo appearance in\nStar Wars Episode II: Attack of the Clones\nbut their scenes were cut." },
-        { 4, "Fun Fact: 'N Sync and Backstreet Boys\nwere created by the same man." },
-        { 5, "FYI: 'N Sync is an acronym using the\nlast letter of each member’s first name." },
-        { 6, "Fun Fact: Nick Carter of the Backstreet Boys\nhad a minor background role in the movie,\nEdward Scissorhands." },
-        { 7, "Fun Fact: Elvis Presley’s 35-year Billboard\nrecord was broken by Boyz II Men" },
-        { 8, "Did you know: New Kids on the Block formed\na Megaband with Backstreet Boys called NKOTBSB" },
-        { 9, "Fun Fact: Boyz II Men practiced singing\nin their high school school bathrooms" },
-        { 10, "Did you know: Sea Otters\nsometimes hold hands when they sleep." }
+        { 1, "Did you know: Ryan Gosling was almost a Backstreet Boy." },
+        { 2, "Fun Fact: Backstreet Boys never had a #1 single in America." },
+        { 3, "Guess what: 'N Sync made a cameo appearance in Star Wars Episode II: Attack of the Clones but their scenes were cut." },
+        { 4, "Fun Fact: 'N Sync and Backstreet Boys were created by the same man." },
+        { 5, "FYI: 'N Sync is an acronym using the last letter of each member’s first name." },
+        { 6, "Fun Fact: Nick Carter of the Backstreet Boys had a minor background role in the movie, Edward Scissorhands." },
+        { 7, "Fun Fact: Elvis Presley’s 35-year Billboard record was broken by Boyz II Men" },
+        { 8, "Did you know: New Kids on the Block formed a Megaband with Backstreet Boys called NKOTBSB" },
+        { 9, "Fun Fact: Boyz II Men practiced singing in their high school school bathrooms" },
+        { 10, "Did you know: Sea Otters sometimes hold hands when they sleep." }
     };
 
     /*

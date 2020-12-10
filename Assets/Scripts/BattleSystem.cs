@@ -509,8 +509,8 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitUntil(() => BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS/2);
 
         // Change to fun fact
-        if (GameManager.instance.bossesDefeated >= 2) //change to 0 to test
-            playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0] + "\n\n" + BattleLineManager.S.RetrieveQuip(Random.Range(1, BattleLineManager.S.QuipLen() + 1));
+        // if (GameManager.instance.bossesDefeated >= 2) //change to 0 to test
+        //     playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0] + "\n\n" + BattleLineManager.S.RetrieveQuip(Random.Range(1, BattleLineManager.S.QuipLen() + 1));
     
         yield return new WaitUntil(() => BeatManager.S.playerLoopInt >= 2 * Mathf.Min(2, GameManager.instance.bossesDefeated) + 2);
 
@@ -648,7 +648,7 @@ public class BattleSystem : MonoBehaviour
             // Display banana with 1/3 chance
             if (playerAnswered) {
                 if (!hatDisplayed && GameManager.opponents[GameManager.currBoss].GetBanana() == false) {
-                    if (Random.Range(0, 3) == 2) {
+                    if (Random.Range(0, 7) == 6) {
                         banans[GameManager.currBoss].SetActive(true);
                     }
                     hatDisplayed = true;
