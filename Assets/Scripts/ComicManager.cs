@@ -8,6 +8,7 @@ public class ComicManager : MonoBehaviour
     [SerializeField] GameObject[] panels;
     [SerializeField] GameObject continueButton;
     [SerializeField] GameObject quitButton;
+    [SerializeField] GameObject creditsButton;
     [SerializeField] GameObject title;
     // Start is called before the first frame update
     void Start()
@@ -31,9 +32,11 @@ public class ComicManager : MonoBehaviour
 
         continueButton.SetActive(true);
         quitButton.SetActive(true);
+        creditsButton.SetActive(true);
         title.SetActive(true);
 
         StartCoroutine(DoFadeIn(continueButton.GetComponent<Image>(), 0.8f));
+        StartCoroutine(DoFadeIn(creditsButton.GetComponent<Image>(), 0.8f));
         StartCoroutine(DoFadeIn(quitButton.GetComponent<Image>(), 0.8f));
         StartCoroutine(DoFadeInText(title.GetComponent<Text>(), 0.8f));
     }
