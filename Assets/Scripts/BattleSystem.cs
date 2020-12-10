@@ -630,7 +630,7 @@ public class BattleSystem : MonoBehaviour
         if (!slider) Debug.LogError("Slider not valid!");
         slider.value = 1;
 
-        bool flippedOn = false;
+        bool quipPlayed = false;
         // timeToWait -= (60f * 1f) / (BeatManager.S.beatsPerMinute);
 
         // Decrease slider value over timeToWait seconds
@@ -641,6 +641,18 @@ public class BattleSystem : MonoBehaviour
                 break;
             }
             slider.value -= Time.deltaTime / timeToWait;
+
+            // Play announcer quip if we have enough time left
+            if (playerAnswered && !quipPlayed) {
+                if (GameManager.announcerQuips.Count > 0) {
+                    AudioClip quipToPlay = GameManager.announcerQuips[Random.Range(0, GameManager.announcerQuips.Count)];
+
+                    if (quipToPlay.length < slider.value*timeToWait) {
+                        quipPlayed = true;
+                        voicePlayer.PlayOneShot(quipToPlay);
+                    }
+                }
+            }
 
             //TODO: skipping beat bug fix temp
 
