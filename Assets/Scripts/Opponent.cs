@@ -14,6 +14,7 @@ public class Opponent : MonoBehaviour
     private bool setID = false;
     private Sprite sprite;
     private AudioClip intro;
+    private bool banana;
 
     public Opponent(string name, bool defeated, int turns, Sprite s, AudioClip a) {
         this.name = name;
@@ -22,14 +23,25 @@ public class Opponent : MonoBehaviour
         this.sprite = s;
         this.intro = a;
         this.rank = "";
+        this.banana = false;
     }
 
     public void Defeat() {
         defeated = true;
     }
 
+    public void Banana()
+    {
+        banana = true;
+    }
+
     public bool GetDefeated() {
         return defeated;
+    }
+
+    public bool GetBanana()
+    {
+        return banana;
     }
 
     public string GetName() {
