@@ -9,12 +9,31 @@ public class ComicManager : MonoBehaviour
     [SerializeField] GameObject continueButton;
     [SerializeField] GameObject quitButton;
     [SerializeField] GameObject title;
+    [SerializeField] GameObject skipButton;
+    [SerializeField] GameObject creditButton;
+    bool skip;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(RunComic());
     }
 
+    public void SetSkipTrue() {
+        skip = true;
+    }
+
+    void Update() {
+        if (skip) {
+            StopAllCoroutines();
+            continueButton.SetActive(true);
+            quitButton.SetActive(true);
+            title.SetActive(true);
+            creditButton.SetActive(true);
+            panels[panels.Length - 1].SetActive(true);
+            skipButton.SetActive(false);
+        }
+
+    }
     IEnumerator RunComic() {
         for (int i = 0; i < panels.Length; i++) {
             panels[i].SetActive(true);
@@ -28,6 +47,7 @@ public class ComicManager : MonoBehaviour
             // yield return DoFadeOut(img, 0.8f);
             // panels[i].SetActive(false);
         }
+        skipButton.SetActive(false);
 
         continueButton.SetActive(true);
         quitButton.SetActive(true);

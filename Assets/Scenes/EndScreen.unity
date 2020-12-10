@@ -654,7 +654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &559128399
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1006,10 +1006,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 9d532ad5dbc78444d8e2808f322b898f, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 9d532ad5dbc78444d8e2808f322b898f, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 9d532ad5dbc78444d8e2808f322b898f, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: b73b682416bb7f4498b4c7f093bb4690, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: 1a0354b9ea40727408539c810ab1cec2, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 1a0354b9ea40727408539c810ab1cec2, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 1a0354b9ea40727408539c810ab1cec2, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: c0256fcde75fb8946b2c3ff4689c27aa, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b73b682416bb7f4498b4c7f093bb4690, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0256fcde75fb8946b2c3ff4689c27aa, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1192,6 +1192,7 @@ MonoBehaviour:
   fmodEvent2: event:/Music/Choice Select
   bossScores: []
   redX: []
+  banans: []
   endScreenButton: {fileID: 0}
   bossesDefeated: 0
 --- !u!4 &1285469689
