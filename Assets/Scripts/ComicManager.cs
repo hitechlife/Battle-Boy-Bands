@@ -30,6 +30,7 @@ public class ComicManager : MonoBehaviour
             title.SetActive(true);
             creditButton.SetActive(true);
             panels[panels.Length - 1].SetActive(true);
+            panels[panels.Length - 1].SetActive(true);
             skipButton.SetActive(false);
         }
 
@@ -51,10 +52,12 @@ public class ComicManager : MonoBehaviour
 
         continueButton.SetActive(true);
         quitButton.SetActive(true);
+        creditButton.SetActive(true);
         title.SetActive(true);
 
         StartCoroutine(DoFadeIn(continueButton.GetComponent<Image>(), 0.8f));
         StartCoroutine(DoFadeIn(quitButton.GetComponent<Image>(), 0.8f));
+        StartCoroutine(DoFadeIn(creditButton.GetComponent<Image>(), 0.8f));
         StartCoroutine(DoFadeInText(title.GetComponent<Text>(), 0.8f));
     }
 
