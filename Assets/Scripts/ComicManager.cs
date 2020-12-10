@@ -57,8 +57,8 @@ public class ComicManager : MonoBehaviour
 
         StartCoroutine(DoFadeIn(continueButton.GetComponent<Image>(), 0.8f));
         StartCoroutine(DoFadeIn(quitButton.GetComponent<Image>(), 0.8f));
-        StartCoroutine(DoFadeIn(creditButton.GetComponent<Image>(), 0.8f));
-        StartCoroutine(DoFadeInText(title.GetComponent<Text>(), 0.8f));
+        StartCoroutine(DoFadeInText(creditButton.GetComponentsInChildren<Text>()[0], 0.8f));
+        StartCoroutine(DoFadeIn(title.GetComponent<Image>(), 0.8f));
     }
 
 
