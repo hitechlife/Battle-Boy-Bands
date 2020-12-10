@@ -103,7 +103,7 @@
 			<value>4.4535413245758075</value>
 		</property>
 		<property name="volume">
-			<value>-6</value>
+			<value>-16</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{c3237440-cac0-4138-90c6-fe5322ed18a4}</destination>
@@ -134,7 +134,7 @@
 			<value>2</value>
 		</property>
 		<property name="volume">
-			<value>-6</value>
+			<value>-16</value>
 		</property>
 		<relationship name="sounds">
 			<destination>{89b3db38-78e8-4873-a389-8ecc2919e7ba}</destination>

@@ -110,6 +110,9 @@
 		<property name="length">
 			<value>5.7610204081632652</value>
 		</property>
+		<property name="volume">
+			<value>-10</value>
+		</property>
 		<relationship name="automators">
 			<destination>{ca13c08a-128d-4436-a699-ba7491d8ccfa}</destination>
 		</relationship>
@@ -142,7 +145,7 @@
 			<value>5.063645764217017</value>
 		</property>
 		<property name="volume">
-			<value>2.5</value>
+			<value>-8.5</value>
 		</property>
 		<relationship name="sounds">
 			<destination>{2c399ffb-da8e-4f30-a70a-6db67dcdd021}</destination>
