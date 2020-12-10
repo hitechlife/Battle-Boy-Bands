@@ -363,7 +363,7 @@ public class BattleLineManager : MonoBehaviour
         { 89, "[Christian show]"}
     };
 
-    private Dictionary<int, string> announcerQuips = new Dictionary<int, string>
+    private Dictionary<int, string> funFacts = new Dictionary<int, string>
     {
         { 1, "Did you know: Ryan Gosling was\nalmost a Backstreet Boy." },
         { 2, "Fun Fact: Backstreet Boys never\nhad a #1 single in America." },
@@ -373,7 +373,7 @@ public class BattleLineManager : MonoBehaviour
         { 6, "Fun Fact: Nick Carter of the Backstreet Boys\nhad a minor background role in the movie,\nEdward Scissorhands." },
         { 7, "Fun Fact: Elvis Presley’s 35-year Billboard\nrecord was broken by Boyz II Men" },
         { 8, "Did you know: New Kids on the Block formed\na Megaband with Backstreet Boys called NKOTBSB" },
-        { 9, "Fun Fact: Boyz II Men practiced singing\nin their high school school bathrooms}" },
+        { 9, "Fun Fact: Boyz II Men practiced singing\nin their high school school bathrooms" },
         { 10, "Did you know: Sea Otters\nsometimes hold hands when they sleep." }
     };
 
@@ -471,11 +471,11 @@ public class BattleLineManager : MonoBehaviour
 
     public int QuipLen()
     {
-        return announcerQuips.Count;
+        return funFacts.Count;
     }
 
     public string RetrieveQuip(int quipLineID)
     {
-        return announcerQuips[quipLineID];
+        return funFacts[quipLineID];
     }
 }

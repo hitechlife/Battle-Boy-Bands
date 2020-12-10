@@ -479,9 +479,10 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERCHOICE;
         battleSpeaker.text = "YOU CHOOSE";
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
-        if (GameManager.instance.bossesDefeated >= 2) //change to 0 to test
-            playerText.text += "\n\n" + BattleLineManager.S.RetrieveQuip(Random.Range(1, BattleLineManager.S.QuipLen() + 1));
-        else
+
+        // if (GameManager.instance.bossesDefeated >= 2) //change to 0 to test
+        //     playerText.text += "\n\n" + BattleLineManager.S.RetrieveQuip(Random.Range(1, BattleLineManager.S.QuipLen() + 1));
+        // else
             playerText.text += "\n\n(Get ready to choose a second line...)";
         thoughtBubble.SetActive(true);
 
@@ -505,6 +506,11 @@ public class BattleSystem : MonoBehaviour
         // int doubleTime = BeatManager.doubleTime ? 2 : 1;
 
         yield return new WaitUntil(() => BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS/2);
+
+        // Change to fun fact
+        if (GameManager.instance.bossesDefeated >= 2) //change to 0 to test
+            playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0] + "\n\n" + BattleLineManager.S.RetrieveQuip(Random.Range(1, BattleLineManager.S.QuipLen() + 1));
+    
         yield return new WaitUntil(() => BeatManager.S.playerLoopInt >= 2 * Mathf.Min(2, GameManager.instance.bossesDefeated) + 2);
 
         SetChoices(true);
