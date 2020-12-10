@@ -87,6 +87,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private GameObject crowd;
 
     [SerializeField] private GameObject thoughtBubble;
+    [SerializeField] GameObject[] banans;
 
     private float baseTimeScale;
 
@@ -479,7 +480,11 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERCHOICE;
         battleSpeaker.text = "YOU CHOOSE";
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
-        playerText.text += "\n\n(Get ready to choose a second line...)";
+
+        // if (GameManager.instance.bossesDefeated >= 2) //change to 0 to test
+        //     playerText.text += "\n\n" + BattleLineManager.S.RetrieveQuip(Random.Range(1, BattleLineManager.S.QuipLen() + 1));
+        // else
+            playerText.text += "\n\n(Get ready to choose a second line...)";
         thoughtBubble.SetActive(true);
 
         int i = 0;
@@ -502,6 +507,11 @@ public class BattleSystem : MonoBehaviour
         // int doubleTime = BeatManager.doubleTime ? 2 : 1;
 
         yield return new WaitUntil(() => BeatManager.S.counter > BeatManager.S.NUM_BREAK_BARS/2);
+
+        // Change to fun fact
+        if (GameManager.instance.bossesDefeated >= 2) //change to 0 to test
+            playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0] + "\n\n" + BattleLineManager.S.RetrieveQuip(Random.Range(1, BattleLineManager.S.QuipLen() + 1));
+    
         yield return new WaitUntil(() => BeatManager.S.playerLoopInt >= 2 * Mathf.Min(2, GameManager.instance.bossesDefeated) + 2);
 
         SetChoices(true);
@@ -621,7 +631,7 @@ public class BattleSystem : MonoBehaviour
         if (!slider) Debug.LogError("Slider not valid!");
         slider.value = 1;
 
-        bool flippedOn = false;
+        bool quipPlayed = false;
         // timeToWait -= (60f * 1f) / (BeatManager.S.beatsPerMinute);
 
         // Decrease slider value over timeToWait seconds
@@ -632,6 +642,28 @@ public class BattleSystem : MonoBehaviour
                 break;
             }
             slider.value -= Time.deltaTime / timeToWait;
+
+
+            if (playerAnswered) {
+                if (GameManager.opponents[GameManager.currBoss].GetBanana() == false) {
+                    banans[GameManager.currBoss].SetActive(true);
+                }
+                else {
+                    EventSystem.current.SetSelectedGameObject(choices[choicesMap[selectionNum]]);
+                }
+            }
+
+            // Play announcer quip if we have enough time left
+            if (playerAnswered && !quipPlayed) {
+                if (GameManager.announcerQuips.Count > 0) {
+                    AudioClip quipToPlay = GameManager.announcerQuips[Random.Range(0, GameManager.announcerQuips.Count)];
+
+                    if (quipToPlay.length < slider.value*timeToWait) {
+                        quipPlayed = true;
+                        voicePlayer.PlayOneShot(quipToPlay);
+                    }
+                }
+            }
 
             //TODO: skipping beat bug fix temp
 
@@ -669,6 +701,8 @@ public class BattleSystem : MonoBehaviour
             // }
             yield return null;
         }
+
+        banans[GameManager.currBoss].SetActive(false);
         // print("Choices timer completed");
         if (!playerAnswered) {
             ChooseInsult(2);
