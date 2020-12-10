@@ -395,29 +395,29 @@ public class BattleLineManager : MonoBehaviour
         new string[] { // Wash Depp
             "You think you’re better than the veteran,\nbut you ain’t matching up/You’re sputterin’ while I’m gunnin’ it,\ndon’t even bother catching up",
             "My band sung about love,\nbut I know how to fight/Tryin’ to stand up to me? Bitch,\nyou don’t have the right",
-            "I’m the modern Elvis Presley,\nwhen it comes to rap I'm the king./Wanna battle against me, kid?\nYou can choke on my middle ring.",
-            "I can tell you're getting worried\ncuz engine’s had a stall/I was in this fuckin' race\nbefore you knew how to crawl",
+            "I’m the modern Elvis Presley,\nwhen it comes to rap I'm the King./Wanna battle against me, kid?\nYou can choke on my middle ring.",
+            "I can tell you're getting worried\n'cuz engine’s had a stall/I was in this fuckin' race\nbefore you knew how to crawl",
             "Think newer is better?\nWell, talent never fades/And getting this good\ncan only come with age",
             "Try to catch up,\nbut you’re always in my shadow/Legends never die,\nI’m immortal, I won this battle",
             "The people don’t want you,\nyou just want a fan/You’ll get chewed up, kid,\nand spat out again",
             "You don’t get a voice like mine\nby singing showtunes/I was hanging with Dylan\nwhile you were in the womb",
-            "Alright kid, I’m your elder,\nlet me be your teacher/you’re just a wannabe,\nI’m still the main feature"
+            "Alright kid, I’m your elder,\nlet me school ya/you’re just a wannabe,\nI’m still the main feature"
         },
         new string[] { // Kendrick Amore
-            "Hey there handsome, get your hands up\ncuz it’s time for your surrender/I’m the OG ladies man\nand you're a little pretender",
-            "Open up your girl’s DMs\nyou’ll find 'em full of this MC/See you’re getting heated\ncuz your stan’s all hyung up on me",
-            "Yeah, I’m the king\nof the pretty boy committee/you’re so lowly,\nit’s a shame and a pity",
-            "You better watch yourself -\noh wait, nevermind/’cuz you so damn ugly,\nyou breakin’ mirrors all the time",
+            "Hey there handsome, get your hands up\n'cuz it’s time for your surrender/I’m the OG ladies man\nand you're a little pretender",
+            "Open up your girl’s DMs\nyou’ll find 'em full of this MC/See, you’re getting heated\n'cuz your Stan’s all Hyung up on me",
+            "Your dumb face is so damn plain\nhonestly it’s such a pity/you’re a peasant\nI’m the king of the pretty boy committee",
+            "I’d say you better watch yourself -\nbut I’d hate to take that chance/’cuz your face is so damn ugly,\nyou breakin’ mirrors with a glance",
             "I got looks so good,\nthey’re known to disarm/so don’t beat yourself up\nwhen you’re drawn to my charm",
             "I’m so damn hot\nwhen I’m walking down the street/bitches be comin’ up to me\nlike they in heat",
-            "You know, this profile\ntook 2 glorious hours/Meanwhile you don’t even\nlook like you took a shower",
-            "I’m the guy she tells you\nnot to worry about/Cause when they see me,\nshe and all the other girls shout",
-            "Bask in my presence,\nI’m oozing with style/Looks like you pulled those\nclothes out of a trash pile"
+            "You know, this look\ntook 2 full hours/Meanwhile, you don’t even\nlook like you took a shower",
+            "I’m the guy she tells you\nnot to worry about/'Cause when they see me,\nshe and all the other girls shout",
+            "Bask in my presence,\nI’m oozing with style/Looks like you pulled those clothes\nout of a trash pile"
         },
         new string[] { // Lil Pay
             "Welcome to the final\nnow it’s time for Lil’ Pay/When I walk up on the stage\ny’all know it’s time to lil pray", 
-            "Bitch I’m 9 years old\n 'n I’m already flexin millions/Lil Pay’s on Call of Duty\nwhile your ass is a civilian", 
-            "Ok Boomer you're just mad\ncuz I’m already verified/Lil Pay’s an asteroid,\ncall this stage a genocide", 
+            "Bitch I’m 9 years old\n'n I’m already flexin millions/Lil Pay’s on Call of Duty\nwhile your ass is a civilian", 
+            "Ok Boomer you're just mad\n'cuz I’m already verified/Lil Pay’s an asteroid,\ncall this stage a genocide", 
             "You’re just a Millennial,\ndon’t try to mess with Gen Z/I already reached platinum\nwith just a single LP", 
             "They call me Lil' Pay\nbut I ain't so small/ I'm king of the world,\nyou're just a fly on the wall",
             "Nobody understands\nyour obscure 90's references/Keep it to yourself, we don't care\n'bout your preferences",
