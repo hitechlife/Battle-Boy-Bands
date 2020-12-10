@@ -479,7 +479,10 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERCHOICE;
         battleSpeaker.text = "YOU CHOOSE";
         playerText.text = BattleLineManager.S.RetrievePlayerLine(BattleLineManager.S.RetrievePlayerLines(enemyID, currentEnemyLineID)[0]).Split('/')[0];
-        playerText.text += "\n\n(Get ready to choose a second line...)";
+        if (GameManager.instance.bossesDefeated >= 2) //change to 0 to test
+            playerText.text += "\n\n" + BattleLineManager.S.RetrieveQuip(Random.Range(1, BattleLineManager.S.QuipLen() + 1));
+        else
+            playerText.text += "\n\n(Get ready to choose a second line...)";
         thoughtBubble.SetActive(true);
 
         int i = 0;

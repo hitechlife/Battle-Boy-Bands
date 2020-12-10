@@ -363,6 +363,20 @@ public class BattleLineManager : MonoBehaviour
         { 89, "[Christian show]"}
     };
 
+    private Dictionary<int, string> announcerQuips = new Dictionary<int, string>
+    {
+        { 1, "Did you know: Ryan Gosling was\nalmost a Backstreet Boy." },
+        { 2, "Fun Fact: Backstreet Boys never\nhad a #1 single in America." },
+        { 3, "Guess what: 'N Sync made a cameo appearance in\nStar Wars Episode II: Attack of the Clones\nbut their scenes were cut." },
+        { 4, "Fun Fact: 'N Sync and Backstreet Boys\nwere created by the same man." },
+        { 5, "FYI: 'N Sync is an acronym using the\nlast letter of each member’s first name." },
+        { 6, "Fun Fact: Nick Carter of the Backstreet Boys\nhad a minor background role in the movie,\nEdward Scissorhands." },
+        { 7, "Fun Fact: Elvis Presley’s 35-year Billboard\nrecord was broken by Boyz II Men" },
+        { 8, "Did you know: New Kids on the Block formed\na Megaband with Backstreet Boys called NKOTBSB" },
+        { 9, "Fun Fact: Boyz II Men practiced singing\nin their high school school bathrooms}" },
+        { 10, "Did you know: Sea Otters\nsometimes hold hands when they sleep." }
+    };
+
     /*
      * HOT BARS
      * 
@@ -376,7 +390,7 @@ public class BattleLineManager : MonoBehaviour
      * Cookin' your sad face like it's over-easy
      */
 
-    // enemyLines[Enemy ID][Response ID]
+        // enemyLines[Enemy ID][Response ID]
     public string[][] enemyLines = {
         new string[] { // Wash Depp
             "You think you’re better than the veteran,\nbut you ain’t matching up/You’re sputterin’ while I’m gunnin’ it,\ndon’t even bother catching up",
@@ -453,5 +467,15 @@ public class BattleLineManager : MonoBehaviour
 
     public string RetrieveChoiceLine(int playerLineID) {
         return choiceLines[playerLineID];
+    }
+
+    public int QuipLen()
+    {
+        return announcerQuips.Count;
+    }
+
+    public string RetrieveQuip(int quipLineID)
+    {
+        return announcerQuips[quipLineID];
     }
 }
