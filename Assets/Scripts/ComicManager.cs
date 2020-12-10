@@ -20,18 +20,22 @@ public class ComicManager : MonoBehaviour
             panels[i].SetActive(true);
             Image img = panels[i].GetComponent<Image>();
             yield return DoFadeIn(img, 0.8f);
+                        yield return new WaitForSeconds(4.05f);
 
             // Skip panel if this is the final comic
             if (i == panels.Length - 1) continue;
 
-            yield return new WaitForSeconds(3.25f);
-            yield return DoFadeOut(img, 0.8f);
-            panels[i].SetActive(false);
+            // yield return DoFadeOut(img, 0.8f);
+            // panels[i].SetActive(false);
         }
 
         continueButton.SetActive(true);
         quitButton.SetActive(true);
         title.SetActive(true);
+
+        StartCoroutine(DoFadeIn(continueButton.GetComponent<Image>(), 0.8f));
+        StartCoroutine(DoFadeIn(quitButton.GetComponent<Image>(), 0.8f));
+        StartCoroutine(DoFadeInText(title.GetComponent<Text>(), 0.8f));
     }
 
 
@@ -49,12 +53,25 @@ public class ComicManager : MonoBehaviour
 
     private IEnumerator DoFadeIn(Image img, float fadeTime)
     {
+        img.color = new Color(1.0f, 1.0f, 1.0f, 0);
         float elapsedTime = 0.0f;
         while (elapsedTime < fadeTime)
         {
             yield return new WaitForEndOfFrame();
             elapsedTime += Time.deltaTime;
             img.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Clamp01(elapsedTime / fadeTime));
+        }
+    }
+
+    private IEnumerator DoFadeInText(Text txt, float fadeTime)
+    {
+        txt.color = new Color(1.0f, 1.0f, 1.0f, 0);
+        float elapsedTime = 0.0f;
+        while (elapsedTime < fadeTime)
+        {
+            yield return new WaitForEndOfFrame();
+            elapsedTime += Time.deltaTime;
+            txt.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Clamp01(elapsedTime / fadeTime));
         }
     }
 }
