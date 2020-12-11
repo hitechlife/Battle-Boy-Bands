@@ -904,10 +904,10 @@ RectTransform:
   m_Father: {fileID: 1213613569}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.079}
-  m_AnchorMin: {x: 0, y: 0.7776352}
+  m_AnchorMin: {x: 0, y: 0.808}
   m_AnchorMax: {x: 1, y: 0.9976352}
-  m_AnchoredPosition: {x: 0, y: 1.4640198}
-  m_SizeDelta: {x: 0, y: -0.92807007}
+  m_AnchoredPosition: {x: 0, y: 1.5999908}
+  m_SizeDelta: {x: 0, y: -1.1425629}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &450968707
 MonoBehaviour:
@@ -933,9 +933,9 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 95193d9eb959e7348918e3211407b7c1, type: 3}
     m_FontSize: 75
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 100
+    m_BestFit: 1
+    m_MinSize: 50
+    m_MaxSize: 150
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
@@ -1334,10 +1334,10 @@ RectTransform:
   m_Father: {fileID: 1213613569}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.051347334, y: 0.24463521}
-  m_AnchorMax: {x: 0.95000005, y: 0.76344645}
-  m_AnchoredPosition: {x: -0.5, y: 0.5}
-  m_SizeDelta: {x: 3.772766, y: -1.3842163}
+  m_AnchorMin: {x: 0.074, y: 0.1243648}
+  m_AnchorMax: {x: 0.92300004, y: 0.808}
+  m_AnchoredPosition: {x: 0.5, y: 2.5}
+  m_SizeDelta: {x: -3.3567505, y: -0.7284241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &811697039
 MonoBehaviour:
@@ -1365,7 +1365,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 20
-    m_MaxSize: 100
+    m_MaxSize: 80
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1386,8 +1386,13 @@ MonoBehaviour:
     Anabelle Kang, Carol He
 
 
-    Produced through Carnegie Mellon University Game
-    Creation Society'
+    Voices: Wash Depp/Player - joey perrino, kendrick
+    amore - anabelle kang, lil'' pay - michelle cao, announcer - Jake Hanzlik, hype
+    - Josh Hanzlik
+
+
+    Produced through Carnegie Mellon University Game Creation
+    Society'
 --- !u!222 &811697040
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2627,10 +2632,10 @@ RectTransform:
   m_Father: {fileID: 319118451}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.26834956, y: 0.06180576}
-  m_AnchorMax: {x: 0.72800004, y: 0.24418467}
-  m_AnchoredPosition: {x: -0.5, y: 0.29501343}
-  m_SizeDelta: {x: -5.579834, y: -7.39447}
+  m_AnchorMin: {x: 0.29900002, y: 0.02160192}
+  m_AnchorMax: {x: 0.69600004, y: 0.13380574}
+  m_AnchoredPosition: {x: 0.5, y: 2}
+  m_SizeDelta: {x: -0.49319458, y: -3.9567337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1814342574
 MonoBehaviour:
